@@ -1,0 +1,8 @@
+{
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "vetur.format.defaultFormatterOptions": {
+        "wrap_attributes": "force-aligned"
+    }
+}

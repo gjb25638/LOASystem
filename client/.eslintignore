@@ -1,0 +1,9 @@
+/build/
+/config/
+/dist/
+/*.js
+/test/unit/coverage/
+/src/default.js
+/src/reportUtility.js
+/src/locale.js
+/src/utility.js
