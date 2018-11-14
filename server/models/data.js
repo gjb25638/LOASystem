@@ -1,8 +1,6 @@
 var depts = {
-    A1: '行政部(A)',
-    A2: '管理部(A)',
-    C: '客服部(C)',
-    I: '資訊部(I)',
+    A: '部門A',
+    B: '部門B',
 }
 
 var levels = {
@@ -90,17 +88,17 @@ var dateTypeGroup = {
 }
 
 module.exports = [{
-    employeeID: 'A2001',
-    dept: depts.A2,
-    level: levels.manager,
+    employeeID: 'A01',
+    dept: depts.A,
+    level: levels.admin,
     name: 'Alice',
     username: 'Alice',
     arrivedDate: '2015-03-03',
     signers: [],
     activatedDateTypes: dateTypeGroup.generalFemale
 }, {
-    employeeID: 'A1001',
-    dept: depts.A1,
+    employeeID: 'A02',
+    dept: depts.A,
     level: levels.manager,
     name: 'Bob',
     username: 'Bob',
@@ -108,8 +106,8 @@ module.exports = [{
     signers: ['Alice'],
     activatedDateTypes: dateTypeGroup.generalMale
 }, {
-    employeeID: 'A1002',
-    dept: depts.A1,
+    employeeID: 'A03',
+    dept: depts.A,
     level: levels.normal,
     name: 'Charlie',
     username: 'Charlie',
@@ -117,41 +115,14 @@ module.exports = [{
     signers: ['Alice', 'Bob'],
     activatedDateTypes: dateTypeGroup.generalMale
 }, {
-    employeeID: 'C0001',
-    dept: depts.C,
-    level: levels.manager,
+    employeeID: 'B01',
+    dept: depts.B,
+    level: levels.normal,
     name: 'Dara',
     username: 'Dara',
     arrivedDate: '2016-02-24',
     signers: ['Alice'],
     activatedDateTypes: dateTypeGroup.generalFemale
-}, {
-    employeeID: 'C0002',
-    dept: depts.C,
-    level: levels.normal,
-    name: 'Ella',
-    username: 'Ella',
-    arrivedDate: '2017-07-05',
-    signers: ['Alice', 'Dara'],
-    activatedDateTypes: dateTypeGroup.generalFemale
-}, {
-    employeeID: 'I0001',
-    dept: depts.I,
-    level: levels.manager,
-    name: 'Forsen',
-    username: 'Forsen',
-    arrivedDate: '2016-06-09',
-    signers: ['Alice'],
-    activatedDateTypes: dateTypeGroup.generalMale
-}, {
-    employeeID: 'I0002',
-    dept: depts.I,
-    level: levels.normal,
-    name: 'Gary',
-    username: 'Gary',
-    arrivedDate: '2017-08-15',
-    signers: ['Alice', 'Forsen'],
-    activatedDateTypes: dateTypeGroup.generalMale
 }];
 
 
