@@ -138,8 +138,8 @@ module.exports = [{
     employeeID: 'I0001',
     dept: depts.I,
     level: levels.manager,
-    name: 'Frosen',
-    username: 'Frosen',
+    name: 'Forsen',
+    username: 'Forsen',
     arrivedDate: '2016-06-09',
     signers: ['Alice'],
     activatedDateTypes: dateTypeGroup.generalMale
@@ -161,6 +161,6 @@ module.exports = [{
  *                    Charlie(A1)
  *          Dara(C)
  *                    Ella(C)
- *          Frosen(I)
+ *          Forsen(I)
  *                    Gary(I)
  */
