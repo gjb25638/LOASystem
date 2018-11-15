@@ -51,7 +51,7 @@ git push
 git pull
 docker-compose up
 ```
-3. 等待. client 會比較久, 因為會在 production 環境當場打包並執行(npm run host).
+3. 等待. client 會比較久, 因為會在 production 環境當場打包並執行(npm run deploy).
 
 ## 資料串接
 - 於 `/server/models/data.js` 有一份假的人事資料, 基本上系統會在第一次讀取所有人事資料並建立帳號.
