@@ -17,7 +17,7 @@ cd LOASystem
 2. 請修改資料夾內的 docker-compose.yml, 修改 API_URL
    - API_URL 為 server 端的網址, 是 client 端所需要的資訊.
    - 此架構 client 與 server 分開, 假如 self-host 的機器為 192.168.1.1, 那 client 與 server 分別會是 192.168.1.1:8080 與 192.168.1.1:8081, 這時你就要修改成 API_URL=http://192.168.1.1:8081.
-3. 開始 docker-compose
+3. 開始 docker-compose. build 是要建立好 3 個 container 與裡面的 image, 因此只需要第一次做即可.
 ```
 docker-compose build
 docker-compose up
