@@ -352,5 +352,4 @@ export default {
             }
         }
     }
-}['zh']
-//[navigator ? navigator.language.substr(0, 2) : 'zh']
+}[navigator ? navigator.language.substr(0, 2) : 'zh']
