@@ -1,7 +1,5 @@
 FROM node:carbon
 
-ENV API_URL=${API_URL}
-
 COPY ./docker/entrypoint.sh /entrypoint/
 
 RUN ["chmod", "+x", "entrypoint/entrypoint.sh"]
