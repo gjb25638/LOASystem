@@ -56,4 +56,5 @@ docker-compose up
 ## 資料串接
 - 於 `/server/models/data.js` 有一份假的人事資料, 基本上系統會在第一次讀取所有人事資料並建立帳號.
 - 你可以依據個人需求修改, 但請先詳讀 `/server/models/employee.js` schema. 
-- 其他問題請再提出 issue, 我盡量解答.
+
+## 若有其他問題, 請再提出 issue, 我盡量解答.
