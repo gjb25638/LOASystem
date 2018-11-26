@@ -42,10 +42,10 @@
             <v-data-table :pagination.sync="pagination" :search="search" :headers="headers" :items="records" class="elevation-1" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
               <template slot="items" slot-scope="props">
                 <tr>
-                  <td>{{ props.item.appliedDate }}</td>
-                  <td>{{ generateSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
+                  <td style="min-width:120px">{{ props.item.appliedDate }}</td>
+                  <td style="min-width:120px">{{ generateSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
                   <td>{{ generateConsumeSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
-                  <td>
+                  <td style="min-width:120px">
                     <v-tooltip bottom>
                       <div slot="activator">
                         <v-icon :class="props.item.class" v-if="false">{{props.item.icon}}</v-icon>
@@ -64,7 +64,7 @@
                       </div>
                     </v-tooltip>
                   </td>
-                  <td>{{ props.item.agent }}</td>
+                  <td style="min-width:100px">{{ props.item.agent }}</td>
                   <td>
                     <div v-for="signing in props.item.signings" :key="signing._id">
                       <v-tooltip bottom>

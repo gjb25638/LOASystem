@@ -55,9 +55,9 @@
                   </td>
                   <td>{{ props.item.name }}</td>
                   <td>{{ props.item.username }}</td>
-                  <td>{{ props.item.dept }}</td>
-                  <td>{{ props.item.arrivedDate ? props.item.arrivedDate.substr(0, 10) : '' }}</td>
-                  <td>
+                  <td style="min-width:120px">{{ props.item.dept }}</td>
+                  <td style="min-width:120px">{{ props.item.arrivedDate ? props.item.arrivedDate.substr(0, 10) : '' }}</td>
+                  <td style="min-width:120px">
                     <router-link v-bind:to="{ name: 'RecordList', params: { id: props.item._id } }">{{localeConf.list.td.records}}</router-link>
                     <router-link v-if="fullControl || $cookie.get('loginuser') === props.item.username.toLocaleLowerCase()" v-bind:to="{ name: 'Detail', params: { id: props.item._id } }">| {{localeConf.list.td.edit}}</router-link>
                     <span v-if="fullControl && $cookie.get('loginuser') !== props.item.username.toLocaleLowerCase()"> |

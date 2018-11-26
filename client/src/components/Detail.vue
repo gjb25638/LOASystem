@@ -18,18 +18,16 @@
               <v-flex xs6>
                 <v-text-field v-model="username" :rules="usernameRules" :label="this.localeConf.detail.input.username" required :readonly='!fullControl'></v-text-field>
               </v-flex>
-              <v-flex xs5>
+              <v-flex xs4>
                 <v-menu :close-on-content-click="false" v-model="datepickerMenu" :nudge-right="40" lazy transition="scale-transition" offset-y full-width max-width="290px" min-width="290px" :disabled='!fullControl'>
                   <v-text-field slot="activator" v-model="arrivedDate" :label="this.localeConf.detail.input.arrivedDate" persistent-hint prepend-icon="event" readonly></v-text-field>
                   <v-date-picker v-model="arrivedDate" no-title @input="datepickerMenu = false" scrollable></v-date-picker>
                 </v-menu>
               </v-flex>
-              <v-flex></v-flex>
-              <v-flex xs3>
+              <v-flex xs4>
                 <v-select prepend-icon="security" v-model="level" :items="['admin', 'manager', 'normal']" :label="this.localeConf.detail.input.level" required :readonly='!fullControl'></v-select>
               </v-flex>
-              <v-flex xs1></v-flex>
-              <v-flex xs2>
+              <v-flex xs3>
                 <v-dialog v-model="resetPWDDialog" max-width="400px" v-if="isEditMode">
                   <v-btn slot="activator">
                     <v-icon>lock</v-icon>
