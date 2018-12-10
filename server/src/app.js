@@ -444,6 +444,17 @@ function updateUserData(user, cb) {
     }
   }
 
+  const businessTripDateType = enableDateTypes.find((dt) => dt.name === 'businessTrip')
+  if (businessTripDateType) {
+    const deadline = currentMonth < 11 ? new Date(currentYear, currentMonth + 1, 0) : new Date(currentYear + 1, 0, 0)
+    if (deadline > businessTripDateType.deadline) {
+      businessTripDateType.deadline = deadline
+      businessTripDateType.totals.days = 20
+      businessTripDateType.consumes.days = 0
+      logs.push(businessTripDateType)
+    }
+  }
+
   if (cb) {
     user.save((err) => {
       if (err) {
