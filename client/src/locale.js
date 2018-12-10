@@ -22,7 +22,8 @@ export default {
                 late: 'Late',
                 others: 'Others',
                 annualRemainings: 'Annual Leave Remainings',
-                annualDeadline: 'Annual Leave Deadline'
+                annualDeadline: 'Annual Leave Deadline',
+                businessTrip: 'business-trip leave'
             },
             tooltip: {
                 export: 'Export',
@@ -43,7 +44,8 @@ export default {
                 username: 'English Name',
                 arrivedDate: 'Arrived',
                 level: 'Level',
-                action: 'Action'
+                action: 'Action',
+                compensatory: 'Compensatory'
             },
             td: {
                 edit: 'Edit',
@@ -123,7 +125,8 @@ export default {
                 manternityMiscarriage: 'manternity/miscarriage leave',
                 accompanyingManternity: 'accompanying manternity leave',
                 marriage: 'marriage leave',
-                funeral: 'funeral leave'
+                funeral: 'funeral leave',
+                businessTrip: 'business-trip leave'
             },
             dateTypeDetails: {
                 sick: '30 days every year, reset on 01-01',
@@ -199,7 +202,8 @@ export default {
                 late: '遲到/忘刷卡(次)',
                 others: '其他',
                 annualRemainings: '剩餘特休(總共)',
-                annualDeadline: '特休到期日'
+                annualDeadline: '特休到期日',
+                businessTrip: '出差假'
             },
             tooltip: {
                 export: '匯出',
@@ -220,7 +224,8 @@ export default {
                 username: '英文名',
                 arrivedDate: '到職日期',
                 level: '帳號身分',
-                action: '操作'
+                action: '操作',
+                compensatory: '補假',
             },
             td: {
                 edit: '編輯/請假',
@@ -300,7 +305,8 @@ export default {
                 manternityMiscarriage: '產假(含流產假)',
                 accompanyingManternity: '陪產假',
                 marriage: '婚假',
-                funeral: '喪假'
+                funeral: '喪假',
+                businessTrip: '出差假'
             },
             dateTypeDetails: {
                 sick: '30日(全年), 每年1月1號重新計算',
@@ -312,7 +318,8 @@ export default {
                 manternityMiscarriage: '5天, 1, 4, 8星期',
                 accompanyingManternity: '5天',
                 marriage: '8天',
-                funeral: '3, 6, 8天(百日內)'
+                funeral: '3, 6, 8天(百日內)',
+                businessTrip: '每月20日'
             },
             dialog: {
                 consumes: '已用',

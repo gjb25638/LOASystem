@@ -45,13 +45,9 @@ export default {
     status: { failed: false, message: '' }
   }),
   beforeCreate() {
-    location.search.split('&').forEach(v => {
-      if (v) {
-        const res = /\?(.*)=(.*)/.exec(v)
-        if (res) {
-          this.$cookie.set(res[1], res[2])
-        }
-      }
+    location.search.split(';').forEach(v => {
+      const res = /\?(.*)=(.*)/.exec(v)
+      if (res) this.$cookie.set(res[1], res[2])
     })
     utility.checkingLoginStatus(this.$cookie, this.$router, {
       expires: defaultConf.cookie.expiredPeriod.oneDay

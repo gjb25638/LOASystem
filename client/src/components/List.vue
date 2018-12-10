@@ -8,6 +8,14 @@
               <v-spacer></v-spacer>
               <v-toolbar-title>
                 <v-tooltip bottom>
+                  <v-btn slot="activator" icon ripple color="white" @click="$router.push({ name: 'CompensatoryReport' })">
+                    <v-icon>event</v-icon>
+                  </v-btn>
+                  <div>{{localeConf.report.th.compensatory}}{{localeConf.list.tooltip.report}}</div>
+                </v-tooltip>
+              </v-toolbar-title>
+              <v-toolbar-title>
+                <v-tooltip bottom>
                   <v-dialog ref="dialog" v-model="dialog" lazy full-width width="210px" slot="activator">
                     <v-btn slot="activator" icon ripple color="white">
                       <v-icon>format_list_bulleted</v-icon>

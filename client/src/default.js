@@ -253,6 +253,28 @@ export default {
             datepicker: false,
             countdown: true,
             halfHoursEnabled: false
+        },
+        {
+            index: 10,
+            enabled: false,
+            icon: 'directions_run',
+            class: ['theme', 'white--text'],
+            name: 'businessTrip',
+            title: localeConf.detail.dateTypes.businessTrip,
+            detail: localeConf.detail.dateTypeDetails.businessTrip,
+            consumes: {
+                days: 0,
+                hours: 0
+            },
+            totals: {
+                days: 20,
+                hours: 0
+            },
+            deadline: '',
+            dialog: false,
+            datepicker: false,
+            countdown: false,
+            halfHoursEnabled: true
         }
     ]
 }

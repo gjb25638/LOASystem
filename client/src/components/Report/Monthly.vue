@@ -199,6 +199,7 @@
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.preManternity) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.manternityMiscarriage) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.accompanyingManternity) }}</td>
+                  <td style="min-width:100px">{{ generateDateTypeSummary(props.item.businessTrip) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.others) }}</td>
                 </tr>
               </template>

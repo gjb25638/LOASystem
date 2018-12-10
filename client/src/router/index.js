@@ -5,6 +5,7 @@ import Detail from '@/components/Detail'
 import RecordList from '@/components/RecordList'
 import MonthlyReport from '@/components/Report/Monthly'
 import AnnualReport from '@/components/Report/Annual'
+import CompensatoryReport from '@/components/Report/CompensatoryReport'
 import Login from '@/views/Login'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -45,6 +46,11 @@ export default new Router({
       path: '/report/:year/:month',
       name: 'MonthlyReport',
       component: MonthlyReport
+    },
+    {
+      path: '/compensatoryReport',
+      name: 'CompensatoryReport',
+      component: CompensatoryReport
     }
   ]
 })

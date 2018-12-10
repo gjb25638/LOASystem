@@ -23,6 +23,7 @@ export default {
         { text: localeConf.report.th.preManternity, value: 'preManternity', sortable: false },
         { text: localeConf.report.th.manternityMiscarriage, value: 'manternityMiscarriage', sortable: false },
         { text: localeConf.report.th.accompanyingManternity, value: 'accompanyingManternity', sortable: false },
+        { text: localeConf.report.th.businessTrip, value: 'businessTrip', sortable: false },
         { text: localeConf.report.th.others, value: 'others', sortable: false }
     ],
     annualInfoHeaders: [
@@ -83,6 +84,7 @@ export default {
         'preManternity',
         'manternityMiscarriage',
         'accompanyingManternity',
+        'businessTrip',
         'others'
     ],
     createObjectByKeys: (keys, value) => {
@@ -92,7 +94,7 @@ export default {
         });
         return obj;
     },
-    sumUpDaysNHours: (currentDays, currentHours, halfHours) => {
+    sumUpDaysNHours: (currentDays, currentHours, halfHours, days = 1) => {
         const counter = { days: currentDays, hours: currentHours }
         if (halfHours > 0) {
             counter.hours += halfHours / 2
@@ -101,7 +103,7 @@ export default {
                 counter.hours = counter.hours % 8
             }
         } else {
-            counter.days++
+            counter.days += days
         }
         return counter
     },
@@ -119,12 +121,15 @@ export default {
         const allSignersSigned = record.signers.every(signer => record.signings.some(signing => signing.id === signer.id))
         return record.signings.length > 0 ? record.signings.every(signing => signing.pass) && allSignersSigned : allSignersSigned
     },
-    generateDateTypeSummary: ({ days, hours, totalDays }) => {
-        if (totalDays) {
+    generateDateTypeSummary: ({ days, hours, totalDays, totalHours }) => {
+        if (totalDays || totalHours) {
             return (
                 (days + localeConf.report.th.days) +
-                '('+ totalDays + localeConf.report.th.days + ')' + 
-                (hours && hours > 0 ? hours + localeConf.report.th.hours : '')
+                (hours && hours > 0 ? hours + localeConf.report.th.hours : '') +
+                '(' +
+                totalDays + localeConf.report.th.days +
+                (totalHours ? totalHours + localeConf.report.th.hours : '') +
+                ')'
             )
         } else {
             return (
