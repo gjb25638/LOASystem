@@ -58,6 +58,7 @@ app.get('/employees/:loginuser/:token', (req, res) => {
               .map(e => {
                 return {
                   _id: e._id,
+                  enabled: e.enabled,
                   password: e.password,
                   employeeID: e.employeeID,
                   username: e.username,
@@ -72,7 +73,7 @@ app.get('/employees/:loginuser/:token', (req, res) => {
                       return r.signings.length > 0 ? r.signings.every(signing => signing.pass) && !allSignersSigned : !allSignersSigned
                     })
                 }
-              }),
+              }).sort(e => e.enabled),
             fullControl: user.level === 'admin'
           })
         }
@@ -160,6 +161,30 @@ app.put('/employee/:id/:loginuser/:token', (req, res) => {
           Employee.arrivedDate = req.body.arrivedDate
           Employee.signers = req.body.signers
           Employee.activatedDateTypes = req.body.activatedDateTypes
+
+          Employee.save((err) => {
+            if (err) {
+              res.send({ success: false, message: err, })
+            } else {
+              res.send({ success: true, message: "employee updated successfully" })
+            }
+          })
+        }
+      })
+    } else {
+      res.send({ success: false, message: "token validation failed" })
+    }
+  })
+})
+
+app.put('/switch/:id/:loginuser/:token', (req, res) => {
+  validate_admin(req.params.loginuser, req.params.token, (pass) => {
+    if (pass) {
+      Employee.findById(req.params.id, null, (err, Employee) => {
+        if (err) {
+          res.send({ success: false, message: err })
+        } else {
+          Employee.enabled = !Employee.enabled
 
           Employee.save((err) => {
             if (err) {

@@ -50,6 +50,8 @@ export default {
       td: {
         edit: 'Edit',
         delete: 'Delete',
+        disable: 'Disable',
+        enable: 'Enable',
         records: 'Records',
         sign: 'Sign',
         signed: 'Signed'
@@ -71,7 +73,11 @@ export default {
         report: 'Choose a Year of Report'
       },
       message: {
-        dateTypeReset: 'The leave kinds list below were all reset:'
+        dateTypeReset: 'The leave kinds list below were all reset:',
+        confirmToDeleteEmployee: 'Do you really want to delete?'
+      },
+      label: {
+        showAllPeople: "Show All"
       }
     },
     login: {
@@ -229,6 +235,8 @@ export default {
       td: {
         edit: '編輯/請假',
         delete: '刪除',
+        disable: '停用',
+        enable: '啟用',
         records: '請假紀錄',
         sign: '簽核',
         signed: '已簽核'
@@ -240,7 +248,7 @@ export default {
       },
       btn: {
         report: '至請假報表',
-        close: '關閉'
+        close: '關閉',
       },
       input: {
         report: '年份',
@@ -250,7 +258,11 @@ export default {
         report: '輸入報表年份'
       },
       message: {
-        dateTypeReset: '以下假別的 [到期日] 與 (請假天數) 已經更新:'
+        dateTypeReset: '以下假別的 [到期日] 與 (請假天數) 已經更新:',
+        confirmToDeleteEmployee: '真的要刪除嗎?'
+      },
+      label: {
+        showAllPeople: "顯示所有人"
       }
     },
     login: {

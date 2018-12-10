@@ -35,5 +35,9 @@ export default {
   delete(params) {
     const url = `employee/${params.id}/${params.loginuser}/${encodeURIComponent(params.token)}`
     return Api().delete(url)
+  },
+  switch(params) {
+    const url = `switch/${params.id}/${params.loginuser}/${encodeURIComponent(params.token)}`
+    return Api().put(url)
   }
 }
