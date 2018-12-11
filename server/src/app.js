@@ -73,7 +73,7 @@ app.get('/employees/:loginuser/:token', (req, res) => {
                       return r.signings.length > 0 ? r.signings.every(signing => signing.pass) && !allSignersSigned : !allSignersSigned
                     })
                 }
-              }).sort(e => e.enabled),
+              }),
             fullControl: user.level === 'admin'
           })
         }
