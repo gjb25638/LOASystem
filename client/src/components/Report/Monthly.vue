@@ -19,10 +19,11 @@
               </v-toolbar-title>
             </v-toolbar>
             <v-card-title>
+              <v-switch :label="localeConf.list.label.showAllPeople" v-if="fullControl" v-model="showAllPeople"></v-switch>
               <v-spacer></v-spacer>
               <v-text-field v-model="search" append-icon="search" :label="localeConf.list.input.search" single-line hide-details></v-text-field>
             </v-card-title>
-            <v-data-table :search="search" :headers="headers" :items="employees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
+            <v-data-table :search="search" :headers="headers" :items="filteredEmployees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
               <template slot="items" slot-scope="props">
                 <tr :title="props.item.name + ' (' + props.item.username + ')'">
                   <td>{{ props.item.employeeID }}</td>
@@ -230,7 +231,13 @@ export default {
       employees: [],
       fullControl: false,
       month: parseInt(this.$route.params.month),
-      year: parseInt(this.$route.params.year)
+      year: parseInt(this.$route.params.year),
+      showAllPeople: false
+    }
+  },
+  computed: {
+    filteredEmployees: function() {
+      return this.employees.filter(e => this.showAllPeople || e.enabled)
     }
   },
   beforeCreate() {
@@ -323,6 +330,7 @@ export default {
         dept,
         name,
         username,
+        enabled: employee.enabled,
         arrivedDate: utility.formatDate(arrivedDate)
       }
 

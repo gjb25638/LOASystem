@@ -5,16 +5,17 @@ import App from './App'
 import router from './router'
 import localeConf from './locale.js'
 import VueCookie from 'vue-cookie'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.config.productionTip = false
-
+Vue.use(Vuetify)
 Vue.use(VueCookie)
 Vue.mixin({
-  data: () => {
+  data: function() {
     return {
-      get localeConf() {
-        return localeConf
-      }
+      localeConf
     }
   }
 })

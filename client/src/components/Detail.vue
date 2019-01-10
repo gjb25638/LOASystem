@@ -62,7 +62,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-list>
-                  <v-list-tile avatar v-for="item in dateTypes" :key="item.index">
+                  <v-list-tile avatar v-for="item in availableDateTypes" :key="item.index">
                     <v-list-tile-avatar>
                       <v-icon :class="item.class" @click="selectDateType($vuetify, item)">{{item.icon}}</v-icon>
                     </v-list-tile-avatar>
@@ -161,6 +161,99 @@
                     </v-list-tile-action>
                   </v-list-tile>
                 </v-list>
+              </v-flex>
+              <v-flex>
+                <v-expansion-panel dark>
+                  <v-expansion-panel-content>
+                    <div slot="header">{{ localeConf.detail.message.unavailableDateTypes }}
+                       ({{ localeConf.detail.message.unavailableDateTypesDetails }})
+                    </div>
+                    <v-list>
+                      <v-list-tile avatar v-for="item in unavailableDateTypes" :key="item.index">
+                        <v-list-tile-avatar>
+                          <v-icon :class="item.class" @click="selectDateType($vuetify, item)">{{item.icon}}</v-icon>
+                        </v-list-tile-avatar>
+                        <v-list-tile-content :title="item.title + (item.countdown ? ' - ' + item.detail : '')" @click="selectDateType($vuetify, item)" style="cursor:pointer">
+                          <v-list-tile-title>{{item.title}}</v-list-tile-title>
+                          <v-list-tile-sub-title>{{item.countdown ? item.detail : ''}}</v-list-tile-sub-title>
+                        </v-list-tile-content>
+                        <v-list-tile-avatar v-if="fullControl || item.countdown">
+                          <v-tooltip bottom>
+                            <v-chip slot="activator" :class="item.enabled ? 'theme' : ''" text-color="white" @click="item.dialog = fullControl;">
+                              <v-avatar :class="item.enabled ? 'theme' : ''">{{item.consumes.days}}</v-avatar>
+                              {{item.totals.days}}
+                            </v-chip>
+                            <div>
+                              <span>{{localeConf.detail.dialog.consumes}} {{item.consumes.days}} {{localeConf.detail.dialog.input.days}} </span>
+                              <span v-if="item.halfHoursEnabled"> {{item.consumes.hours}} {{localeConf.detail.dialog.input.hours}}</span>
+                            </div>
+                            <div>
+                              <span>{{localeConf.detail.dialog.totals}} {{item.totals.days}} {{localeConf.detail.dialog.input.days}} </span>
+                              <span v-if="item.halfHoursEnabled"> {{item.totals.hours}} {{localeConf.detail.dialog.input.hours}}</span>
+                            </div>
+                            <div v-if="item.deadline">
+                              {{localeConf.detail.dialog.deadline}} {{item.deadline}}
+                            </div>
+                          </v-tooltip>
+                        </v-list-tile-avatar>
+                        <v-list-tile-action v-if="fullControl">
+                          <v-btn icon ripple @click="item.enabled = !item.enabled">
+                            <v-icon :class="item.enabled ? 'green--text' : ''">{{item.enabled ? 'done' : 'add'}}</v-icon>
+                          </v-btn>
+                        </v-list-tile-action>
+                        <v-dialog v-model="item.dialog" max-width="400px">
+                          <v-card>
+                            <v-card-title>
+                              <h2>{{localeConf.detail.dialog.consumes}}</h2>
+                            </v-card-title>
+                            <v-card-text>
+                              <v-layout row wrap>
+                                <v-flex xs5>
+                                  <v-text-field type="number" min="0" :label="localeConf.detail.dialog.input.days" v-model="item.consumes.days"></v-text-field>
+                                </v-flex>
+                                <v-flex xs2>
+                                  <v-checkbox v-if="item.isCustomizedType" v-model="item.halfHoursEnabled"></v-checkbox>
+                                </v-flex>
+                                <v-flex xs5>
+                                  <v-text-field :disabled="!item.halfHoursEnabled" type="number" min="0" max="15" :label="localeConf.detail.dialog.input.hours" v-model="item.consumes.hours"></v-text-field>
+                                </v-flex>
+                              </v-layout>
+                            </v-card-text>
+                            <v-card-title primary-title>
+                              <h2>{{localeConf.detail.dialog.totals}}</h2>
+                            </v-card-title>
+                            <v-card-text>
+                              <v-layout row wrap>
+                                <v-flex xs5>
+                                  <v-text-field type="number" min="0" :label="localeConf.detail.dialog.input.days" v-model="item.totals.days"></v-text-field>
+                                </v-flex>
+                                <v-flex xs2></v-flex>
+                                <v-flex xs5>
+                                  <v-text-field :disabled="!item.halfHoursEnabled" type="number" min="0" max="15" :label="localeConf.detail.dialog.input.hours" v-model="item.totals.hours"></v-text-field>
+                                </v-flex>
+                              </v-layout>
+                            </v-card-text>
+                            <v-card-text>
+                              <v-layout row wrap>
+                                <v-flex xs6>
+                                  <v-menu :close-on-content-click="false" v-model="item.datepicker" :nudge-right="40" lazy transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
+                                    <v-text-field slot="activator" v-model="item.deadline" :label="localeConf.detail.dialog.deadline" persistent-hint prepend-icon="event" readonly></v-text-field>
+                                    <v-date-picker v-model="item.deadline" no-title @input="item.datepicker = false"></v-date-picker>
+                                  </v-menu>
+                                </v-flex>
+                              </v-layout>
+                            </v-card-text>
+                            <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn class="theme" @click="item.dialog=false">{{localeConf.detail.dialog.close}}</v-btn>
+                              <v-btn v-if="item.isCustomizedType" class="theme" @click="dateTypes = dateTypes.filter((e) => e.index !== item.index)">remove</v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
+                      </v-list-tile>
+                    </v-list>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
               </v-flex>
               <v-flex xs12>
                 <v-divider></v-divider>
@@ -326,6 +419,28 @@ export default {
     employees: [],
     employeeOptions: []
   }),
+  computed: {
+    availableDateTypes: function() {
+      return this.dateTypes.filter(dt => {
+        return !(
+          dt.name.startsWith(this.localeConf.report.th.compensatory) &&
+          dt.consumes.days === dt.totals.days &&
+          dt.consumes.halfHours === dt.totals.halfHours &&
+          utility.formatDate(dt.deadline) <= utility.formatDate('now')
+        )
+      })
+    },
+    unavailableDateTypes: function() {
+      return this.dateTypes.filter(dt => {
+        return (
+          dt.name.startsWith(this.localeConf.report.th.compensatory) &&
+          dt.consumes.days === dt.totals.days &&
+          dt.consumes.halfHours === dt.totals.halfHours &&
+          utility.formatDate(dt.deadline) <= utility.formatDate('now')
+        )
+      })
+    }
+  },
   beforeCreate() {
     utility.checkingLoginStatus(this.$cookie, this.$router)
   },
@@ -562,10 +677,11 @@ export default {
       }
 
       if (
-        this.selectedDateType.consumes.days + this.apply.dates.length >
+        (this.selectedDateType.consumes.days + this.apply.dates.length >
           this.selectedDateType.totals.days &&
-        this.selectedDateType.consumes.hours ===
-          this.selectedDateType.totals.hours
+          this.selectedDateType.consumes.hours ===
+            this.selectedDateType.totals.hours) ||
+        (this.selectedDateType.totals.days === 0 && this.apply.totalHours === 0)
       ) {
         this.snackbar = true
         this.snackbarText = this.localeConf.detail.message.runOutQotaOfLeave
@@ -638,8 +754,23 @@ export default {
         }
       }
     },
-    allowedDates: d => ![0, 6].includes(new Date(d).getDay()),
-    allowedHours: h => h >= 7 && h <= 22,
+    allowedDates(d) {
+      const date = new Date(d)
+      const annualPreRequest = this.dateTypes.find(
+        dt => dt.name === 'annualPreRequest'
+      )
+      const annual = this.dateTypes.find(dt => dt.name === 'annual')
+      if (
+        annual &&
+        annualPreRequest &&
+        this.selectedDateType.name === annualPreRequest.name
+      ) {
+        return new Date(annual.deadline) < date
+      } else {
+        return true
+      }
+    },
+    allowedHours: h => h >= 7 && h <= 23,
     allowedMinutes: m => m % 30 === 0,
     calculateTotalTime(dialog, target) {
       dialog.save(this.apply[target])

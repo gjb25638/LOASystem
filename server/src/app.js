@@ -157,6 +157,7 @@ app.put('/employee/:id/:loginuser/:token', (req, res) => {
           Employee.username = req.body.username
           Employee.employeeID = req.body.employeeID
           Employee.name = req.body.name
+          Employee.level = req.body.level
           Employee.dept = req.body.dept
           Employee.arrivedDate = req.body.arrivedDate
           Employee.signers = req.body.signers
@@ -406,7 +407,6 @@ function updateUserData(user, cb) {
     const arrivedMonth = arrivedDate.getMonth()
     const arrivedDay = arrivedDate.getDate()
 
-
     const months = diffMonth(new Date(arrivedDate), today)
     const seniority = Math.floor(months / 12)
     //          0.5, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13,    14, 15, 16...
@@ -417,13 +417,36 @@ function updateUserData(user, cb) {
       let deadline = new Date(currentYear, arrivedMonth, arrivedDay - 1)
       deadline = deadline >= today ? deadline : new Date(currentYear + 1, arrivedMonth, arrivedDay - 1)
       if (deadline > annualDateType.deadline) {
+
+        const annualPreRequestDateType = enableDateTypes.find((dt) => dt.name === 'annualPreRequest')
+        if (user.arrivedDate && annualPreRequestDateType) {
+          const days_next = seniority > 12 ? seniority + 7 : map[seniority + 1]
+          let deadline_next = new Date(deadline.getFullYear() + 1, deadline.getMonth(), deadline.getDate())
+          annualPreRequestDateType.deadline = deadline_next
+          annualPreRequestDateType.totals.days = days_next
+
+          if (annualPreRequestDateType.consumes.days > 0) {
+            annualDateType.consumes.days = annualPreRequestDateType.consumes.days
+            annualPreRequestDateType.consumes.days = 0
+            user.records.forEach(r => {
+              if (r.dateType === 'annualPreRequest') {
+                r.dateType = 'annual'
+              }
+            });
+          } else {
+            annualDateType.consumes.days = 0
+          }
+        } else {
+          annualDateType.consumes.days = 0
+        }
+        
         annualDateType.deadline = deadline
         annualDateType.totals.days = days
-        annualDateType.consumes.days = 0
         logs.push(annualDateType)
       }
     }
   }
+
 
   const sickDateType = enableDateTypes.find((dt) => dt.name === 'sick')
   if (sickDateType) {

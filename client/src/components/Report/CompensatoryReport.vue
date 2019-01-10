@@ -25,10 +25,11 @@
               </v-toolbar-title>
             </v-toolbar>
             <v-card-title>
+              <v-switch :label="localeConf.list.label.showAllPeople" v-if="fullControl" v-model="showAllPeople"></v-switch>
               <v-spacer></v-spacer>
               <v-text-field v-model="search" append-icon="search" :label="localeConf.list.input.search" hide-details></v-text-field>
             </v-card-title>
-            <v-data-table must-sort :search="search" :headers="headers" :items="employees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
+            <v-data-table must-sort :search="search" :headers="headers" :items="filteredEmployees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
               <template slot="items" slot-scope="props">
                 <tr @click="props.expanded = !props.expanded">
                   <td>{{ props.item.employeeID }}</td>
@@ -64,7 +65,13 @@ export default {
       employees: [],
       fullControl: false,
       dialog: false,
-      yearOfReport: new Date().getFullYear()
+      yearOfReport: new Date().getFullYear(),
+      showAllPeople: false
+    }
+  },
+  computed: {
+    filteredEmployees: function() {
+      return this.employees.filter(e => this.showAllPeople || e.enabled)
     }
   },
   beforeCreate() {
@@ -72,12 +79,28 @@ export default {
   },
   created() {
     this.headers = [
-      { text: this.localeConf.list.th.employeeID, value: 'employeeID', sortable: false },
+      {
+        text: this.localeConf.list.th.employeeID,
+        value: 'employeeID',
+        sortable: false
+      },
       { text: this.localeConf.list.th.name, value: 'name', sortable: false },
-      { text: this.localeConf.list.th.username, value: 'username', sortable: false },
+      {
+        text: this.localeConf.list.th.username,
+        value: 'username',
+        sortable: false
+      },
       { text: this.localeConf.list.th.dept, value: 'dept', sortable: false },
-      { text: this.localeConf.list.th.arrivedDate, value: 'arrivedDate', sortable: false },
-      { text: this.localeConf.list.th.compensatory, value: 'compensatory', sortable: false },
+      {
+        text: this.localeConf.list.th.arrivedDate,
+        value: 'arrivedDate',
+        sortable: false
+      },
+      {
+        text: this.localeConf.list.th.compensatory,
+        value: 'compensatory',
+        sortable: false
+      },
       { text: this.localeConf.list.th.action, value: '', sortable: false }
     ]
   },
@@ -144,13 +167,13 @@ export default {
           0
         )
 
-        console.log(compensatory)
         return {
           _id,
           employeeID,
           dept,
           name,
           username,
+          enabled: employee.enabled,
           arrivedDate,
           compensatory
         }

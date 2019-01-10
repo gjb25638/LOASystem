@@ -96,7 +96,7 @@ export default {
           return {
             text: `${month} ${localeConf.report.th.months} ${day} ${
               localeConf.report.th.days
-            }`,
+              }`,
             value: 'day' + day,
             sortable: false
           }
@@ -108,7 +108,7 @@ export default {
         return {
           text: `${year} ${localeConf.report.th.years} ${month} ${
             localeConf.report.th.months
-          }`,
+            }`,
           value: 'month' + month,
           sortable: false
         }
@@ -120,11 +120,11 @@ export default {
   parseDateString: dateString => {
     return dateString
       ? {
-          year: parseInt(dateString.substr(0, 4)),
-          month: parseInt(dateString.substr(5, 2)),
-          day: parseInt(dateString.substr(8, 2)),
-          date: new Date(dateString)
-        }
+        year: parseInt(dateString.substr(0, 4)),
+        month: parseInt(dateString.substr(5, 2)),
+        day: parseInt(dateString.substr(8, 2)),
+        date: new Date(dateString)
+      }
       : undefined
   },
   dateTypes: [

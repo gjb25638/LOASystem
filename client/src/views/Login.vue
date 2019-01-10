@@ -14,7 +14,7 @@
               <v-card-text>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field prepend-icon="person" name="username" :label="localeConf.login.input.username" type="text" v-model="username" :rules="usernameRules" required></v-text-field>
-                  <v-text-field :append-icon="showingPassword ? 'visibility_off' : 'visibility'" prepend-icon="lock" name="password" :label="localeConf.login.input.password" :type="showingPassword ? 'text' : 'password'" v-model="password" :rules="passwordRules" required @click:append="showingPassword = !showingPassword" @keyup="detectUserBehavior"></v-text-field>
+                  <v-text-field :append-icon="showingPassword ? 'visibility_off' : 'visibility'" prepend-icon="lock" name="password" :label="localeConf.login.input.password" :type="showingPassword ? 'text' : 'password'" v-model="password" :rules="passwordRules" required @click:append="showingPassword = !showingPassword" @keyup.enter="login"></v-text-field>
                 </v-form>
                 <v-alert v-model="status.failed" type="error">{{status.message}}</v-alert>
               </v-card-text>
@@ -54,12 +54,6 @@ export default {
     })
   },
   methods: {
-    async detectUserBehavior(e) {
-      const enterKeyCode = 13
-      if (e.keyCode === enterKeyCode) {
-        await this.login()
-      }
-    },
     async login() {
       if (this.$refs.form.validate()) {
         const {

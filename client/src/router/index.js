@@ -7,11 +7,7 @@ import MonthlyReport from '@/components/Report/Monthly'
 import AnnualReport from '@/components/Report/Annual'
 import CompensatoryReport from '@/components/Report/CompensatoryReport'
 import Login from '@/views/Login'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
-Vue.use(Vuetify)
 Vue.use(Router)
 
 export default new Router({
