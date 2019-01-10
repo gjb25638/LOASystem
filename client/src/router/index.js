@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import List from '@/components/List'
-import Detail from '@/components/Detail'
-import RecordList from '@/components/RecordList'
-import MonthlyReport from '@/components/Report/Monthly'
-import AnnualReport from '@/components/Report/Annual'
-import CompensatoryReport from '@/components/Report/CompensatoryReport'
+import List from '@/views/List'
+import Detail from '@/views/Detail'
+import RecordList from '@/views/RecordList'
+import MonthlyReport from '@/views/Report/Monthly'
+import AnnualReport from '@/views/Report/Annual'
+import CompensatoryReport from '@/views/Report/CompensatoryReport'
 import Login from '@/views/Login'
 
 Vue.use(Router)
