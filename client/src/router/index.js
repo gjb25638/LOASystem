@@ -6,6 +6,7 @@ import RecordList from '@/views/RecordList'
 import MonthlyReport from '@/views/Report/Monthly'
 import AnnualReport from '@/views/Report/Annual'
 import CompensatoryReport from '@/views/Report/CompensatoryReport'
+import TableMenu from '@/components/TableMenu'
 import Login from '@/views/Login'
 
 Vue.use(Router)
@@ -47,6 +48,11 @@ export default new Router({
       path: '/compensatoryReport',
       name: 'CompensatoryReport',
       component: CompensatoryReport
+    },
+    {
+      path: '/test',
+      name: 'TableMenu',
+      component: TableMenu
     }
   ]
 })

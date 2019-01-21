@@ -4,43 +4,47 @@
       <v-layout>
         <v-flex xs12>
           <v-card class="elevation-12">
-            <v-toolbar flat class="theme">
-              <v-spacer></v-spacer>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-btn icon ripple color="white" @click="exportExcel" slot="activator">
-                    <v-icon>cloud_download</v-icon>
-                  </v-btn>
-                  <div>{{localeConf.report.tooltip.export}}</div>
-                </v-tooltip>
-              </v-toolbar-title>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-btn icon ripple color="white" @click="logout($cookie, $router)" slot="activator">
-                    <v-icon>power_settings_new</v-icon>
-                  </v-btn>
-                  <div>{{localeConf.list.tooltip.logout}}</div>
-                  <div>({{localeConf.list.tooltip.loginuser}}: {{$cookie.get('loginuser')}})</div>
-                </v-tooltip>
-              </v-toolbar-title>
-            </v-toolbar>
+            <table-menu :enabled="{ export: true }"></table-menu>
             <v-card-title>
-              <v-switch :label="localeConf.list.label.showAllPeople" v-if="fullControl" v-model="showAllPeople"></v-switch>
+              <v-switch
+                :label="localeConf.list.label.showAllPeople"
+                v-if="fullControl"
+                v-model="showAllPeople"
+              ></v-switch>
               <v-spacer></v-spacer>
-              <v-text-field v-model="search" append-icon="search" :label="localeConf.list.input.search" hide-details></v-text-field>
+              <v-text-field
+                v-model="search"
+                append-icon="search"
+                :label="localeConf.list.input.search"
+                hide-details
+              ></v-text-field>
             </v-card-title>
-            <v-data-table must-sort :search="search" :headers="headers" :items="filteredEmployees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
+            <v-data-table
+              must-sort
+              :search="search"
+              :headers="headers"
+              :items="filteredEmployees"
+              item-key="_id"
+              :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
+            >
               <template slot="items" slot-scope="props">
                 <tr @click="props.expanded = !props.expanded">
                   <td>{{ props.item.employeeID }}</td>
                   <td>{{ props.item.name }}</td>
                   <td>{{ props.item.username }}</td>
                   <td style="min-width:120px">{{ props.item.dept }}</td>
-                  <td style="min-width:120px">{{ props.item.arrivedDate ? props.item.arrivedDate.substr(0, 10) : '' }}</td>
+                  <td
+                    style="min-width:120px"
+                  >{{ props.item.arrivedDate ? props.item.arrivedDate.substr(0, 10) : '' }}</td>
                   <td style="min-width:150px">{{ generateDateTypeSummary(props.item.compensatory) }}</td>
                   <td style="min-width:120px">
-                    <router-link v-bind:to="{ name: 'RecordList', params: { id: props.item._id } }">{{localeConf.list.td.records}}</router-link>
-                    <router-link v-if="fullControl || $cookie.get('loginuser') === props.item.username.toLocaleLowerCase()" v-bind:to="{ name: 'Detail', params: { id: props.item._id } }">| {{localeConf.list.td.edit}}</router-link>
+                    <router-link
+                      v-bind:to="{ name: 'RecordList', params: { id: props.item._id } }"
+                    >{{localeConf.list.td.records}}</router-link>
+                    <router-link
+                      v-if="fullControl || $cookie.get('loginuser') === props.item.username.toLocaleLowerCase()"
+                      v-bind:to="{ name: 'Detail', params: { id: props.item._id } }"
+                    >| {{localeConf.list.td.edit}}</router-link>
                   </td>
                 </tr>
               </template>
@@ -53,70 +57,76 @@
 </template>
 
 <script>
-import EmployeeService from '@/services/EmployeeService'
-import reportUtility from '@/reportUtility.js'
-import utility from '@/utility.js'
+import EmployeeService from "@/services/EmployeeService";
+import TableMenu from '@/components/TableMenu'
+import reportUtility from "@/reportUtility.js";
+import utility from "@/utility.js";
 export default {
-  name: 'List',
+  name: "List",
   data() {
     return {
-      search: '',
+      search: "",
       headers: [],
       employees: [],
       fullControl: false,
       dialog: false,
       yearOfReport: new Date().getFullYear(),
       showAllPeople: false
-    }
+    };
+  },
+  components: {
+    "table-menu": TableMenu
   },
   computed: {
     filteredEmployees: function() {
-      return this.employees.filter(e => this.showAllPeople || e.enabled)
+      return this.employees.filter(e => this.showAllPeople || e.enabled);
     }
   },
   beforeCreate() {
-    utility.checkingLoginStatus(this.$cookie, this.$router)
+    utility.checkingLoginStatus(this.$cookie, this.$router);
   },
   created() {
     this.headers = [
       {
         text: this.localeConf.list.th.employeeID,
-        value: 'employeeID',
+        value: "employeeID",
         sortable: false
       },
-      { text: this.localeConf.list.th.name, value: 'name', sortable: false },
+      { text: this.localeConf.list.th.name, value: "name", sortable: false },
       {
         text: this.localeConf.list.th.username,
-        value: 'username',
+        value: "username",
         sortable: false
       },
-      { text: this.localeConf.list.th.dept, value: 'dept', sortable: false },
+      { text: this.localeConf.list.th.dept, value: "dept", sortable: false },
       {
         text: this.localeConf.list.th.arrivedDate,
-        value: 'arrivedDate',
+        value: "arrivedDate",
         sortable: false
       },
       {
         text: this.localeConf.list.th.compensatory,
-        value: 'compensatory',
+        value: "compensatory",
         sortable: false
       },
-      { text: this.localeConf.list.th.action, value: '', sortable: false }
-    ]
+      { text: this.localeConf.list.th.action, value: "", sortable: false }
+    ];
   },
   mounted() {
-    this.getEmployees()
+    this.getEmployees();
   },
   methods: {
     async getEmployees() {
-      const { data: { employees, fullControl } } = await EmployeeService.fetch({
-        loginuser: this.$cookie.get('loginuser'),
-        token: this.$cookie.get('token')
-      })
+      const {
+        data: { employees, fullControl }
+      } = await EmployeeService.fetch({
+        loginuser: this.$cookie.get("loginuser"),
+        token: this.$cookie.get("token")
+      });
       Promise.all(await employees.map(this.getEmployee)).then(
         res => (this.employees = res.filter(e => e))
-      )
-      this.fullControl = fullControl
+      );
+      this.fullControl = fullControl;
     },
     async getEmployee(employee) {
       const {
@@ -132,18 +142,18 @@ export default {
         }
       } = await EmployeeService.get({
         id: employee._id,
-        loginuser: this.$cookie.get('loginuser'),
-        token: this.$cookie.get('token')
-      })
+        loginuser: this.$cookie.get("loginuser"),
+        token: this.$cookie.get("token")
+      });
 
       let compensatoryDateTypes = activatedDateTypes.filter(dt =>
         dt.name.startsWith(this.localeConf.report.th.compensatory)
-      )
+      );
       if (compensatoryDateTypes.length > 0) {
         let compensatory = {
           days: 0,
           hours: 0
-        }
+        };
 
         records
           .filter(r =>
@@ -155,17 +165,17 @@ export default {
               compensatory.hours,
               r.totals.halfHours,
               r.totals.days
-            )
-          })
+            );
+          });
 
-        compensatory['totalDays'] = compensatoryDateTypes.reduce(
+        compensatory["totalDays"] = compensatoryDateTypes.reduce(
           (acc, cur) => acc + cur.totals.days,
           0
-        )
-        compensatory['totalHours'] = compensatoryDateTypes.reduce(
+        );
+        compensatory["totalHours"] = compensatoryDateTypes.reduce(
           (acc, cur) => acc + cur.totals.halfHours / 2,
           0
-        )
+        );
 
         return {
           _id,
@@ -176,17 +186,14 @@ export default {
           enabled: employee.enabled,
           arrivedDate,
           compensatory
-        }
+        };
       } else {
-        return undefined
+        return undefined;
       }
     },
-    logout: (cookie, router) => utility.logout(cookie, router),
-    exportExcel: () =>
-      utility.exportExcel(document.querySelector('table').outerHTML),
     generateDateTypeSummary: reportUtility.generateDateTypeSummary
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .theme {

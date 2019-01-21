@@ -4,49 +4,32 @@
       <v-layout>
         <v-flex xs12>
           <v-card class="elevation-12">
-            <v-toolbar flat class="theme">
-              <v-toolbar-title>
-                {{yearOfReport}} {{localeConf.report.th.years}}
-              </v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-dialog slot="activator" ref="dialog" v-model="dialog" lazy full-width width="210px">
-                    <v-btn slot="activator" icon ripple color="white">
-                      <v-icon>format_list_bulleted</v-icon>
-                    </v-btn>
-                    <v-card>
-                      <v-card-title class="theme">
-                        <span class="headline">{{localeConf.report.dialog.report}}</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-text-field :label="localeConf.report.input.report" v-model="monthOfReport"></v-text-field>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn flat @click="dialog = false">{{localeConf.list.btn.close}}</v-btn>
-                        <v-btn class="theme" flat @click.native="toReportPage(monthOfReport)">{{localeConf.list.btn.report}}</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                  <div>{{localeConf.report.tooltip.report}}</div>
-                </v-tooltip>
-              </v-toolbar-title>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-btn icon ripple color="white" @click="exportExcel" slot="activator">
-                    <v-icon>cloud_download</v-icon>
-                  </v-btn>
-                  <div>{{localeConf.report.tooltip.export}}</div>
-                </v-tooltip>
-              </v-toolbar-title>
-            </v-toolbar>
+            <table-menu
+              :enabled="{ report: { type: 'month', year: yearOfReport }, export: true }"
+              :title="`${yearOfReport} ${localeConf.report.th.years}`"
+            ></table-menu>
             <v-card-title>
-              <v-switch :label="localeConf.list.label.showAllPeople" v-if="fullControl" v-model="showAllPeople"></v-switch>
+              <v-switch
+                :label="localeConf.list.label.showAllPeople"
+                v-if="fullControl"
+                v-model="showAllPeople"
+              ></v-switch>
               <v-spacer></v-spacer>
-              <v-text-field v-model="search" append-icon="search" :label="localeConf.list.input.search" single-line hide-details></v-text-field>
+              <v-text-field
+                v-model="search"
+                append-icon="search"
+                :label="localeConf.list.input.search"
+                single-line
+                hide-details
+              ></v-text-field>
             </v-card-title>
-            <v-data-table :search="search" :headers="headers" :items="filteredEmployees" item-key="_id" :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]">
+            <v-data-table
+              :search="search"
+              :headers="headers"
+              :items="filteredEmployees"
+              item-key="_id"
+              :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
+            >
               <template slot="items" slot-scope="props">
                 <tr :title="props.item.name + ' (' + props.item.username + ')'">
                   <td>{{ props.item.employeeID }}</td>
@@ -55,64 +38,88 @@
                   <td style="min-width:120px">{{ props.item.dept }}</td>
                   <td style="min-width:120px">{{ props.item.arrivedDate }}</td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month1" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month1"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month2" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month2"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month3" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month3"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month4" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month4"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month5" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month5"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month6" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month6"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month7" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month7"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month8" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month8"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month9" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month9"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month10" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month10"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month11" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month11"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td>
-                    <v-chip :class="generateDateTypeClass(data.dateType)" v-for="data in props.item.month12" :key="data.dateType">
-                      {{ generateSummary(data) }}
-                    </v-chip>
+                    <v-chip
+                      :class="generateDateTypeClass(data.dateType)"
+                      v-for="data in props.item.month12"
+                      :key="data.dateType"
+                    >{{ generateSummary(data) }}</v-chip>
                   </td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.annual) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.compensatory) }}</td>
@@ -125,13 +132,25 @@
                   <td>{{ props.item.derelictionOfDuty}}</td>
                   <td>{{ props.item.late}}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.familyCare) }}</td>
-                  <td style="min-width:100px">{{ generateDateTypeSummary(props.item.preManternity) }}</td>
-                  <td style="min-width:100px">{{ generateDateTypeSummary(props.item.manternityMiscarriage) }}</td>
-                  <td style="min-width:100px">{{ generateDateTypeSummary(props.item.accompanyingManternity) }}</td>
+                  <td
+                    style="min-width:100px"
+                  >{{ generateDateTypeSummary(props.item.preManternity) }}</td>
+                  <td
+                    style="min-width:100px"
+                  >{{ generateDateTypeSummary(props.item.manternityMiscarriage) }}</td>
+                  <td
+                    style="min-width:100px"
+                  >{{ generateDateTypeSummary(props.item.accompanyingManternity) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.businessTrip) }}</td>
                   <td style="min-width:100px">{{ generateDateTypeSummary(props.item.others) }}</td>
-                  <td v-if="yearOfReport === currentYear" style="min-width:100px">{{ generateDateTypeSummary(props.item.annualInfo) }}</td>
-                  <td v-if="yearOfReport === currentYear" style="min-width:120px">{{ props.item.annualInfo.deadline }}</td>
+                  <td
+                    v-if="yearOfReport === currentYear"
+                    style="min-width:100px"
+                  >{{ generateDateTypeSummary(props.item.annualInfo) }}</td>
+                  <td
+                    v-if="yearOfReport === currentYear"
+                    style="min-width:120px"
+                  >{{ props.item.annualInfo.deadline }}</td>
                 </tr>
               </template>
             </v-data-table>
@@ -147,16 +166,20 @@
 </template>
 
 <script>
-import EmployeeService from '@/services/EmployeeService'
-import reportUtility from '@/reportUtility.js'
-import utility from '@/utility.js'
+import EmployeeService from "@/services/EmployeeService";
+import TableMenu from "@/components/TableMenu";
+import reportUtility from "@/reportUtility.js";
+import utility from "@/utility.js";
 export default {
-  name: 'AnnualReport',
+  name: "AnnualReport",
+  components: {
+    "table-menu": TableMenu
+  },
   data() {
     return {
       snackbar: false,
-      snackbarText: '',
-      search: '',
+      snackbarText: "",
+      search: "",
       headers: [],
       employees: [],
       fullControl: false,
@@ -168,29 +191,29 @@ export default {
       currentMonth: new Date().getMonth() + 1,
       currentDay: new Date().getDate(),
       showAllPeople: false
-    }
+    };
   },
   computed: {
     filteredEmployees: function() {
-      return this.employees.filter(e => this.showAllPeople || e.enabled)
+      return this.employees.filter(e => this.showAllPeople || e.enabled);
     }
   },
   beforeCreate() {
-    utility.checkingLoginStatus(this.$cookie, this.$router)
+    utility.checkingLoginStatus(this.$cookie, this.$router);
   },
   created() {
     reportUtility.basicHeaders
       .concat(
-        reportUtility.generateColumns('month', this.yearOfReport),
+        reportUtility.generateColumns("month", this.yearOfReport),
         reportUtility.dateTypeHeaders,
         this.yearOfReport === this.currentYear
           ? reportUtility.annualInfoHeaders
           : []
       )
-      .forEach(header => this.headers.push(header))
+      .forEach(header => this.headers.push(header));
   },
   mounted() {
-    this.getEmployees()
+    this.getEmployees();
   },
   methods: {
     async getEmployee(employee) {
@@ -207,30 +230,30 @@ export default {
         }
       } = await EmployeeService.get({
         id: employee._id,
-        loginuser: this.$cookie.get('loginuser'),
-        token: this.$cookie.get('token')
-      })
+        loginuser: this.$cookie.get("loginuser"),
+        token: this.$cookie.get("token")
+      });
 
       const counterByMonth = Array.apply(null, { length: 13 }).map(v => {
-        return {}
-      })
+        return {};
+      });
 
       const annualDateType = activatedDateTypes.find(
-        dt => dt.enabled && dt.name === 'annual'
-      )
+        dt => dt.enabled && dt.name === "annual"
+      );
 
-      let annualRemainingDays = annualDateType ? annualDateType.totals.days : 0
+      let annualRemainingDays = annualDateType ? annualDateType.totals.days : 0;
       const annualDeadlineDate = annualDateType
         ? new Date(annualDateType.deadline)
-        : undefined
-      let annualDeadlineDateLastYear
+        : undefined;
+      let annualDeadlineDateLastYear;
       if (annualDeadlineDate) {
-        const adLastYear = annualDeadlineDate.getFullYear() - 1
-        const adMonth = annualDeadlineDate.getMonth()
-        const adDay = annualDeadlineDate.getDate()
+        const adLastYear = annualDeadlineDate.getFullYear() - 1;
+        const adMonth = annualDeadlineDate.getMonth();
+        const adDay = annualDeadlineDate.getDate();
         annualDeadlineDateLastYear = annualDateType
           ? new Date(adLastYear, adMonth, adDay)
-          : undefined
+          : undefined;
       }
 
       records.filter(reportUtility.checkingSigned).forEach(record => {
@@ -243,56 +266,56 @@ export default {
                 (this.currentDay > 5
                   ? dateObj.month <= this.currentMonth
                   : dateObj.month < this.currentMonth))
-          )
+          );
 
         availableDates.forEach(dateObj => {
-          let counter = counterByMonth[dateObj.month][record.dateType]
+          let counter = counterByMonth[dateObj.month][record.dateType];
           if (!counter) {
             counter = {
               days: 0,
               hours: 0
-            }
+            };
           }
 
           if (
             annualDateType &&
-            record.dateType === 'annual' &&
+            record.dateType === "annual" &&
             annualDeadlineDateLastYear &&
             dateObj.date > annualDeadlineDateLastYear
           ) {
-            annualRemainingDays--
+            annualRemainingDays--;
           }
 
           counter = reportUtility.sumUpDaysNHours(
             counter.days,
             counter.hours,
             record.totals.halfHours
-          )
+          );
 
-          counterByMonth[dateObj.month][record.dateType] = counter
-        })
-      })
+          counterByMonth[dateObj.month][record.dateType] = counter;
+        });
+      });
 
       const counterByDateType = reportUtility.createObjectByKeys(
         reportUtility.dateTypes,
         {}
-      )
+      );
       Object.keys(counterByDateType).forEach(
         key => (counterByDateType[key] = { days: 0, hours: 0 })
-      )
+      );
 
       counterByMonth.forEach(month => {
         Object.keys(month).forEach(dateType => {
-          const days = month[dateType].days
-          const hours = month[dateType].hours
-          let counter = counterByDateType[dateType]
+          const days = month[dateType].days;
+          const hours = month[dateType].hours;
+          let counter = counterByDateType[dateType];
           if (!counter) {
             if (dateType.startsWith(this.localeConf.report.th.compensatory)) {
-              counter = counterByDateType['compensatory']
-              dateType = 'compensatory'
+              counter = counterByDateType["compensatory"];
+              dateType = "compensatory";
             } else {
-              counter = counterByDateType['others']
-              dateType = 'others'
+              counter = counterByDateType["others"];
+              dateType = "others";
             }
           }
           counter = reportUtility.sumTotalDaysNHours(
@@ -300,11 +323,11 @@ export default {
             counter.hours,
             days,
             hours
-          )
+          );
 
-          counterByDateType[dateType] = counter
-        })
-      })
+          counterByDateType[dateType] = counter;
+        });
+      });
 
       const res = {
         _id,
@@ -319,48 +342,39 @@ export default {
           days: annualDateType ? annualRemainingDays : 0,
           deadline: annualDateType
             ? utility.formatDate(annualDateType.deadline)
-            : ''
+            : ""
         }
-      }
+      };
 
       counterByMonth.forEach(
         (month, index) =>
-          (res['month' + index] = Object.keys(month).map(dateType => {
-            return { dateType: dateType, counter: month[dateType] }
+          (res["month" + index] = Object.keys(month).map(dateType => {
+            return { dateType: dateType, counter: month[dateType] };
           }))
-      )
+      );
 
       Object.keys(counterByDateType).forEach(
         dateType => (res[dateType] = counterByDateType[dateType])
-      )
-      return res
+      );
+      return res;
     },
     async getEmployees() {
-      const { data: { employees, fullControl } } = await EmployeeService.fetch({
-        loginuser: this.$cookie.get('loginuser'),
-        token: this.$cookie.get('token')
-      })
+      const {
+        data: { employees, fullControl }
+      } = await EmployeeService.fetch({
+        loginuser: this.$cookie.get("loginuser"),
+        token: this.$cookie.get("token")
+      });
       Promise.all(await employees.map(this.getEmployee)).then(
         res => (this.employees = res)
-      )
-      this.fullControl = fullControl
+      );
+      this.fullControl = fullControl;
     },
-    toReportPage(month) {
-      const [m] = /^\d{1,2}$/.exec(month)
-      if (m) {
-        this.$router.push({
-          name: 'MonthlyReport',
-          params: { year: this.yearOfReport, month: m }
-        })
-      }
-    },
-    exportExcel: () =>
-      utility.exportExcel(document.querySelector('table').outerHTML),
     generateSummary: reportUtility.generateSummary,
     generateDateTypeSummary: reportUtility.generateDateTypeSummary,
     generateDateTypeClass: reportUtility.generateDateTypeClass
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .theme {

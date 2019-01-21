@@ -4,50 +4,7 @@
       <v-layout>
         <v-flex xs12>
           <v-card class="elevation-12">
-            <v-toolbar flat class="theme">
-              <v-spacer></v-spacer>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-btn slot="activator" icon ripple color="white" @click="$router.push({ name: 'CompensatoryReport' })">
-                    <v-icon>event</v-icon>
-                  </v-btn>
-                  <div>{{localeConf.report.th.compensatory}}{{localeConf.list.tooltip.report}}</div>
-                </v-tooltip>
-              </v-toolbar-title>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-dialog ref="dialog" v-model="dialog" lazy full-width width="210px" slot="activator">
-                    <v-btn slot="activator" icon ripple color="white">
-                      <v-icon>format_list_bulleted</v-icon>
-                    </v-btn>
-                    <v-card>
-                      <v-card-title class="theme">
-                        <span class="headline">{{localeConf.list.dialog.report}}</span>
-                        <v-spacer></v-spacer>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-text-field :label="localeConf.list.input.report" v-model="yearOfReport"></v-text-field>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn flat @click="dialog = false">{{localeConf.list.btn.close}}</v-btn>
-                        <v-btn class="theme" flat @click.native="toReportPage(yearOfReport)">{{localeConf.list.btn.report}}</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                  <div>{{localeConf.list.tooltip.report}}</div>
-                </v-tooltip>
-              </v-toolbar-title>
-              <v-toolbar-title>
-                <v-tooltip bottom>
-                  <v-btn icon ripple color="white" @click="logout($cookie, $router)" slot="activator">
-                    <v-icon>power_settings_new</v-icon>
-                  </v-btn>
-                  <div>{{localeConf.list.tooltip.logout}}</div>
-                  <div>({{localeConf.list.tooltip.loginuser}}: {{$cookie.get('loginuser')}})</div>
-                </v-tooltip>
-              </v-toolbar-title>
-            </v-toolbar>
+            <table-menu :enabled="{ compensatory: true, report: { type: 'year' } }"></table-menu>
             <v-card-title>
               <v-switch :label="localeConf.list.label.showAllPeople" v-if="fullControl" v-model="showAllPeople"></v-switch>
               <v-spacer></v-spacer>
@@ -168,10 +125,14 @@
 
 <script>
 import EmployeeService from '@/services/EmployeeService'
+import TableMenu from '@/components/TableMenu'
 import defaultConf from '@/default.js'
 import utility from '@/utility.js'
 export default {
   name: 'List',
+  components: {
+    'table-menu': TableMenu
+  },
   data() {
     return {
       snackbar: false,
@@ -181,8 +142,6 @@ export default {
       headers: [],
       employees: [],
       fullControl: false,
-      dialog: false,
-      yearOfReport: new Date().getFullYear(),
       showAllPeople: false
     }
   },
@@ -287,14 +246,7 @@ export default {
         this.snackbarText = response.data.message
       }
     },
-    generateSummary: utility.generateSummary,
-    logout: (cookie, router) => utility.logout(cookie, router),
-    toReportPage(year) {
-      const [y] = /^\d{4}$/.exec(year)
-      if (y) {
-        this.$router.push({ name: 'AnnualReport', params: { year: y } })
-      }
-    }
+    generateSummary: utility.generateSummary
   }
 }
 </script>
