@@ -25,10 +25,10 @@ export default {
   exportExcel: html => {
     window.open(
       'data:application/vnd.ms-excel,' +
-        encodeURIComponent(
-          '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>' +
-            html
-        )
+      encodeURIComponent(
+        '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>' +
+        html
+      )
     )
   },
   calculateTotalHours: (startFrom, endTo) => {

@@ -256,7 +256,7 @@ export default {
     generateConsumeSummary: utility.generateConsumeSummary,
     calculateTotalHours: utility.calculateTotalHours,
     formatDate: utility.formatDate,
-    generateSummary: utility.generateSummary,
+    generateSummary: utility.generateSummary
   }
 };
 </script>

@@ -58,7 +58,7 @@
 
 <script>
 import EmployeeService from "@/services/EmployeeService";
-import TableMenu from '@/components/TableMenu'
+import TableMenu from "@/components/TableMenu";
 import reportUtility from "@/reportUtility.js";
 import utility from "@/utility.js";
 export default {

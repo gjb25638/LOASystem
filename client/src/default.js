@@ -230,7 +230,7 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false            
+            halfHoursEnabled: false
         },
         {
             index: 9,
@@ -297,6 +297,6 @@ export default {
             datepicker: false,
             countdown: true,
             halfHoursEnabled: false
-        },
+        }
     ]
 }

@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VueCookie)
 Vue.mixin({
-  data: function() {
+  data: function () {
     return {
       localeConf
     }
