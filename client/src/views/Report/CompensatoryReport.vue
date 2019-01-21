@@ -70,7 +70,6 @@ export default {
       employees: [],
       fullControl: false,
       dialog: false,
-      yearOfReport: new Date().getFullYear(),
       showAllPeople: false
     };
   },
