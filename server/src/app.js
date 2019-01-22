@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 
+const emailUtil = require("./email.js")
 const Employee = require("../models/employee")
 const data = require("../models/data")
 
@@ -63,6 +64,7 @@ app.get('/employees/:loginuser/:token', (req, res) => {
                   employeeID: e.employeeID,
                   username: e.username,
                   name: e.name,
+                  email: e.email,
                   level: e.level,
                   dept: e.dept,
                   signers: e.signers,
@@ -93,6 +95,7 @@ app.post('/employee/:loginuser/:token', (req, res) => {
             employeeID: req.body.employeeID,
             dept: req.body.dept,
             name: req.body.name,
+            email: req.body.email,
             username: req.body.username,
             arrivedDate: req.body.arrivedDate,
             level: req.body.level,
@@ -131,6 +134,7 @@ app.get('/employee/:id/:loginuser/:token', (req, res) => {
             employeeID: Employee.employeeID,
             dept: Employee.dept,
             name: Employee.name,
+            email: Employee.email,
             username: Employee.username,
             arrivedDate: Employee.arrivedDate,
             level: Employee.level,
@@ -157,6 +161,7 @@ app.put('/employee/:id/:loginuser/:token', (req, res) => {
           Employee.username = req.body.username
           Employee.employeeID = req.body.employeeID
           Employee.name = req.body.name
+          Employee.email = req.body.email
           Employee.level = req.body.level
           Employee.dept = req.body.dept
           Employee.arrivedDate = req.body.arrivedDate
@@ -268,7 +273,32 @@ app.put('/employee/loa/:id/:loginuser/:token', (req, res) => {
             if (err) {
               res.send({ success: false, message: err, })
             } else {
+              emailUtil.sendLeaveTakingEmail({ taker: Employee, signers: Employee.signers, records: req.body.records })
               res.send({ success: true, message: "records updated successfully" })
+            }
+          })
+        }
+      })
+    } else {
+      res.send({ success: false, message: "token validation failed" })
+    }
+  })
+})
+
+app.put('/employee/email/:id/:loginuser/:token', (req, res) => {
+  validate_owner(req.params.id, req.params.loginuser, req.params.token, (pass, user) => {
+    if (pass || (user && user.level === 'admin')) {
+      Employee.findById(req.params.id, null, (err, Employee) => {
+        if (err) {
+          res.send({ success: false, message: err })
+        } else {
+          Employee.email = req.body.email
+          Employee.save((err) => {
+            if (err) {
+              res.send({ success: false, message: err })
+
+            } else {
+              res.send({ success: true, message: "email updated successfully" })
             }
           })
         }
@@ -339,6 +369,7 @@ app.put('/employee/sign/:id/:loginuser/:token', (req, res) => {
                 if (err) {
                   res.send({ success: false, message: err })
                 } else {
+                  emailUtil.sendLeaveSigningEmail({ taker: Employee, signer: signer, record: signedRecord })
                   res.send({ success: true, message: "record's signing updated successfully" })
                 }
               })
@@ -410,7 +441,10 @@ function updateUserData(user, cb) {
     const months = diffMonth(new Date(arrivedDate), today)
     const seniority = Math.floor(months / 12)
     //          0.5, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13,    14, 15, 16...
+    // const map = [10, 11, 12, 14, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20];// 20, 21, 22...
+    // Labor Standards Act
     const map = [3,  7,  10, 14, 14, 15, 15, 15, 15, 15, 16, 17, 18, 19];// 20, 21, 22...
+    
     const days = seniority > 13 ? seniority + 6 : map[seniority]
 
     if (months >= 6) {
@@ -439,7 +473,7 @@ function updateUserData(user, cb) {
         } else {
           annualDateType.consumes.days = 0
         }
-        
+
         annualDateType.deadline = deadline
         annualDateType.totals.days = days
         logs.push(annualDateType)

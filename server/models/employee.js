@@ -10,6 +10,7 @@ var EmployeeSchema = new Schema({
   employeeID: String,
   name: String,
   dept: String,
+  email: String,
   arrivedDate: Date,
   level: String,
   signers: [{ id: String, dept: String, name: String, username: String, level: String }],
@@ -45,7 +46,8 @@ var EmployeeSchema = new Schema({
       username: String,
       level: String,
       signedDate: Date,
-      pass: Boolean
+      pass: Boolean,
+      email: String
     }], 
     signers: [{
       id: String,
@@ -53,8 +55,7 @@ var EmployeeSchema = new Schema({
       name: String,
       username: String,
       level: String,
-      signedDate: Date,
-      pass: Boolean
+      email: String
     }]
   }]
 });

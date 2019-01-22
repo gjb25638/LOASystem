@@ -121,7 +121,10 @@ export default {
         runOutQotaOfLeave: 'Run out the Quota of this Leave',
         clickADateType: 'Click One Leave Kind Below',
         unavailableDateTypes: 'Unavailable Compensatory DateType',
-        unavailableDateTypesDetails: 'It runs out of quota and expires(deadline).'
+        unavailableDateTypesDetails: 'It runs out of quota and expires(deadline).',
+        personalEditableArea: 'Personal Editable Area',
+        personalUneditableArea: 'Personal Uneditable Area',
+        resetEmailTooltip: 'Please click the right-side icon to update Email'
       },
       dateTypes: {
         sick: 'sick leave',
@@ -310,7 +313,10 @@ export default {
         runOutQotaOfLeave: '此假別的請假數已超量',
         clickADateType: '點擊下列其中一項假別',
         unavailableDateTypes: '已用完的補休假別',
-        unavailableDateTypesDetails: '天數與時數使用完, 而且已經到期'
+        unavailableDateTypesDetails: '天數與時數使用完, 而且已經到期',
+        personalEditableArea: '可修改區',
+        personalUneditableArea: '不可修改區',
+        resetEmailTooltip: '請點選右側圖示更新 Email'
       },
       dateTypes: {
         sick: '普通傷病假',
