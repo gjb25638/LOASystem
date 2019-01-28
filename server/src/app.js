@@ -21,6 +21,7 @@ const db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error"))
 db.once("open", (callback) => {
   console.log("Connection Succeeded")
+  //importEmails(JSON.parse(JSON.stringify(data)))
   Employee.findOne({ username: "admin" }, (err, user) => {
     if (!user) {
       new Employee({
@@ -154,26 +155,37 @@ app.get('/employee/:id/:loginuser/:token', (req, res) => {
 app.put('/employee/:id/:loginuser/:token', (req, res) => {
   validate_admin(req.params.loginuser, req.params.token, (pass) => {
     if (pass) {
-      Employee.findById(req.params.id, null, (err, Employee) => {
+      Employee.findById(req.params.id, null, (err, employee) => {
         if (err) {
           res.send({ success: false, message: err })
         } else {
-          Employee.username = req.body.username
-          Employee.employeeID = req.body.employeeID
-          Employee.name = req.body.name
-          Employee.email = req.body.email
-          Employee.level = req.body.level
-          Employee.dept = req.body.dept
-          Employee.arrivedDate = req.body.arrivedDate
-          Employee.signers = req.body.signers
-          Employee.activatedDateTypes = req.body.activatedDateTypes
+          // employee.username = req.body.username
+          employee.employeeID = req.body.employeeID
+          employee.name = req.body.name
+          employee.email = req.body.email
+          employee.level = req.body.level
+          employee.dept = req.body.dept
+          employee.arrivedDate = req.body.arrivedDate
+          employee.signers = req.body.signers
+          employee.activatedDateTypes = req.body.activatedDateTypes
 
-          Employee.save((err) => {
-            if (err) {
-              res.send({ success: false, message: err, })
-            } else {
-              res.send({ success: true, message: "employee updated successfully" })
-            }
+          Employee.find({ 'signers': { $elemMatch: { username: employee.username } } }, (err, employees) => {
+            employee.save((err) => {
+              if (err) {
+                res.send({ success: false, message: err })
+              } else {
+                updateOthersSignerInfo(employees,
+                  {
+                    employeeID: employee.employeeID,
+                    username: employee.username,
+                    name: employee.name,
+                    level: employee.level,
+                    dept: employee.dept
+                  },
+                  res,
+                  (res) => res.send({ success: true, message: "employee updated successfully" }))
+              }
+            })
           })
         }
       })
@@ -252,12 +264,12 @@ app.post('/auth', (req, res) => {
 app.put('/employee/loa/:id/:loginuser/:token', (req, res) => {
   validate_owner(req.params.id, req.params.loginuser, req.params.token, (pass, user) => {
     if (pass || (user && user.level === 'admin')) {
-      Employee.findById(req.params.id, null, (err, Employee) => {
+      Employee.findById(req.params.id, null, (err, employee) => {
         if (err) {
           res.send({ success: false, message: err })
         } else {
-          Employee.activatedDateTypes = req.body.activatedDateTypes
-          Employee.records = Employee.records.concat(req.body.records.map(r => {
+          employee.activatedDateTypes = req.body.activatedDateTypes
+          employee.records = employee.records.concat(req.body.records.map(r => {
             return {
               appliedDate: r.appliedDate,
               dateType: r.dateType,
@@ -266,14 +278,22 @@ app.put('/employee/loa/:id/:loginuser/:token', (req, res) => {
               endTo: r.endTo,
               agent: r.agent,
               totals: r.totals,
-              signers: Employee.signers
+              signers: employee.signers
             }
           }))
-          Employee.save((err) => {
+          employee.save((err) => {
             if (err) {
               res.send({ success: false, message: err, })
             } else {
-              emailUtil.sendLeaveTakingEmail({ taker: Employee, signers: Employee.signers, records: req.body.records })
+              collectSignersEmails(employee.signers,
+                [],
+                (signers) => emailUtil.sendLeaveTakingEmail(
+                  {
+                    taker: employee,
+                    signers,
+                    records: req.body.records
+                  },
+                ))
               res.send({ success: true, message: "records updated successfully" })
             }
           })
@@ -288,18 +308,28 @@ app.put('/employee/loa/:id/:loginuser/:token', (req, res) => {
 app.put('/employee/email/:id/:loginuser/:token', (req, res) => {
   validate_owner(req.params.id, req.params.loginuser, req.params.token, (pass, user) => {
     if (pass || (user && user.level === 'admin')) {
-      Employee.findById(req.params.id, null, (err, Employee) => {
+      Employee.findById(req.params.id, null, (err, employee) => {
         if (err) {
           res.send({ success: false, message: err })
         } else {
-          Employee.email = req.body.email
-          Employee.save((err) => {
-            if (err) {
-              res.send({ success: false, message: err })
-
-            } else {
-              res.send({ success: true, message: "email updated successfully" })
-            }
+          employee.email = req.body.email
+          Employee.find({ 'signers': { $elemMatch: { username: employee.username } } }, (err, employees) => {
+            employee.save((err) => {
+              if (err) {
+                res.send({ success: false, message: err })
+              } else {
+                updateOthersSignerInfo(employees,
+                  {
+                    employeeID: employee.employeeID,
+                    username: employee.username,
+                    name: employee.name,
+                    level: employee.level,
+                    dept: employee.dept
+                  },
+                  res,
+                  (res) => res.send({ success: true, message: "employee updated successfully" }))
+              }
+            })
           })
         }
       })
@@ -389,6 +419,50 @@ app.put('/employee/sign/:id/:loginuser/:token', (req, res) => {
 
 app.listen(process.env.PORT || 8081)
 
+function collectSignersEmails(signers, signersWithEmails, cb) {
+  const signer = signers.pop()
+  if (signer) {
+    Employee.findOne({ username: new RegExp(`^${signer.username}$`, "i") }, (err, employee) => {
+      if (employee.email) {
+        signersWithEmails.push({
+          username: employee.username,
+          employeeID: employee.employeeID,
+          name: employee.name,
+          email: employee.email,
+          dept: employee.dept,
+          level: employee.level,
+        })
+      }
+      collectSignersEmails(signers, signersWithEmails, cb)
+    })
+  } else {
+    cb(signersWithEmails)
+  }
+}
+
+function updateOthersSignerInfo(employees, signerInfo, res, cb) {
+  const employee = employees.pop()
+  if (employee) {
+    employee.signers.forEach((signer) => {
+      if (signer.username === signerInfo.username) {
+        signer.employeeID = signerInfo.employeeID
+        signer.name = signerInfo.name
+        signer.dept = signerInfo.dept
+        signer.level = signerInfo.level
+      }
+    })
+    employee.save((err) => {
+      if (err) {
+        res.send({ success: false, message: err })
+      } else {
+        updateOthersSignerInfo(employees, signerInfo, res, cb)
+      }
+    })
+  } else {
+    cb(res)
+  }
+}
+
 function validate_admin(username, token, cb) {
   console.log({ username, token })
   Employee.findOne({ username: new RegExp(`^${username}$`, "i"), password: token, level: 'admin' }, (err, user) => {
@@ -441,10 +515,10 @@ function updateUserData(user, cb) {
     const months = diffMonth(new Date(arrivedDate), today)
     const seniority = Math.floor(months / 12)
     //          0.5, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13,    14, 15, 16...
-    // const map = [10, 11, 12, 14, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20];// 20, 21, 22...
-    // Labor Standards Act
+    const map = [10, 11, 12, 14, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20];// 20, 21, 22...
+    /* Labor Standards Act
     const map = [3,  7,  10, 14, 14, 15, 15, 15, 15, 15, 16, 17, 18, 19];// 20, 21, 22...
-    
+    */
     const days = seniority > 13 ? seniority + 6 : map[seniority]
 
     if (months >= 6) {
@@ -556,6 +630,23 @@ function diffMonth(from, to) {
   return toMonths >= fromMonths ? toMonths - fromMonths : 0;
 }
 
+function importEmails(array) {
+  var item = array.pop()
+  if (item) {
+    console.log("import email " + item.username + ", " + array.length + " left")
+    Employee.findOne({ username: new RegExp(`^${item.username}$`, "i") }, (err, user) => {
+      user.email = item.email
+      user.save((err) => {
+        if (err) {
+          console.log(err)
+        } else {
+          importEmails(array)
+        }
+      })
+    })
+  }
+}
+
 function importData(array) {
   var item = array.pop()
   if (item) {
@@ -568,7 +659,8 @@ function importData(array) {
       level: item.level,
       dept: item.dept,
       arrivedDate: item.arrivedDate,
-      activatedDateTypes: item.activatedDateTypes
+      activatedDateTypes: item.activatedDateTypes,
+      email: item.email
     }).save((err) => {
       if (err) {
         console.log(err)
@@ -609,7 +701,8 @@ function addSigner(array, user, signernames) {
           dept: signer.dept,
           name: signer.name,
           username: signer.username,
-          level: signer.level
+          level: signer.level,
+          email: signer.email
         })
         user.save((err) => {
           if (err) {

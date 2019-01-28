@@ -13,7 +13,13 @@ var EmployeeSchema = new Schema({
   email: String,
   arrivedDate: Date,
   level: String,
-  signers: [{ id: String, dept: String, name: String, username: String, level: String }],
+  signers: [{ 
+    id: String, 
+    dept: String, 
+    name: String, 
+    username: String, 
+    level: String 
+  }],
   activatedDateTypes: [{
     halfHoursEnabled: Boolean,
     enabled: Boolean,
@@ -47,7 +53,6 @@ var EmployeeSchema = new Schema({
       level: String,
       signedDate: Date,
       pass: Boolean,
-      email: String
     }], 
     signers: [{
       id: String,
@@ -55,7 +60,6 @@ var EmployeeSchema = new Schema({
       name: String,
       username: String,
       level: String,
-      email: String
     }]
   }]
 });

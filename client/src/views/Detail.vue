@@ -21,7 +21,7 @@
                 <v-text-field prepend-icon="person" v-model="name" :rules="nameRules" :label="this.localeConf.detail.input.name" required :readonly='!fullControl'></v-text-field>
               </v-flex>
               <v-flex xs6>
-                <v-text-field v-model="username" :rules="usernameRules" :label="this.localeConf.detail.input.username" required :readonly='!fullControl'></v-text-field>
+                <v-text-field v-model="username" :rules="usernameRules" :label="this.localeConf.detail.input.username" required :readonly='!fullControl && isEditMode'></v-text-field>
               </v-flex>
               <v-flex xs6>
                 <v-menu :close-on-content-click="false" v-model="datepickerMenu" :nudge-right="40" lazy transition="scale-transition" offset-y full-width max-width="290px" min-width="290px" :disabled='!fullControl'>
