@@ -1,10 +1,12 @@
-import localeConf from './locale.js'
-import utility from './utility.js'
+import localeConf from '@/localization/index'
+import utility from '@/utility'
+import defaultConf from '@/default'
 export default {
   checkingLoginStatus: (cookie, router) => {
     const loginuser = cookie.get('loginuser')
     const token = cookie.get('token')
-    if (!loginuser || !token) {
+    if (router.history.current.name !== 'Login'
+      && (!loginuser || !token)) {
       cookie.delete('loginuser')
       cookie.delete('token')
       router.push({ name: 'Login' })
@@ -64,10 +66,71 @@ export default {
       return (
         utility.calculateTotalHours(startFrom, endTo) +
         ' ' +
-        localeConf.recordlist.td.hours
+        localeConf.RecordList.td.hours
       )
     } else {
-      return dates.length + ' ' + localeConf.recordlist.td.days
+      return dates.length + ' ' + localeConf.RecordList.td.days
     }
+  },
+  lookUpCustomMessage: (msg) => {
+    const customMessage = localeConf.shared.message[msg.replace(/\s+/g, "_")];
+    return customMessage ? customMessage : msg;
+  },
+  lookUpLeaveTypeIconNClass: (leaveType) => {
+    const target = defaultConf.leaveTypes.find(type => type.name === leaveType)
+    return {
+      icon: target ? target.icon : defaultConf.customLeaveType.icon,
+      class: target ? target.class : defaultConf.customLeaveType.class
+    }
+  },
+  stringFormat: (template, ...values) => {
+    values.forEach((v, i) => {
+      const reg = new RegExp(`\\\$\\\{${i}\\\}`)
+      template = template.replace(reg, v)
+    })
+    return template
+  },
+  isLeaveTypeInfoGeneral: (leaveTypeName) => {
+    return defaultConf.leaveTypes.filter(type => type.countdown).some(type => type.name === leaveTypeName)
+  },
+  getLocaleDateTypeNames: (name) => {
+    return localeConf.shared.dateTypes[name] ? localeConf.shared.dateTypes[name] : name
+  },
+  getCompensatoryLeaveTypes: (leaveTypes) => {
+    return leaveTypes.filter(type => type.enabled && type.name.startsWith(defaultConf.compensatory.keyword))
+  },
+  getCompensatoryRecords: (records) => {
+    return records.filter(r => r.signings.every(s => !!s.pass) && r.dateType.startsWith(defaultConf.compensatory.keyword))
+  },
+  sumUpTotals: (totalsList) => {
+    const counter = { days: 0, hours: 0 }
+    totalsList.forEach(({ days, halfHours }) => {
+      if (halfHours > 0) {
+        counter.hours += halfHours / 2
+        if (counter.hours >= 8) {
+          counter.days += Math.floor(counter.hours / 8)
+          counter.hours = counter.hours % 8
+        }
+      } else {
+        counter.days += days
+      }
+    })
+    return counter
+  },
+  getUnusedOutLeaveTypes: (leaveTypes, records) => {
+    return leaveTypes.filter(type =>
+      (type.totals.days !== type.consumes.days || type.totals.halfHours !== type.consumes.halfHours)
+      && (type.totals.days > 0 || type.totals.halfHours > 0)
+    ).map(type => {
+      return {
+        dateType: type.name,
+        daysNHours: {
+          days: type.consumes.days,
+          hours: type.consumes.halfHours / 2,
+          totalDays: type.totals.days,
+          totalHours: type.totals.halfHours / 2
+        }
+      }
+    })
   }
 }

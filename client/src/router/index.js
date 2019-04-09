@@ -3,10 +3,11 @@ import Router from 'vue-router'
 import List from '@/views/List'
 import Detail from '@/views/Detail'
 import RecordList from '@/views/RecordList'
-import MonthlyReport from '@/views/Report/Monthly'
-import AnnualReport from '@/views/Report/Annual'
-import CompensatoryReport from '@/views/Report/CompensatoryReport'
+import MonthlyReport from '@/views/Report/MonthlyReport'
+import AnnualReport from '@/views/Report/AnnualReport'
+import CompensatoryList from '@/views/CompensatoryList'
 import Login from '@/views/Login'
+import LeaveTypeInfo from '@/views/LeaveTypeInfo'
 
 Vue.use(Router)
 
@@ -29,24 +30,29 @@ export default new Router({
       component: Detail
     },
     {
-      path: '/employee/:id/records',
+      path: '/employee/:id/records/:query?',
       name: 'RecordList',
       component: RecordList
     },
     {
-      path: '/report/:year/',
+      path: '/annualreport',
       name: 'AnnualReport',
       component: AnnualReport
     },
     {
-      path: '/report/:year/:month',
+      path: '/monthlyreport',
       name: 'MonthlyReport',
       component: MonthlyReport
     },
     {
-      path: '/compensatoryReport',
-      name: 'CompensatoryReport',
-      component: CompensatoryReport
+      path: '/compensatorylist',
+      name: 'CompensatoryList',
+      component: CompensatoryList
+    },
+    {
+      path: '/leavetype',
+      name: 'LeaveTypeInfo',
+      component: LeaveTypeInfo
     }
   ]
 })

@@ -1,6 +1,9 @@
 var depts = {
-    A: '部門A',
-    B: '部門B',
+    A1: '行政部(A)',
+    A2: '管理部(A)',
+    C: '客服部(C)',
+    I: '資訊部(I)',
+    S: '技術支援(S)'
 }
 
 var levels = {
@@ -88,50 +91,33 @@ var dateTypeGroup = {
 }
 
 module.exports = [{
-    employeeID: 'A01',
-    dept: depts.A,
+    employeeID: 'A0001',
+    dept: depts.A1,
     level: levels.admin,
-    name: 'Alice',
-    username: 'Alice',
-    arrivedDate: '2015-03-03',
+    name: 'BOSS',
+    username: 'Boss',
+    arrivedDate: '2016-01-01',
     signers: [],
-    activatedDateTypes: dateTypeGroup.generalFemale
-}, {
-    employeeID: 'A02',
-    dept: depts.A,
+    activatedDateTypes: dateTypeGroup.generalMale,
+    email: 'admin@email.com'
+},{
+    employeeID: 'A0002',
+    dept: depts.A1,
     level: levels.manager,
-    name: 'Bob',
-    username: 'Bob',
-    arrivedDate: '2016-01-17',
-    signers: ['Alice'],
-    activatedDateTypes: dateTypeGroup.generalMale
-}, {
-    employeeID: 'A03',
-    dept: depts.A,
+    name: 'MANAGER',
+    username: 'Manager',
+    arrivedDate: '2016-07-01',
+    signers: ['Boss'],
+    activatedDateTypes: dateTypeGroup.generalFemale,
+    email: 'manager@email.com'
+},{
+    employeeID: 'A0003',
+    dept: depts.A1,
     level: levels.normal,
-    name: 'Charlie',
-    username: 'Charlie',
-    arrivedDate: '2017-05-09',
-    signers: ['Alice', 'Bob'],
-    activatedDateTypes: dateTypeGroup.generalMale
-}, {
-    employeeID: 'B01',
-    dept: depts.B,
-    level: levels.normal,
-    name: 'Dara',
-    username: 'Dara',
-    arrivedDate: '2016-02-24',
-    signers: ['Alice'],
-    activatedDateTypes: dateTypeGroup.generalFemale
+    name: 'NORMAL',
+    username: 'Normal',
+    arrivedDate: '2017-01-01',
+    signers: ['Boss', 'Manager'],
+    activatedDateTypes: dateTypeGroup.generalMale,
+    email: 'normal@email.com'
 }];
-
-
-/**
- * Alice(A2)
- *          Bob(A1)
- *                    Charlie(A1)
- *          Dara(C)
- *                    Ella(C)
- *          Forsen(I)
- *                    Gary(I)
- */

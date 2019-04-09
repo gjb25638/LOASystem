@@ -7,39 +7,46 @@
             <v-card class="elevation-12">
               <v-toolbar class="theme">
                 <v-tooltip bottom>
-                  <v-toolbar-title slot="activator">LOA System</v-toolbar-title>
-                  <span>Leave of Absence System</span>
+                  <v-toolbar-title slot="activator">{{localeConf.self.toolbar.title}}</v-toolbar-title>
+                  <span>{{localeConf.self.tooltip.title}}</span>
                 </v-tooltip>
+                <v-img position="right" src="./static/logo.svg" aspect-ratio="6" contain></v-img>
               </v-toolbar>
               <v-card-text>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field
                     prepend-icon="person"
                     name="username"
-                    :label="localeConf.login.input.username"
+                    :label="localeConf.self.input.username"
                     type="text"
                     v-model="username"
                     :rules="usernameRules"
                     required
+                    autocomplete="username"
                   ></v-text-field>
                   <v-text-field
                     :append-icon="showingPassword ? 'visibility_off' : 'visibility'"
                     prepend-icon="lock"
                     name="password"
-                    :label="localeConf.login.input.password"
+                    :label="localeConf.self.input.password"
                     :type="showingPassword ? 'text' : 'password'"
                     v-model="password"
                     :rules="passwordRules"
                     required
                     @click:append="showingPassword = !showingPassword"
                     @keyup.enter="login"
+                    autocomplete="current-password"
                   ></v-text-field>
                 </v-form>
-                <v-alert v-model="status.failed" type="error">{{status.message}}</v-alert>
+                <v-alert outline v-model="status.failed" type="error">{{status.message}}</v-alert>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="theme" @click="login">{{localeConf.login.btn.login}}</v-btn>
+                <v-btn
+                  :class="valid ? 'theme' : 'disabled'"
+                  @click="login"
+                  :disabled="!valid"
+                >{{localeConf.self.btn.login}}</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -56,21 +63,26 @@ export default {
   name: "Login",
   data: () => ({
     showingPassword: false,
-    valid: true,
+    valid: false,
     username: "",
-    usernameRules: [v => !!v || ""],
+    usernameRules: [],
     password: "",
-    passwordRules: [v => !!v || ""],
+    passwordRules: [],
     status: { failed: false, message: "" }
   }),
-  beforeCreate() {
-    location.search.split(";").forEach(v => {
-      const res = /\?(.*)=(.*)/.exec(v);
-      if (res) this.$cookie.set(res[1], res[2]);
-    });
-    utility.checkingLoginStatus(this.$cookie, this.$router, {
-      expires: defaultConf.cookie.expiredPeriod.oneDay
-    });
+  created() {
+    this.usernameRules = [
+      v => !!v || this.localeConf.self.input.validation.noEmpty,
+      v =>
+        /^[a-zA-Z0-9/.]+$/.test(v) ||
+        this.localeConf.self.input.validation.notAEnglishName
+    ];
+    this.passwordRules = [
+      v => !!v || this.localeConf.self.input.validation.noEmpty
+    ];
+  },
+  mounted() {
+    this.valid = false;
   },
   methods: {
     async login() {
@@ -90,7 +102,10 @@ export default {
           });
           this.$router.push({ name: "List", params: { logs } });
         } else {
-          this.status = { failed: true, message };
+          this.status = {
+            failed: true,
+            message: utility.lookUpCustomMessage(message)
+          };
         }
       }
     }
@@ -98,14 +113,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.theme {
-  background: linear-gradient(
-    to right,
-    rgba(225, 56, 89, 1) 0%,
-    rgba(195, 43, 127, 1) 35%,
-    rgba(146, 49, 140, 1) 65%,
-    rgba(78, 56, 130, 1) 100%
-  ) !important;
-  color: white !important;
-}
 </style>

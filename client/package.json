@@ -12,8 +12,10 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js",
-    "deploy": "npm run build && npm run host",
+    "build:prod": "node build/build.prod.js",
+    "build:dev": "node build/build.dev.js",
+    "deploy:prod": "npm run build:prod && npm run host",
+    "deploy:dev": "npm run build:dev && npm run host",
     "host": "./node_modules/nodemon/bin/nodemon.js app.js"
   },
   "dependencies": {
@@ -22,7 +24,7 @@
     "axios": "^0.17.1",
     "http-server": "^0.11.1",
     "passport": "^0.4.0",
-    "vue": "^2.5.2",
+    "vue": "^2.6.0",
     "vue-cookie": "^1.1.4",
     "vue-router": "^3.0.1",
     "vuetify": "^1.2.9"
@@ -82,7 +84,7 @@
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "^2.6.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",

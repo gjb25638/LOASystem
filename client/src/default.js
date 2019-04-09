@@ -1,5 +1,8 @@
-import localeConf from './locale.js'
+import localeConf from '@/localization/index'
 export default {
+    compensatory: {
+        keyword: '補休'
+    },
     cookie: {
         expiredPeriod: {
             oneYear: '1Y',
@@ -10,15 +13,15 @@ export default {
         }
     },
     deptOptions: ['行政部(A)', '管理部(A)', '客服部(C)', '資訊部(I)', '技術支援(S)', '業務部(B)'],
-    customDateType: {
+    levelOptions: ['admin', 'manager', 'normal'],
+    customLeaveType: {
         index: 0,
         enabled: false,
-        isCustomizedType: true,
+        default: false,
         icon: 'event',
         class: ['brown', 'darken-1', 'white--text'],
         name: '',
         title: '',
-        detail: '',
         consumes: {
             days: 0,
             hours: 0
@@ -33,15 +36,14 @@ export default {
         countdown: true,
         halfHoursEnabled: true
     },
-    dateTypes: [
+    leaveTypes: [
         {
             index: 0,
             enabled: false,
             icon: 'hotel',
             class: ['amber', 'white--text'],
             name: 'sick',
-            title: localeConf.detail.dateTypes.sick,
-            detail: localeConf.detail.dateTypeDetails.sick,
+            title: localeConf.shared.dateTypes.sick,
             consumes: {
                 days: 0,
                 hours: 0,
@@ -54,16 +56,16 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: false,
-            halfHoursEnabled: true
+            halfHoursEnabled: true,
+            default: true,
         },
         {
             index: 1,
             enabled: false,
             icon: 'local_hospital',
-            class: ['amber', 'white--text'],
+            class: ['deep-orange', 'white--text'],
             name: 'familyCare',
-            title: localeConf.detail.dateTypes.familyCare,
-            detail: localeConf.detail.dateTypeDetails.familyCare,
+            title: `${localeConf.shared.dateTypes.familyCare}(${localeConf.shared.dateTypes.personal})`,
             consumes: {
                 days: 0,
                 hours: 0
@@ -76,7 +78,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: false,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 2,
@@ -84,8 +87,7 @@ export default {
             icon: 'announcement',
             class: ['deep-orange', 'white--text'],
             name: 'personal',
-            title: localeConf.detail.dateTypes.personal,
-            detail: localeConf.detail.dateTypeDetails.personal,
+            title: localeConf.shared.dateTypes.personal,
             consumes: {
                 days: 0,
                 hours: 0
@@ -98,7 +100,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: false,
-            halfHoursEnabled: true
+            halfHoursEnabled: true,
+            default: true,
         },
         {
             index: 3,
@@ -106,8 +109,7 @@ export default {
             icon: 'local_airport',
             class: ['light-blue', 'white--text'],
             name: 'annual',
-            title: localeConf.detail.dateTypes.annual,
-            detail: localeConf.detail.dateTypeDetails.annual,
+            title: localeConf.shared.dateTypes.annual,
             consumes: {
                 days: 0,
                 hours: 0
@@ -120,7 +122,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 4,
@@ -128,8 +131,7 @@ export default {
             icon: 'favorite',
             class: ['pink', 'lighten-3', 'white--text'],
             name: 'menstrual',
-            title: localeConf.detail.dateTypes.menstrual,
-            detail: localeConf.detail.dateTypeDetails.menstrual,
+            title: localeConf.shared.dateTypes.menstrual,
             consumes: {
                 days: 0,
                 hours: 0
@@ -142,7 +144,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 5,
@@ -150,8 +153,7 @@ export default {
             icon: 'pregnant_woman',
             class: ['pink', 'lighten-3', 'white--text'],
             name: 'preManternity',
-            title: localeConf.detail.dateTypes.preManternity,
-            detail: localeConf.detail.dateTypeDetails.preManternity,
+            title: localeConf.shared.dateTypes.preManternity,
             consumes: {
                 days: 0,
                 hours: 0
@@ -164,7 +166,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: true
+            halfHoursEnabled: true,
+            default: true,
         },
         {
             index: 6,
@@ -172,8 +175,7 @@ export default {
             icon: 'airline_seat_flat_angled',
             class: ['pink', 'lighten-3', 'white--text'],
             name: 'manternityMiscarriage',
-            title: localeConf.detail.dateTypes.manternityMiscarriage,
-            detail: localeConf.detail.dateTypeDetails.manternityMiscarriage,
+            title: localeConf.shared.dateTypes.manternityMiscarriage,
             consumes: {
                 days: 0,
                 hours: 0
@@ -186,7 +188,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 7,
@@ -194,8 +197,7 @@ export default {
             icon: 'people_outline',
             class: ['pink', 'lighten-3', 'white--text'],
             name: 'accompanyingManternity',
-            title: localeConf.detail.dateTypes.accompanyingManternity,
-            detail: localeConf.detail.dateTypeDetails.accompanyingManternity,
+            title: localeConf.shared.dateTypes.accompanyingManternity,
             consumes: {
                 days: 0,
                 hours: 0
@@ -208,7 +210,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 8,
@@ -216,8 +219,7 @@ export default {
             icon: 'wc',
             class: ['red', 'accent-3', 'white--text'],
             name: 'marriage',
-            title: localeConf.detail.dateTypes.marriage,
-            detail: localeConf.detail.dateTypeDetails.marriage,
+            title: localeConf.shared.dateTypes.marriage,
             consumes: {
                 days: 0,
                 hours: 0
@@ -230,7 +232,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 9,
@@ -238,8 +241,7 @@ export default {
             icon: 'hourglass_empty',
             class: ['blue-grey', 'white--text'],
             name: 'funeral',
-            title: localeConf.detail.dateTypes.funeral,
-            detail: localeConf.detail.dateTypeDetails.funeral,
+            title: localeConf.shared.dateTypes.funeral,
             consumes: {
                 days: 0,
                 hours: 0
@@ -252,7 +254,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
+            halfHoursEnabled: false,
+            default: true,
         },
         {
             index: 10,
@@ -260,8 +263,7 @@ export default {
             icon: 'directions_run',
             class: ['theme', 'white--text'],
             name: 'businessTrip',
-            title: localeConf.detail.dateTypes.businessTrip,
-            detail: localeConf.detail.dateTypeDetails.businessTrip,
+            title: localeConf.shared.dateTypes.businessTrip,
             consumes: {
                 days: 0,
                 hours: 0
@@ -274,7 +276,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: false,
-            halfHoursEnabled: true
+            halfHoursEnabled: true,
+            default: true,
         },
         {
             index: 11,
@@ -282,8 +285,7 @@ export default {
             icon: 'local_airport',
             class: ['light-blue', 'lighten-4', 'white--text'],
             name: 'annualPreRequest',
-            title: localeConf.detail.dateTypes.annualPreRequest,
-            detail: localeConf.detail.dateTypeDetails.annualPreRequest,
+            title: localeConf.shared.dateTypes.annualPreRequest,
             consumes: {
                 days: 0,
                 hours: 0
@@ -296,7 +298,8 @@ export default {
             dialog: false,
             datepicker: false,
             countdown: true,
-            halfHoursEnabled: false
-        }
+            halfHoursEnabled: false,
+            default: true,
+        },
     ]
 }

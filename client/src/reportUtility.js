@@ -1,83 +1,88 @@
-import localeConf from './locale.js'
-import defaultConf from './default.js'
+import localeConf from '@/localization/index'
+import defaultConf from '@/default'
+import reportUtility from '@/reportUtility'
 export default {
   basicHeaders: [
     {
-      text: localeConf.list.th.employeeID,
+      text: localeConf.List.th.employeeID,
       value: 'employeeID',
       sortable: false
     },
-    { text: localeConf.list.th.name, value: 'name', sortable: false },
-    { text: localeConf.list.th.username, value: 'username', sortable: false },
-    { text: localeConf.list.th.dept, value: 'dept', sortable: false },
-    {
-      text: localeConf.list.th.arrivedDate,
-      value: 'arrivedDate',
-      sortable: false
-    }
+    { text: localeConf.List.th.name, value: 'name', sortable: false },
+    { text: localeConf.List.th.username, value: 'username', sortable: false },
+    // {
+    //   text: localeConf.List.th.arrivedDate,
+    //   value: 'arrivedDate',
+    //   sortable: false
+    // },
+    // {
+    //   text: "月份",
+    //   value: '',
+    //   sortable: false
+    // }
   ],
   dateTypeHeaders: [
-    { text: localeConf.report.th.annual, value: 'annual', sortable: false },
+    { text: localeConf.Report.th.annual, value: 'annual', sortable: false },
     {
-      text: localeConf.report.th.compensatory,
+      text: localeConf.Report.th.compensatory,
       value: 'compensatory',
       sortable: false
     },
     {
-      text: localeConf.report.th.statutory,
+      text: localeConf.Report.th.statutory,
       value: 'statutory',
       sortable: false
     },
-    { text: localeConf.report.th.marriage, value: 'marriage', sortable: false },
-    { text: localeConf.report.th.funeral, value: 'funeral', sortable: false },
+    { text: localeConf.Report.th.marriage, value: 'marriage', sortable: false },
+    { text: localeConf.Report.th.funeral, value: 'funeral', sortable: false },
     {
-      text: localeConf.report.th.menstrual,
+      text: localeConf.Report.th.menstrual,
       value: 'menstrual',
       sortable: false
     },
-    { text: localeConf.report.th.sick, value: 'sick', sortable: false },
-    { text: localeConf.report.th.personal, value: 'personal', sortable: false },
+    { text: localeConf.Report.th.sick, value: 'sick', sortable: false },
+    { text: localeConf.Report.th.personal, value: 'personal', sortable: false },
     {
-      text: localeConf.report.th.derelictionOfDuty,
+      text: localeConf.Report.th.derelictionOfDuty,
       value: 'derelictionOfDuty',
       sortable: false
     },
-    { text: localeConf.report.th.late, value: 'late', sortable: false },
+    { text: localeConf.Report.th.late, value: 'late', sortable: false },
     {
-      text: localeConf.report.th.familyCare,
+      text: localeConf.Report.th.familyCare,
       value: 'familyCare',
       sortable: false
     },
     {
-      text: localeConf.report.th.preManternity,
+      text: localeConf.Report.th.preManternity,
       value: 'preManternity',
       sortable: false
     },
     {
-      text: localeConf.report.th.manternityMiscarriage,
+      text: localeConf.Report.th.manternityMiscarriage,
       value: 'manternityMiscarriage',
       sortable: false
     },
     {
-      text: localeConf.report.th.accompanyingManternity,
+      text: localeConf.Report.th.accompanyingManternity,
       value: 'accompanyingManternity',
       sortable: false
     },
     {
-      text: localeConf.report.th.businessTrip,
+      text: localeConf.Report.th.businessTrip,
       value: 'businessTrip',
       sortable: false
     },
-    { text: localeConf.report.th.others, value: 'others', sortable: false }
+    { text: localeConf.Report.th.others, value: 'others', sortable: false }
   ],
   annualInfoHeaders: [
     {
-      text: localeConf.report.th.annualRemainings,
+      text: localeConf.Report.th.annualRemainings,
       value: 'annualInfo',
       sortable: false
     },
     {
-      text: localeConf.report.th.annualDeadline,
+      text: localeConf.Report.th.annualDeadline,
       value: 'annualInfo',
       sortable: false
     }
@@ -94,8 +99,8 @@ export default {
         .map((v, i) => i + 1)
         .map(day => {
           return {
-            text: `${month} ${localeConf.report.th.months} ${day} ${
-              localeConf.report.th.days
+            text: `${month} ${localeConf.Report.th.months} ${day} ${
+              localeConf.Report.th.days
               }`,
             value: 'day' + day,
             sortable: false
@@ -106,8 +111,8 @@ export default {
       const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
       return months.map(month => {
         return {
-          text: `${year} ${localeConf.report.th.years} ${month} ${
-            localeConf.report.th.months
+          text: `${year} ${localeConf.Report.th.years} ${month} ${
+            localeConf.Report.th.months
             }`,
           value: 'month' + month,
           sortable: false
@@ -184,33 +189,90 @@ export default {
     if (totalDays || totalHours) {
       return (
         days +
-        localeConf.report.th.days +
-        (hours && hours > 0 ? hours + localeConf.report.th.hours : '') +
-        '(' +
+        localeConf.shared.common.dayUnit +
+        (hours && hours > 0 ? ` ${hours}${localeConf.shared.common.hourUnit}` : '') +
+        '/' +
         totalDays +
-        localeConf.report.th.days +
-        (totalHours ? totalHours + localeConf.report.th.hours : '') +
-        ')'
+        localeConf.shared.common.dayUnit +
+        (totalHours ? ` ${totalHours}${localeConf.shared.common.hourUnit}` : '')
       )
     } else {
       return (
-        (days ? days + localeConf.report.th.days : '') +
-        (hours && hours > 0 ? hours + localeConf.report.th.hours : '')
+        (days ? days + localeConf.shared.common.days : '') +
+        (hours && hours > 0 ? hours + localeConf.shared.common.hourUnit : '')
       )
     }
   },
   generateSummary: ({ dateType, counter: { days, hours } }) => {
     return (
-      (localeConf.report.th[dateType]
-        ? localeConf.report.th[dateType]
+      (localeConf.Report.th[dateType]
+        ? localeConf.Report.th[dateType]
         : dateType) +
       ' ' +
-      (days > 0 ? days + localeConf.report.th.days : '') +
-      (hours > 0 ? hours + localeConf.report.th.hours : '')
+      (days > 0 ? days + localeConf.Report.th.days : '') +
+      (hours > 0 ? hours + localeConf.Report.th.hours : '')
     )
   },
   generateDateTypeClass: dateType => {
-    const dt = defaultConf.dateTypes.find(dt => dt.name === dateType)
-    return dt ? dt.class : defaultConf.customDateType.class
-  }
+    const dt = defaultConf.leaveTypes.find(dt => dt.name === dateType)
+    return dt ? dt.class : defaultConf.customLeaveType.class
+  },
+  getRecordsWithinThisYear: (records, year) => {
+    const res = [];
+    records.forEach(record => {
+      const anyDatesOfRecordWithinThisYear = record.dates
+        .map(reportUtility.parseDateString)
+        .some(dateObj => dateObj && dateObj.year === year)
+      if (anyDatesOfRecordWithinThisYear) {
+        res.push(record)
+      }
+    })
+    return res;
+  },
+  groupRecordsByMonth: (records) => {
+    const res = Array.apply(null, { length: 12 }).map((v, i) => []);
+    records.forEach(record => {
+      record.dates.map(reportUtility.parseDateString)
+        .forEach(dateObj => {
+          const recordExists = res[dateObj.month - 1].find(x => x._id === record._id)
+          if (!recordExists) {
+            res[dateObj.month - 1].push(record)
+          }
+        })
+    })
+    return res
+  },
+  groupRecordsByLeaveType: (records) => {
+    const res = []
+    records.forEach(record => {
+      let temp = res.find(x => x.key === record.dateType)
+      if (temp) {
+        temp.list.push(record)
+      } else {
+        res.push({
+          key: record.dateType,
+          list: [record]
+        })
+      }
+    })
+    return res
+  },
+  calculateTotals: (records) => {
+    return reportUtility.sumUpTotals(records.map(record => record.totals))
+  },
+  sumUpTotals: (totalsList) => {
+    const counter = { days: 0, hours: 0 }
+    totalsList.forEach(({ days, halfHours }) => {
+      if (halfHours > 0) {
+        counter.hours += halfHours / 2
+        if (counter.hours >= 8) {
+          counter.days += Math.floor(counter.hours / 8)
+          counter.hours = counter.hours % 8
+        }
+      } else {
+        counter.days += days
+      }
+    })
+    return counter
+  },
 }
