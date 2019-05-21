@@ -75,7 +75,11 @@
                   return-masked-value
                   @blur="info.deadline = dateInput"
                 ></v-text-field>
-                <v-date-picker v-model="info.deadline" no-title @input="datepicker = false"></v-date-picker>
+                <v-date-picker
+                  v-model="info.deadline"
+                  no-title
+                  @input="datepicker = false;dateInput = info.deadline"
+                ></v-date-picker>
               </v-menu>
             </v-flex>
           </v-layout>
@@ -93,7 +97,6 @@
     </v-dialog>
   </div>
 </template>
-
 <script>
 export default {
   name: "LeaveTypeEditorDialog",
@@ -115,9 +118,7 @@ export default {
     datepicker: false,
     dateInput: ""
   }),
-  mounted() {
-    this.dateInput = this.info.deadline;
-  },
+  mounted() {},
   watch: {
     info() {
       this.dateInput = this.info.deadline;
@@ -130,6 +131,5 @@ export default {
   }
 };
 </script>
-
 <style>
 </style>

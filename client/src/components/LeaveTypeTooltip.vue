@@ -40,8 +40,8 @@ export default {
           this.info.totals.days,
           this.info.totals.halfHours
             ? this.info.totals.halfHours / 2
-            : this.info.consumes.hours
-            ? this.info.consumes.hours
+            : this.info.totals.hours
+            ? this.info.totals.hours
             : 0
         ),
         deadline: utility.stringFormat(
