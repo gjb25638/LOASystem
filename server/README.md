@@ -7,7 +7,7 @@
     Employee: {
         ...EmployeeInfos,
         Signers,
-        ActivatedDateTypes,
+        ActivatedleaveTypes,
         Records: {
             ...LeaveInfos,
             Signers,
@@ -33,7 +33,7 @@
 |arrivedDate|when does this employee work in company, for calculating annual vacation.|
 |level|admin, manager and normal.|
 |signers|check out `Signer` section.|
-|activatedDateTypes|check out `ActivatedDateType` section.|
+|activatedLeaveTypes|check out `ActivatedleaveType` section.|
 |records|check out `Record` section.|
 
 ```javascript
@@ -48,12 +48,12 @@
   arrivedDate: Date,
   level: String,
   signers: [Signer],
-  activatedDateTypes: [ActivatedDateTypes],
+  activatedLeaveTypes: [ActivatedleaveTypes],
   records: [Record]
 })
 ```
 
-### ActivatedDateTypes
+### ActivatedleaveTypes
 - All the types of leaves which the employee can take.
 - And the status of these leaves.
 
@@ -89,7 +89,7 @@
 |field|description|
 |:-|:-|
 |appliedDate|when did employee `apply` the leave(s).|
-|dateType|same as `ActivatedDate.name`.|
+|leaveType|same as `ActivatedDate.name`.|
 |dates|when did employee `take` the leave(s).|
 |startFrom|the time start from when, if `dates` is just one day.|
 |endTo|the time end to when, if `dates` is just one day.|
@@ -101,7 +101,7 @@
 ```javascript
 {
     appliedDate: Date,
-    dateType: String,
+    leaveType: String,
     dates: [Date],
     startFrom: String,
     endTo: String,
@@ -172,13 +172,13 @@
 
 |http-method|path|body|
 |:-|:-|:-|
-|get|`/employees/:loginuser/:token`|employeeID, dept, name, email, username, arrivedDate, level, signers, activatedDateTypes|
+|get|`/employees/:loginuser/:token`|employeeID, dept, name, email, username, arrivedDate, level, signers, activatedLeaveTypes|
 |get(v)|`/employee/:id/:loginuser/:token`|
 |post(v)|`/employee/:loginuser/:token`|
 |post|`/auth`|username, password|
-|put|`/switch/:id/:loginuser/:token`|
-|put(v)|`/employee/:id/:loginuser/:token`|employeeID, dept, name, email, ~~username~~, arrivedDate, level, signers, activatedDateTypes|
-|put|`/employee/loa/:id/:loginuser/:token`|activatedDateTypes, records|
+|put|`/active/:id/:loginuser/:token`|
+|put(v)|`/employee/:id/:loginuser/:token`|employeeID, dept, name, email, ~~username~~, arrivedDate, level, signers, activatedLeaveTypes|
+|put|`/employee/loa/:id/:loginuser/:token`|activatedLeaveTypes, records|
 |put|`/employee/email/:id/:loginuser/:token`|email|
 |put|`/employee/pwd/:id/:loginuser/:token`|password|
 |put|`/employee/sign/:id/:loginuser/:token`|recordID, pass|

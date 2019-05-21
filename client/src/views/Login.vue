@@ -7,8 +7,8 @@
             <v-card class="elevation-12">
               <v-toolbar class="theme">
                 <v-tooltip bottom>
-                  <v-toolbar-title slot="activator">{{localeConf.self.toolbar.title}}</v-toolbar-title>
-                  <span>{{localeConf.self.tooltip.title}}</span>
+                  <v-toolbar-title slot="activator">{{loalocale.self.title}}</v-toolbar-title>
+                  <span>{{loalocale.self.tooltip}}</span>
                 </v-tooltip>
                 <v-img position="right" src="./static/logo.svg" aspect-ratio="6" contain></v-img>
               </v-toolbar>
@@ -17,28 +17,32 @@
                   <v-text-field
                     prepend-icon="person"
                     name="username"
-                    :label="localeConf.self.input.username"
+                    :label="loalocale.self.username"
                     type="text"
                     v-model="username"
-                    :rules="usernameRules"
+                    :rules="rules.username"
                     required
                     autocomplete="username"
                   ></v-text-field>
                   <v-text-field
-                    :append-icon="showingPassword ? 'visibility_off' : 'visibility'"
+                    :append-icon="showingPWD ? 'visibility_off' : 'visibility'"
                     prepend-icon="lock"
                     name="password"
-                    :label="localeConf.self.input.password"
-                    :type="showingPassword ? 'text' : 'password'"
+                    :label="loalocale.self.password"
+                    :type="showingPWD ? 'text' : 'password'"
                     v-model="password"
-                    :rules="passwordRules"
+                    :rules="rules.password"
                     required
-                    @click:append="showingPassword = !showingPassword"
+                    @click:append="showingPWD = !showingPWD"
                     @keyup.enter="login"
                     autocomplete="current-password"
                   ></v-text-field>
                 </v-form>
                 <v-alert outline v-model="status.failed" type="error">{{status.message}}</v-alert>
+                <v-chip label outline color="primary" v-if="config.dev">
+                  <v-icon left>storage</v-icon>
+                  {{ config.API_URL.replace("http://", "").replace("https://", "") }}
+                </v-chip>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -46,7 +50,7 @@
                   :class="valid ? 'theme' : 'disabled'"
                   @click="login"
                   :disabled="!valid"
-                >{{localeConf.self.btn.login}}</v-btn>
+                >{{loalocale.self.login}}</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -59,27 +63,24 @@
 import EmployeeService from "@/services/EmployeeService";
 import utility from "@/utility.js";
 import defaultConf from "@/default.js";
+import config from "@/services/config.js";
 export default {
   name: "Login",
   data: () => ({
-    showingPassword: false,
+    showingPWD: false,
     valid: false,
     username: "",
-    usernameRules: [],
+    rules: { username: [], password: [] },
     password: "",
-    passwordRules: [],
-    status: { failed: false, message: "" }
+    status: { failed: false, message: "" },
+    config: config
   }),
   created() {
-    this.usernameRules = [
-      v => !!v || this.localeConf.self.input.validation.noEmpty,
-      v =>
-        /^[a-zA-Z0-9/.]+$/.test(v) ||
-        this.localeConf.self.input.validation.notAEnglishName
+    this.rules.username = [
+      v => !!v || this.loalocale.self.noempty,
+      v => /^[a-zA-Z0-9/.]+$/.test(v) || this.loalocale.self.notengname
     ];
-    this.passwordRules = [
-      v => !!v || this.localeConf.self.input.validation.noEmpty
-    ];
+    this.rules.password = [v => !!v || this.loalocale.self.noempty];
   },
   mounted() {
     this.valid = false;
@@ -88,16 +89,13 @@ export default {
     async login() {
       if (this.$refs.form.validate()) {
         const {
-          data: { success, token, message, logs }
+          data: { success, loginuser, message, logs }
         } = await EmployeeService.auth({
           username: this.username,
           password: this.password
         });
         if (success) {
-          this.$cookie.set("loginuser", this.username.toLocaleLowerCase(), {
-            expires: defaultConf.cookie.expiredPeriod.oneHour
-          });
-          this.$cookie.set("token", token, {
+          this.$cookie.set("loasystem.loginuser", JSON.stringify(loginuser), {
             expires: defaultConf.cookie.expiredPeriod.oneHour
           });
           this.$router.push({ name: "List", params: { logs } });

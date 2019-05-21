@@ -1,88 +1,78 @@
-import localeConf from '@/localization/index'
+import locale from '@/localization/index'
 import defaultConf from '@/default'
 import reportUtility from '@/reportUtility'
 export default {
   basicHeaders: [
     {
-      text: localeConf.List.th.employeeID,
+      text: locale.List.employeeID,
       value: 'employeeID',
       sortable: false
     },
-    { text: localeConf.List.th.name, value: 'name', sortable: false },
-    { text: localeConf.List.th.username, value: 'username', sortable: false },
-    // {
-    //   text: localeConf.List.th.arrivedDate,
-    //   value: 'arrivedDate',
-    //   sortable: false
-    // },
-    // {
-    //   text: "月份",
-    //   value: '',
-    //   sortable: false
-    // }
+    { text: locale.List.name, value: 'name', sortable: false },
+    { text: locale.List.username, value: 'username', sortable: false }
   ],
-  dateTypeHeaders: [
-    { text: localeConf.Report.th.annual, value: 'annual', sortable: false },
+  leaveTypeHeaders: [
+    { text: locale.Report.th.annual, value: 'annual', sortable: false },
     {
-      text: localeConf.Report.th.compensatory,
+      text: locale.Report.th.compensatory,
       value: 'compensatory',
       sortable: false
     },
     {
-      text: localeConf.Report.th.statutory,
+      text: locale.Report.th.statutory,
       value: 'statutory',
       sortable: false
     },
-    { text: localeConf.Report.th.marriage, value: 'marriage', sortable: false },
-    { text: localeConf.Report.th.funeral, value: 'funeral', sortable: false },
+    { text: locale.Report.th.marriage, value: 'marriage', sortable: false },
+    { text: locale.Report.th.funeral, value: 'funeral', sortable: false },
     {
-      text: localeConf.Report.th.menstrual,
+      text: locale.Report.th.menstrual,
       value: 'menstrual',
       sortable: false
     },
-    { text: localeConf.Report.th.sick, value: 'sick', sortable: false },
-    { text: localeConf.Report.th.personal, value: 'personal', sortable: false },
+    { text: locale.Report.th.sick, value: 'sick', sortable: false },
+    { text: locale.Report.th.personal, value: 'personal', sortable: false },
     {
-      text: localeConf.Report.th.derelictionOfDuty,
+      text: locale.Report.th.derelictionOfDuty,
       value: 'derelictionOfDuty',
       sortable: false
     },
-    { text: localeConf.Report.th.late, value: 'late', sortable: false },
+    { text: locale.Report.th.late, value: 'late', sortable: false },
     {
-      text: localeConf.Report.th.familyCare,
+      text: locale.Report.th.familyCare,
       value: 'familyCare',
       sortable: false
     },
     {
-      text: localeConf.Report.th.preManternity,
+      text: locale.Report.th.preManternity,
       value: 'preManternity',
       sortable: false
     },
     {
-      text: localeConf.Report.th.manternityMiscarriage,
+      text: locale.Report.th.manternityMiscarriage,
       value: 'manternityMiscarriage',
       sortable: false
     },
     {
-      text: localeConf.Report.th.accompanyingManternity,
+      text: locale.Report.th.accompanyingManternity,
       value: 'accompanyingManternity',
       sortable: false
     },
     {
-      text: localeConf.Report.th.businessTrip,
+      text: locale.Report.th.businessTrip,
       value: 'businessTrip',
       sortable: false
     },
-    { text: localeConf.Report.th.others, value: 'others', sortable: false }
+    { text: locale.Report.th.others, value: 'others', sortable: false }
   ],
   annualInfoHeaders: [
     {
-      text: localeConf.Report.th.annualRemainings,
+      text: locale.Report.th.annualRemainings,
       value: 'annualInfo',
       sortable: false
     },
     {
-      text: localeConf.Report.th.annualDeadline,
+      text: locale.Report.th.annualDeadline,
       value: 'annualInfo',
       sortable: false
     }
@@ -99,8 +89,8 @@ export default {
         .map((v, i) => i + 1)
         .map(day => {
           return {
-            text: `${month} ${localeConf.Report.th.months} ${day} ${
-              localeConf.Report.th.days
+            text: `${month} ${locale.Report.th.months} ${day} ${
+              locale.Report.th.days
               }`,
             value: 'day' + day,
             sortable: false
@@ -111,8 +101,8 @@ export default {
       const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
       return months.map(month => {
         return {
-          text: `${year} ${localeConf.Report.th.years} ${month} ${
-            localeConf.Report.th.months
+          text: `${year} ${locale.Report.th.years} ${month} ${
+            locale.Report.th.months
             }`,
           value: 'month' + month,
           sortable: false
@@ -132,7 +122,7 @@ export default {
       }
       : undefined
   },
-  dateTypes: [
+  leaveTypes: [
     'annual',
     'compensatory',
     'marriage',
@@ -185,36 +175,36 @@ export default {
       ? record.signings.every(signing => signing.pass) && allSignersSigned
       : allSignersSigned
   },
-  generateDateTypeSummary: ({ days, hours, totalDays, totalHours }) => {
+  generateleaveTypeSummary: ({ days, hours, totalDays, totalHours }) => {
     if (totalDays || totalHours) {
       return (
         days +
-        localeConf.shared.common.dayUnit +
-        (hours && hours > 0 ? ` ${hours}${localeConf.shared.common.hourUnit}` : '') +
+        locale.shared.common.dayUnit +
+        (hours && hours > 0 ? ` ${hours}${locale.shared.common.hourUnit}` : '') +
         '/' +
         totalDays +
-        localeConf.shared.common.dayUnit +
-        (totalHours ? ` ${totalHours}${localeConf.shared.common.hourUnit}` : '')
+        locale.shared.common.dayUnit +
+        (totalHours ? ` ${totalHours}${locale.shared.common.hourUnit}` : '')
       )
     } else {
       return (
-        (days ? days + localeConf.shared.common.days : '') +
-        (hours && hours > 0 ? hours + localeConf.shared.common.hourUnit : '')
+        (days ? days + locale.shared.common.days : '') +
+        (hours && hours > 0 ? hours + locale.shared.common.hourUnit : '')
       )
     }
   },
-  generateSummary: ({ dateType, counter: { days, hours } }) => {
+  generateSummary: ({ leaveType, days, hours }) => {
     return (
-      (localeConf.Report.th[dateType]
-        ? localeConf.Report.th[dateType]
-        : dateType) +
+      (locale.Report.th[leaveType]
+        ? locale.Report.th[leaveType]
+        : leaveType) +
       ' ' +
-      (days > 0 ? days + localeConf.Report.th.days : '') +
-      (hours > 0 ? hours + localeConf.Report.th.hours : '')
+      (days > 0 ? `${days} ${locale.Report.th.days}` : '') +
+      (hours > 0 ? `${hours} ${locale.Report.th.hours}` : '')
     )
   },
-  generateDateTypeClass: dateType => {
-    const dt = defaultConf.leaveTypes.find(dt => dt.name === dateType)
+  generateleaveTypeClass: leaveType => {
+    const dt = defaultConf.leaveTypes.find(dt => dt.name === leaveType)
     return dt ? dt.class : defaultConf.customLeaveType.class
   },
   getRecordsWithinThisYear: (records, year) => {
@@ -245,12 +235,12 @@ export default {
   groupRecordsByLeaveType: (records) => {
     const res = []
     records.forEach(record => {
-      let temp = res.find(x => x.key === record.dateType)
+      let temp = res.find(x => x.key === record.leaveType)
       if (temp) {
         temp.list.push(record)
       } else {
         res.push({
-          key: record.dateType,
+          key: record.leaveType,
           list: [record]
         })
       }

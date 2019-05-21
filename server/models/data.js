@@ -12,7 +12,7 @@ var levels = {
     normal: 'normal'
 }
 
-var dateTypes = {
+var leaveTypes = {
     sick: {
         halfHoursEnabled: true,
         enabled: true,
@@ -85,9 +85,9 @@ var dateTypes = {
     }
 }
 
-var dateTypeGroup = {
-    generalMale: [dateTypes.sick, dateTypes.personal, dateTypes.annual],
-    generalFemale: [dateTypes.sick, dateTypes.personal, dateTypes.menstrual, dateTypes.annual]
+var leaveTypeGroup = {
+    generalMale: [leaveTypes.sick, leaveTypes.personal, leaveTypes.annual],
+    generalFemale: [leaveTypes.sick, leaveTypes.personal, leaveTypes.menstrual, leaveTypes.annual]
 }
 
 module.exports = [{
@@ -98,9 +98,9 @@ module.exports = [{
     username: 'Boss',
     arrivedDate: '2016-01-01',
     signers: [],
-    activatedDateTypes: dateTypeGroup.generalMale,
+    activatedLeaveTypes: leaveTypeGroup.generalMale,
     email: 'admin@email.com'
-},{
+}, {
     employeeID: 'A0002',
     dept: depts.A1,
     level: levels.manager,
@@ -108,9 +108,9 @@ module.exports = [{
     username: 'Manager',
     arrivedDate: '2016-07-01',
     signers: ['Boss'],
-    activatedDateTypes: dateTypeGroup.generalFemale,
+    activatedLeaveTypes: leaveTypeGroup.generalFemale,
     email: 'manager@email.com'
-},{
+}, {
     employeeID: 'A0003',
     dept: depts.A1,
     level: levels.normal,
@@ -118,6 +118,6 @@ module.exports = [{
     username: 'Normal',
     arrivedDate: '2017-01-01',
     signers: ['Boss', 'Manager'],
-    activatedDateTypes: dateTypeGroup.generalMale,
+    activatedLeaveTypes: leaveTypeGroup.generalMale,
     email: 'normal@email.com'
 }];

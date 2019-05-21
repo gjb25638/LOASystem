@@ -1,7 +1,8 @@
 import axios from 'axios'
+import config from '@/services/config'
 
 export default () => {
   return axios.create({
-    baseURL: process.env.API_URL
+    baseURL: config.API_URL
   })
 }

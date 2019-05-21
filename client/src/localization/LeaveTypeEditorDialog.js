@@ -1,36 +1,22 @@
 export default {
     en: {
-        title: {
-            consumes: "Consumes",
-            totals: "Totals",
-            hoursLeave: "Hours Leave Available"
-        },
-        input: {
-            days: "days",
-            hours: "hours"
-        },
-        label: {
-            deadline: "deadline"
-        },
-        btn: {
-            close: "CLOSE"
-        }
+        consumes: "Consumes",
+        totals: "Totals",
+        hoursLeave: "Hours Leave Available",
+        days: "days",
+        hours: "hours",
+        deadline: "deadline",
+        close: "CLOSE",
+        remove: "REMOVE"
     },
     zh: {
-        title: {
-            consumes: "已用",
-            totals: "總共",
-            hoursLeave: "接受時數假"
-        },
-        input: {
-            days: "天數",
-            hours: "時數"
-        },
-        label: {
-            deadline: "到期日"
-        },
-        btn: {
-            close: "關閉"
-        }
+        consumes: "已用",
+        totals: "總共",
+        hoursLeave: "接受時數假",
+        days: "天數",
+        hours: "時數",
+        deadline: "到期日",
+        close: "關閉",
+        remove: "移除"
     }
 }

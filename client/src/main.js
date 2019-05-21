@@ -3,38 +3,50 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import localeConf from '@/localization/index'
+import locale from '@/localization/index'
 import VueCookie from 'vue-cookie'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import utility from '@/utility'
+
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VueCookie)
 Vue.mixin({
-  beforeCreate() {
-    utility.checkingLoginStatus(this.$cookie, this.$router)
+  created() {
+    this.checkLoginStatus()
+  },
+  computed: {
+    loginuser() {
+      return JSON.parse(this.$cookie.get("loasystem.loginuser"));
+    }
   },
   data: function (e) {
-    let localeConfTemp = {}
+    let selfLocale = {}
     const componentTag = e && e.$vnode ? e.$vnode.tag : undefined
     if (componentTag) {
       const [, name] = /-(\w+)$/.exec(componentTag)
-      if (name && localeConf[name]) {
-        localeConfTemp = {
+      if (name) {
+        selfLocale = {
           name,
-          self: localeConf[name],
-          shared: localeConf.shared
-        }
-      } else {
-        localeConfTemp = {
-          componentTag
+          self: locale[name],
+          shared: locale.shared
         }
       }
     }
     return {
-      localeConf: localeConfTemp
+      loalocale: selfLocale
+    }
+  },
+  methods: {
+    checkLoginStatus() {
+      if (this.$router.history.current.name !== "Login") {
+        const loginuser = this.$cookie.get("loasystem.loginuser");
+        if (!loginuser) {
+          this.$cookie.delete("loasystem.loginuser");
+          this.$router.push({ name: "Login" });
+        }
+      }
     }
   }
 })

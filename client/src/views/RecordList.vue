@@ -1,129 +1,122 @@
 <template>
-  <v-app id="inspire">
-    <v-container fluid fill-height>
-      <v-layout>
-        <v-flex xs12>
-          <v-card class="elevation-12">
-            <menu-bar icon="person" :title="`${name} (${username})`" :enabled="{ export: true }">
-              <div>{{localeConf.self.tooltip.dept}} {{dept}}</div>
-              <div>{{localeConf.self.tooltip.employeeID}} {{employeeID}}</div>
-              <div>{{localeConf.self.tooltip.name}} {{name}}</div>
-              <div>{{localeConf.self.tooltip.username}} {{username}}</div>
-              <div>{{localeConf.self.tooltip.arrivedDate}} {{formatDate(arrivedDate)}}</div>
-            </menu-bar>
-            <v-card-title>
-              <v-switch
-                :label="localeConf.self.switch.showAll"
-                v-if="fullControl"
-                v-model="showAll"
-              ></v-switch>
-              <v-spacer></v-spacer>
-              <v-text-field
-                v-model="search"
-                append-icon="search"
-                :label="localeConf.self.input.search"
-                single-line
-              ></v-text-field>
-            </v-card-title>
-            <v-data-table
-              :pagination.sync="pagination"
-              :search="search"
-              :headers="headers"
-              :items="filteredRecords"
-              class="elevation-1"
-              :rows-per-page-items="[10, 20, {'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
-            >
-              <template slot="items" slot-scope="props">
-                <tr>
-                  <td class="min-width-160">
-                    <v-tooltip bottom>
-                      <div slot="activator">{{ props.item.appliedDate }}</div>
-                    </v-tooltip>
-                  </td>
-                  <td
-                    class="min-width-160"
-                  >{{ generateSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
-                  <td
-                    class="min-width-160"
-                  >{{ generateConsumeSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
-                  <td class="min-width-120">
-                    <v-tooltip bottom>
-                      <div slot="activator">{{ props.item.dateType }}</div>
-                      <leave-type-tooltip :info="props.item.activatedDateType"></leave-type-tooltip>
-                    </v-tooltip>
-                  </td>
-                  <td class="min-width-100">{{ props.item.agent }}</td>
-                  <td>
-                    <div v-for="signing in props.item.signings" :key="signing._id">
-                      <v-tooltip bottom>
-                        <v-chip
-                          :color="signing.pass ? 'green' : 'red'"
-                          text-color="white"
-                          slot="activator"
-                        >{{signing.name}} [{{signing.pass ? localeConf.self.td.pass : localeConf.self.td.reject }}]</v-chip>
-                        <signing-tooltip
-                          v-for="signer in props.item.signers"
-                          :key="signer._id"
-                          :signer="signer"
-                          :signings="props.item.signings"
-                        ></signing-tooltip>
-                      </v-tooltip>
-                    </div>
-                  </td>
-                  <td>
-                    <v-tooltip bottom>
-                      <v-btn
-                        slot="activator"
-                        icon
-                        ripple
-                        @click="sign(id, props.item._id, false)"
-                        v-if="props.item.signings.every(signing => signing.pass)"
-                      >
-                        <v-icon color="red">pan_tool</v-icon>
-                      </v-btn>
-                      <div>{{localeConf.self.tooltip.reject}}</div>
-                    </v-tooltip>
-                  </td>
-                </tr>
-              </template>
-            </v-data-table>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <page-container
+    icon="person"
+    :title="`${profile.name} (${profile.username})`"
+    @notified="(notification) => systemNotification = notification"
+  >
+    <template v-slot:tooltip>
+      <employee-info :profile="profile" icon email></employee-info>
+    </template>
+    <v-card class="elevation-12">
+      <v-card-title>
+        <v-switch :label="loalocale.self.showRejects" v-model="showRejects"></v-switch>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          :label="loalocale.self.search"
+          single-line
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :pagination.sync="pagination"
+        :search="search"
+        :headers="headers"
+        :items="filteredRecords"
+        class="elevation-1"
+        :rows-per-page-items="[{'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
+      >
+        <template slot="items" slot-scope="props">
+          <tr>
+            <td class="min-width-160">
+              <v-tooltip bottom>
+                <div slot="activator">{{ props.item.appliedDate }}</div>
+              </v-tooltip>
+            </td>
+            <td
+              class="min-width-160"
+            >{{ generateSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
+            <td
+              class="min-width-160"
+            >{{ generateConsumeSummary(props.item.dates, props.item.startFrom, props.item.endTo) }}</td>
+            <td class="min-width-120">
+              <v-tooltip bottom>
+                <div slot="activator">{{ props.item.leaveType }}</div>
+                <leave-type-tooltip :info="props.item.activatedLeaveTypes"></leave-type-tooltip>
+              </v-tooltip>
+            </td>
+            <td class="min-width-100">{{ props.item.agent }}</td>
+            <td>
+              <div v-for="signing in props.item.signings" :key="signing._id">
+                <v-tooltip bottom>
+                  <v-chip
+                    :color="signing.pass ? 'green' : 'red'"
+                    text-color="white"
+                    slot="activator"
+                  >{{signing.name}} [{{signing.pass ? loalocale.self.pass : loalocale.self.reject }}]</v-chip>
+                  <signing-tooltip
+                    v-for="signer in props.item.signers"
+                    :key="signer._id"
+                    :signer="signer"
+                    :signings="props.item.signings"
+                  ></signing-tooltip>
+                </v-tooltip>
+              </div>
+            </td>
+            <td>
+              <v-tooltip bottom>
+                <v-btn
+                  slot="activator"
+                  icon
+                  ripple
+                  @click="sign(profile.id, props.item._id, false)"
+                  v-if="fullControl && props.item.signings.every(signing => signing.pass)"
+                >
+                  <v-icon color="red">pan_tool</v-icon>
+                </v-btn>
+                <div>{{loalocale.self.reject}}</div>
+              </v-tooltip>
+            </td>
+          </tr>
+        </template>
+      </v-data-table>
+    </v-card>
     <system-notification v-model="systemNotification" @close="systemNotification.visible = false">
       <div>{{systemNotification.text}}</div>
     </system-notification>
-  </v-app>
+  </page-container>
 </template>
 
 <script>
+import SigningTooltip from "@/components/SigningTooltip";
+import LeaveTypeTooltip from "@/components/LeaveTypeTooltip";
+import SystemNotification from "@/components/SystemNotification";
+import PageContainer from "../components/PageContainer";
+import EmployeeInfo from "../components/EmployeeInfo";
 import EmployeeService from "@/services/EmployeeService";
-import MenuBar from "@/components/Shared/MenuBar";
-import SigningTooltip from "@/components/Shared/SigningTooltip";
-import LeaveTypeTooltip from "@/components/Shared/LeaveTypeTooltip";
-import SystemNotification from "@/components/Shared/SystemNotification";
 import utility from "@/utility";
 export default {
   name: "RecordList",
   components: {
-    "menu-bar": MenuBar,
     "signing-tooltip": SigningTooltip,
     "leave-type-tooltip": LeaveTypeTooltip,
-    "system-notification": SystemNotification
+    "system-notification": SystemNotification,
+    "page-container": PageContainer,
+    "employee-info": EmployeeInfo
   },
-  data() {
-    return {
-      showAll: false,
-      systemNotification: {
-        level: "warning",
-        text: "",
-        visible: false
-      },
-      search: this.$route.params.query,
-      headers: [],
-      records: [],
-      fullControl: false,
+  data: () => ({
+    showRejects: false,
+    systemNotification: {
+      level: "warning",
+      text: "",
+      visible: false,
+      handler: () => {}
+    },
+    search: "",
+    headers: [],
+    records: [],
+    fullControl: false,
+    profile: {
       id: "",
       employeeID: "",
       dept: "",
@@ -131,61 +124,63 @@ export default {
       username: "",
       arrivedDate: "",
       level: "",
-      pagination: {
-        sortBy: "appliedDate",
-        descending: true
-      }
-    };
-  },
+      email: ""
+    },
+    pagination: {
+      sortBy: "appliedDate",
+      descending: true
+    }
+  }),
   computed: {
-    filteredRecords: function() {
+    filteredRecords() {
       return this.records.filter(
-        r => this.showAll || r.signings.every(s => s.pass)
+        r => this.showRejects || r.signings.every(s => s.pass)
       );
     }
   },
   created() {
     this.headers = [
       {
-        text: this.localeConf.self.th.appliedDate,
+        text: this.loalocale.self.appliedDate,
         value: "appliedDate",
         width: 120,
         sortable: false
       },
       {
-        text: this.localeConf.self.th.dates,
+        text: this.loalocale.self.dates,
         value: "",
         sortable: false
       },
       {
-        text: this.localeConf.self.th.totals,
+        text: this.loalocale.self.totals,
         value: "",
         sortable: false
       },
       {
-        text: this.localeConf.self.th.dateType,
-        value: "dateType",
-        width: 150,
+        text: this.loalocale.self.leaveType,
+        value: "leaveType",
+        width: 160,
         sortable: false
       },
       {
-        text: this.localeConf.self.th.agent,
+        text: this.loalocale.self.agent,
         value: "agent",
         sortable: false
       },
       {
-        text: this.localeConf.self.th.signings,
+        text: this.loalocale.self.signings,
         value: "signings",
         sortable: false
       },
       {
-        text: this.localeConf.self.th.action,
+        text: this.loalocale.self.action,
         value: "",
         sortable: false
       }
     ];
   },
   mounted() {
+    this.search = this.$route.params.query;
     this.getRecords();
   },
   methods: {
@@ -199,26 +194,30 @@ export default {
           username,
           arrivedDate,
           level,
-          activatedDateTypes,
+          activatedLeaveTypes,
+          email,
           records,
           fullControl
         }
       } = await EmployeeService.get({
         id: this.$route.params.id,
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token")
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token
       });
-      this.employeeID = employeeID;
-      this.dept = dept;
-      this.name = name;
-      this.username = username;
-      this.arrivedDate = arrivedDate;
-      this.level = level;
+      this.profile = {
+        employeeID,
+        dept,
+        name,
+        username,
+        arrivedDate,
+        level,
+        email,
+        id: _id
+      };
       this.fullControl = fullControl;
-      this.id = _id;
       this.records = records.map(record => {
-        const leaveType = activatedDateTypes.find(
-          dt => dt.name === record.dateType
+        const leaveType = activatedLeaveTypes.find(
+          dt => dt.name === record.leaveType
         );
         return this.combineRecord(record, leaveType);
       });
@@ -227,31 +226,29 @@ export default {
       const combinedLeaveType = Object.assign({}, leaveType, {
         deadline: utility.formatDate(leaveType.deadline),
         countdown: utility.isLeaveTypeInfoGeneral(leaveType.name),
-        localeName: this.localeConf.shared.dateTypes[leaveType.name]
+        localeName: this.loalocale.shared.leaveTypes[leaveType.name]
       });
       return Object.assign({}, record, {
         appliedDate: utility.formatDate(record.appliedDate),
-        activatedDateType: combinedLeaveType,
-        dateType: utility.getLocaleDateTypeNames(record.dateType)
+        activatedLeaveTypes: combinedLeaveType,
+        leaveType: utility.getLocaleleaveTypeNames(record.leaveType)
       });
     },
     async sign(id, recordID, pass) {
       const {
         data: { success, message }
       } = await EmployeeService.updateSign({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token"),
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token,
         id: id,
         recordID: recordID,
-        pass: pass
+        pass: pass,
+        forced: true
       });
       if (success) {
         this.getRecords();
       } else {
-        this.systemNotification.text = utility.lookUpCustomMessage(
-          message,
-          this.localeConf.self.message
-        );
+        this.systemNotification.text = utility.lookUpCustomMessage(message);
         this.systemNotification.visible = true;
       }
     },

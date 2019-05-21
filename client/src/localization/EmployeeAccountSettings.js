@@ -1,36 +1,16 @@
 export default {
     en: {
-        btn: {
-            resetPWD: "Reset Password",
-            resetEmail: "Reset Email",
-            update: "Update"
-        },
-        input: {
-            password: "Password",
-            email: "Email",
-            validation: {
-                notEmail: "Invalid Email"
-            }
-        },
-        dialog: {
-            close: "Close"
-        }
+        reset: "Reset",
+        password: "Password",
+        email: "email",
+        close: "Close",
+        invalidEmail: "Invalid Email"
     },
     zh: {
-        btn: {
-            resetPWD: "重設密碼",
-            resetEmail: "重設電子郵件",
-            update: "更新"
-        },
-        input: {
-            password: "密碼",
-            email: "電子郵件",
-            validation: {
-                notEmail: "不合法的 Email"
-            }
-        },
-        dialog: {
-            close: "關閉"
-        }
+        reset: "重設",
+        password: "密碼",
+        email: "Email",
+        close: "關閉",
+        invalidEmail: "Email 不合法"
     }
 }

@@ -1,20 +1,11 @@
-<template>
-</template>
-
+<template></template>
 <script>
 export default {
-  name: '',
-  props: {
-
-  },
-  data() {
-    return {
-    }
-  },
-  methods: {
-  }
-}
+  name: "",
+  props: {},
+  data: () => ({}),
+  methods: {}
+};
 </script>
-
 <style>
 </style>

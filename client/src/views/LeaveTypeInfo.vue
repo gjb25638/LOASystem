@@ -58,7 +58,7 @@
     <v-card>
       <v-layout>
         <v-flex xs12>
-          <v-card-title class="memo" v-for="info in localeConf.self.otherInfos" :key="info">{{info}}</v-card-title>
+          <v-card-title class="memo" v-for="info in loalocale.self.otherInfos" :key="info">{{info}}</v-card-title>
         </v-flex>
       </v-layout>
     </v-card>
@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     leaveTypeInfos: function() {
-      const leaveTypes = this.localeConf.self.leaveTypes;
+      const leaveTypes = this.loalocale.self.leaveTypes;
       return Object.keys(leaveTypes).map(key => {
         const lt = leaveTypes[key];
         const res = utility.lookUpLeaveTypeIconNClass(key);

@@ -1,8 +1,8 @@
 export default {
     en: {
         label: {
-            sign: "| Sign:",
-            signed: "| Signed:"
+            sign: "Sign:",
+            signed: "Status:"
         },
         tooltip: {
             pass: "Pass",
@@ -11,8 +11,8 @@ export default {
     },
     zh: {
         label: {
-            sign: "| 簽核:",
-            signed: "| 已簽核:"
+            sign: "簽核:",
+            signed: "狀態:"
         },
         tooltip: {
             pass: "通過",

@@ -3,8 +3,8 @@ export default {
         th: {
             years: "Year",
             months: "Month",
-            days: "Day",
-            hours: "Hour",
+            days: "Days",
+            hours: "Hours",
             compensatory: "Compensatory",
             statutory: "Statutory",
             sick: "sick leave",
@@ -22,7 +22,8 @@ export default {
             others: "Others",
             annualRemainings: "Annual Leave Remainings",
             annualDeadline: "Annual Leave Deadline",
-            businessTrip: "business-trip leave"
+            businessTrip: "business-trip leave",
+            annualPreRequest: "annual prerequest leave"
         },
         tooltip: {
             export: "Export",
@@ -58,7 +59,8 @@ export default {
             others: "其他",
             annualRemainings: "剩餘特休(總共)",
             annualDeadline: "特休到期日",
-            businessTrip: "出差假"
+            businessTrip: "出差假",
+            annualPreRequest: "預請特休"
         },
         tooltip: {
             export: "匯出",

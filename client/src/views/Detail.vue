@@ -20,88 +20,61 @@
             ></employee-account-settings>
             <v-divider></v-divider>
             <leave-type-container
-              :leaveTypes="availableLeaveTypes"
+              :leaveTypes="availableLTs"
               :readonly="!fullControl"
-              @pickOne="pickOneLeaveType"
-              @importOne="importOneLeaveType"
-              @removeOne="removeOneLeaveType"
+              @importOne="import1LT"
+              @removeOne="remove1LT"
+              helper
             ></leave-type-container>
             <v-layout row wrap>
               <v-flex>
                 <v-expansion-panel dark>
                   <v-expansion-panel-content>
-                    <div slot="header">
-                      {{ localeConf.self.message.unavailableLeaveTypes }}
-                      ({{ localeConf.self.message.unavailableLeaveTypesDetails }})
-                    </div>
-                    <leave-type-container
-                      :leaveTypes="unavailableLeaveTypes"
-                      :readonly="!fullControl"
-                      listonly
-                    ></leave-type-container>
+                    <div slot="header">{{ loalocale.self.unavailableLTs }}</div>
+                    <leave-type-container :leaveTypes="unavailableLTs" :readonly="!fullControl"></leave-type-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-flex>
             </v-layout>
-            <leave-form
-              :leavetype="selectedLeaveType"
-              @submit="takeALeave"
-              :allowed-dates="allowedDates"
-            ></leave-form>
-            <leave-container :leaves="records" :readonly="!fullControl" @remove="removeOneLeave"></leave-container>
             <v-layout row wrap>
               <v-flex xs12>
                 <v-btn
                   :class="['theme', 'float-right']"
                   @click="submit"
                   v-if="fullControl"
-                >{{isEditMode ? localeConf.self.btn.update: localeConf.self.btn.create}}</v-btn>
-                <v-btn
-                  :class="records.length == 0 ? ['float-right'] : ['theme', 'float-right']"
-                  @click="save"
-                  v-if="isEditMode"
-                  :disabled="records.length == 0"
-                >{{localeConf.self.btn.save}}</v-btn>
+                >{{isEditMode ? loalocale.self.update: loalocale.self.create}}</v-btn>
               </v-flex>
             </v-layout>
           </v-form>
         </v-flex>
       </v-layout>
     </v-container>
-    <system-notification v-model="systemNotification" @close="closeNotification">
+    <system-notification v-model="systemNotification" @close="systemNotification.visible = false">
       <div>{{systemNotification.text}}</div>
     </system-notification>
   </v-app>
 </template>
-
 <script>
+import SystemNotification from "@/components/SystemNotification";
+import EmployeeProfile from "@/components/EmployeeProfile";
+import EmployeeAccountSettings from "@/components/EmployeeAccountSettings";
+import LeaveTypeContainer from "@/components/LeaveTypeContainer";
 import EmployeeService from "@/services/EmployeeService";
-import SystemNotification from "@/components/Shared/SystemNotification";
-import defaultConf from "@/default";
 import utility from "@/utility";
-import EmployeeProfile from "@/components/Detail/EmployeeProfile";
-import EmployeeAccountSettings from "@/components/Detail/EmployeeAccountSettings";
-import LeaveTypeContainer from "@/components/Detail/LeaveTypeContainer";
-import LeaveTypeSelectedBlock from "@/components/Detail/LeaveTypeSelectedBlock";
-import LeaveForm from "@/components/Detail/LeaveForm";
-import LeaveContainer from "@/components/Detail/LeaveContainer";
+import defaultConf from "@/default";
 export default {
   name: "Detail",
   components: {
     "system-notification": SystemNotification,
     "employee-profile": EmployeeProfile,
     "employee-account-settings": EmployeeAccountSettings,
-    "leave-type-container": LeaveTypeContainer,
-    "leave-type-selected-block": LeaveTypeSelectedBlock,
-    "leave-form": LeaveForm,
-    "leave-container": LeaveContainer
+    "leave-type-container": LeaveTypeContainer
   },
   data: () => ({
     systemNotification: {
       level: "warning",
       text: "",
-      visible: false,
-      keyword: ""
+      visible: false
     },
     valid: true,
     profile: {
@@ -116,19 +89,12 @@ export default {
     },
     account: {
       password: "",
-      email: ""
+      email: "",
+      id: ""
     },
     leaveTypes: [],
     isEditMode: false,
     fullControl: false,
-    selectedLeaveType: {
-      class: "",
-      icon: "",
-      title: "",
-      halfHoursEnabled: false
-    },
-    records: [],
-    employees: [],
     signerOptions: [
       {
         _id: "",
@@ -142,26 +108,30 @@ export default {
     levelOptions: defaultConf.levelOptions
   }),
   computed: {
-    availableLeaveTypes: function() {
+    availableLTs() {
       return this.leaveTypes.filter(lt => {
-        return !this.isAvailableLeaveType(lt);
+        return !this.isEditMode || !this.isAvailableLT(lt);
       });
     },
-    unavailableLeaveTypes: function() {
+    unavailableLTs() {
       return this.leaveTypes.filter(lt => {
-        return this.isAvailableLeaveType(lt);
+        return this.isAvailableLT(lt);
       });
     }
   },
   mounted() {
+    this.account.id = this.$route.params.id;
     this.isEditMode = this.$route.params.id && this.$route.params.id !== "new";
     if (this.isEditMode) {
       this.getEmployee();
+    } else {
+      this.fullControl = true;
+      this.leaveTypes = JSON.parse(JSON.stringify(defaultConf.leaveTypes));
     }
     this.getEmployees();
   },
   methods: {
-    isAvailableLeaveType: function(leaveType) {
+    isAvailableLT(leaveType) {
       return (
         leaveType.name.startsWith(defaultConf.compensatory.keyword) &&
         leaveType.consumes.days === leaveType.totals.days &&
@@ -173,8 +143,8 @@ export default {
       const {
         data: { employees }
       } = await EmployeeService.fetchForLightweight({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token")
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token
       });
       this.signerOptions = employees;
     },
@@ -188,13 +158,13 @@ export default {
           arrivedDate,
           level,
           signers,
-          activatedDateTypes,
+          activatedLeaveTypes,
           fullControl,
           email
         }
       } = await EmployeeService.get({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token"),
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token,
         id: this.$route.params.id
       });
       this.profile = {
@@ -208,66 +178,21 @@ export default {
         email: email
       };
       this.fullControl = fullControl;
-      this.leaveTypes =
-        activatedDateTypes.length > 0
-          ? this.transformLeaveTypes(activatedDateTypes)
-          : JSON.parse(JSON.stringify(defaultConf.leaveTypes));
-    },
-    async save() {
-      const records = this.records.map(r => {
-        return {
-          appliedDate: r.apply.created,
-          startFrom: r.apply.startFrom,
-          endTo: r.apply.endTo,
-          dateType: r.name,
-          dates: r.apply.dates.map(d => new Date(d)),
-          agent: r.apply.agent,
-          signings: [],
-          totals: {
-            days: r.apply.totalHours === 0 ? r.apply.dates.length : 0,
-            halfHours: r.apply.totalHours * 2
-          }
-        };
-      });
-      const {
-        data: { success, message }
-      } = await EmployeeService.updateLOA({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token"),
-        id: this.$route.params.id,
-        records: records,
-        activatedDateTypes: this.leaveTypes.map(lt => {
-          return {
-            consumes: {
-              days: lt.consumes.days,
-              halfHours: lt.consumes.hours * 2
-            },
-            ...lt
-          };
-        })
-      });
-
-      if (success) {
-        this.$router.push({ name: "List" });
-      } else {
-        this.systemNotification.text = utility.lookUpCustomMessage(
-          message,
-          this.localeConf.self.message
-        );
-        this.systemNotification.visible = true;
-      }
+      this.leaveTypes = this.accumulateLTsCosumes(
+        this.formatLT(activatedLeaveTypes)
+      );
     },
     async submit() {
       if (this.$refs.form.validate()) {
         const params = {
-          employeeID: this.employeeID,
-          dept: this.dept,
-          name: this.name,
-          username: this.username,
-          arrivedDate: this.arrivedDate,
-          level: this.level,
-          email: this.email,
-          activatedDateTypes: this.leaveTypes.map(lt => {
+          employeeID: this.profile.employeeID,
+          dept: this.profile.dept,
+          name: this.profile.name,
+          username: this.profile.username,
+          arrivedDate: this.profile.arrivedDate,
+          level: this.profile.level,
+          email: this.profile.email,
+          activatedLeaveTypes: this.leaveTypes.map(lt => {
             return {
               ...lt,
               consumes: {
@@ -280,8 +205,8 @@ export default {
               }
             };
           }),
-          loginuser: this.$cookie.get("loginuser"),
-          token: this.$cookie.get("token"),
+          loginuser: this.loginuser.username,
+          token: this.loginuser.token,
           id: this.$route.params.id,
           signers: this.profile.signers
         };
@@ -294,21 +219,18 @@ export default {
         if (success) {
           this.$router.push({ name: "List" });
         } else {
-          this.systemNotification.text = utility.lookUpCustomMessage(
-            message,
-            this.localeConf.self.message
-          );
+          this.systemNotification.text = utility.lookUpCustomMessage(message);
           this.systemNotification.visible = true;
         }
       } else {
-        this.systemNotification.visible = {
-          text: "",
+        this.systemNotification = {
+          text: this.loalocale.self.textfieldUndone,
           level: "warning",
           visible: true
         };
       }
     },
-    transformLeaveTypes(leaveTypes) {
+    formatLT(leaveTypes) {
       const newLeaveTypes = JSON.parse(JSON.stringify(defaultConf.leaveTypes));
       leaveTypes.forEach(lt => {
         let leaveTypeInDefault = newLeaveTypes.find(
@@ -347,10 +269,10 @@ export default {
       });
       return newLeaveTypes.filter(lt => this.fullControl || lt.enabled);
     },
-    removeOneLeaveType(index) {
+    remove1LT(index) {
       this.leaveTypes = this.leaveTypes.filter(lt => lt.index !== index);
     },
-    importOneLeaveType(customTypeName) {
+    import1LT(customTypeName) {
       if (customTypeName) {
         const sameNameLeaveTypes = this.leaveTypes.filter(lt =>
           lt.name.startsWith(customTypeName)
@@ -368,202 +290,32 @@ export default {
         });
       }
     },
-    takeALeave(apply) {
-      debugger
-      if (apply.dates.length === 1) {
-        // 1 date chosen.
-        if (this.selectedLeaveType.totals.days > 0) {
-          // totals days > 0.
-          if (
-            this.selectedLeaveType.totals.days -
-              this.selectedLeaveType.consumes.days ===
-              1 &&
-            apply.totalHours >= 8
-          ) {
-            // totals days - consumes days = 1 day left, but the applied time > 9 hours(=1 work day).
-            this.systemNotification.text = this.localeConf.self.message.runOutQotaOfLeave;
-            this.systemNotification.visible = true;
-            return;
-          }
-        } else {
-          // totals days = 0.
-          if (
-            this.selectedLeaveType.consumes.hours + apply.totalHours >
-            this.selectedLeaveType.totals.hours
-          ) {
-            // consume hours + applied time > totals hours.
-            this.systemNotification.text = this.localeConf.self.message.runOutQotaOfLeave;
-            this.systemNotification.visible = true;
-            return;
-          }
-        }
+    accumulateLTsCosumes(leaveTypes) {
+      const familyCare = leaveTypes.find(lt => lt.name === "familyCare");
+      if (familyCare) {
+        const personal = leaveTypes.find(lt => lt.name === "personal");
+        personal.consumes.days += familyCare.consumes.days;
       }
-
-      if (
-        this.selectedLeaveType.consumes.days + apply.dates.length >
-        this.selectedLeaveType.totals.days
-      ) {
-        // consume days + chosen dates > totals days.
-        this.systemNotification.text = this.localeConf.self.message.runOutQotaOfLeave;
-        this.systemNotification.visible = true;
-        return;
-      }
-
-      if (["personal", "familyCare"].includes(this.selectedLeaveType.name)) {
-        debugger;
-        // familyCare leave is a kind of personal leave
-        // , so when taking a personal/familyCare leave
-        // , all of both consumes must < totals of personal leave.
-        const personalLeaveType = this.leaveTypes.find(
-          lt => lt.name === "personal"
-        );
-        const familyCareLeaveType = this.leaveTypes.find(
-          lt => lt.name === "familyCare"
-        );
-
-        if (
-          personalLeaveType.consumes.days * 8 +
-            personalLeaveType.consumes.hours +
-            familyCareLeaveType.consumes.days * 8 +
-            familyCareLeaveType.consumes.hours +
-            (apply.dates.length === 1 && apply.totalHours > 0
-              ? apply.totalHours
-              : apply.dates.length * 8) >
-          personalLeaveType.totals.days * 8
-        ) {
-          this.systemNotification.text = this.localeConf.self.message.runOutQotaOfLeave;
-          this.systemNotification.visible = true;
-          return;
-        }
-      }
-
-      if (this.selectedLeaveType.halfHoursEnabled) {
-        // can leave in hours/half-hours.
-        this.selectedLeaveType.consumes.days +=
-          apply.dates.length === 1 && apply.totalHours === 0
-            ? apply.dates.length
-            : 0;
-        // sum up consumes days with the length of chosen dates
-        // , but only if it's not a hours/half-hours leave.
-
-        this.selectedLeaveType.consumes.hours += apply.totalHours;
-        // sum up consumes hours with the appled time.
-
-        if (this.selectedLeaveType.consumes.hours >= 8) {
-          // recalculate the consumes if the hours overflow.
-          this.selectedLeaveType.consumes.days++;
-          this.selectedLeaveType.consumes.hours -= 8;
-        }
-
-        const hoursLeft =
-          this.selectedLeaveType.totals.days * 8 +
-          this.selectedLeaveType.totals.hours -
-          this.selectedLeaveType.consumes.days * 8 -
-          this.selectedLeaveType.consumes.hours;
-        apply.remainings.days = Math.floor(hoursLeft / 8);
-        apply.remainings.hours = hoursLeft % 8;
-      } else {
-        // cannot leave in hours/half-hours.
-        this.selectedLeaveType.consumes.days += apply.dates.length;
-        // sum up consumes days with the length of chosen dates.
-
-        apply.remainings.days =
-          this.selectedLeaveType.totals.days -
-          this.selectedLeaveType.consumes.days;
-      }
-
-      this.records.push({
-        apply: { ...apply },
-        index: this.records.length,
-        ...this.selectedLeaveType
-      });
+      return leaveTypes;
     },
-    pickOneLeaveType(leaveType) {
-      this.$vuetify.goTo("#apply", {
-        duration: 500,
-        offset: 0,
-        easing: "easeInOutCubic"
-      });
-      this.selectedLeaveType = leaveType;
-    },
-    allowedDates(d) {
-      const date = new Date(d);
-      const annualPreRequest = this.leaveTypes.find(
-        lt => lt.name === "annualPreRequest"
-      );
-      const annual = this.leaveTypes.find(lt => lt.name === "annual");
-      if (
-        annual &&
-        annualPreRequest &&
-        this.selectedLeaveType.name === annualPreRequest.name
-      ) {
-        return new Date(annual.deadline) < date;
-      } else {
-        return true;
-      }
-    },
-    closeNotification() {
-      this.systemNotification.visible = false;
-      if (this.systemNotification.handler) {
-        this.systemNotification.handler(this.$router, this.$cookie);
-      }
-    },
-    removeOneLeave(target) {
-      debugger;
-      const record = this.records.find(r => r.index === target.index);
-      const dateType = this.leaveTypes.find(lt => lt.name === record.name);
-      if (record.apply.totalHours === 0) {
-        dateType.consumes.days -= record.apply.dates.length;
-      } else {
-        let consumeHours = dateType.consumes.days * 8 + dateType.consumes.hours;
-        consumeHours -= record.apply.totalHours;
-        dateType.consumes.days = Math.floor(consumeHours / 8);
-        dateType.consumes.hours = consumeHours % 8;
-      }
-      this.records = this.records.filter(r => r.index !== target.index);
-    },
-    async resetEmail() {
-      const {
-        data: { success, message }
-      } = await EmployeeService.updateEmail({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token"),
-        id: this.$route.params.id,
-        email: this.account.email
-      });
-
+    async resetEmail(success, message) {
       this.systemNotification = {
-        text: utility.lookUpCustomMessage(
-          message,
-          this.localeConf.self.message
-        ),
+        text: utility.lookUpCustomMessage(message),
         level: success ? "info" : "warning",
         visible: true,
-        handler: function($router, $cookie) {
+        handler: ($router, $cookie) => {
           if (success) {
             $router.push({ name: "List" });
           }
         }
       };
     },
-    async resetPWD() {
-      let {
-        data: { success, message }
-      } = await EmployeeService.updatePWD({
-        loginuser: this.$cookie.get("loginuser"),
-        token: this.$cookie.get("token"),
-        id: this.$route.params.id,
-        password: this.account.password
-      });
-
+    async resetPWD(success, message) {
       this.systemNotification = {
-        text: utility.lookUpCustomMessage(
-          message,
-          this.localeConf.self.message
-        ),
+        text: utility.lookUpCustomMessage(message),
         level: success ? "info" : "warning",
         visible: true,
-        handler: function($router, $cookie) {
+        handler: ($router, $cookie) => {
           if (success) {
             $cookie.delete("loginuser");
             $cookie.delete("token");

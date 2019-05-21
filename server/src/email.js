@@ -89,7 +89,7 @@ function formatEmployee(employee) {
 }
 
 function formatRecordTR(record) {
-    const dateTypes = {
+    const leaveTypes = {
         sick: {
             title: '普通傷病假',
             color: '#ffc107'
@@ -139,9 +139,9 @@ function formatRecordTR(record) {
             color: '#c32b7f'
         }
     }
-    const dateType = dateTypes[record.dateType];
+    const leaveType = leaveTypes[record.leaveType];
     return `<tr>
-    <td><span style="color:${dateType ? dateType.color : '#6d4c41'}">[${dateType ? dateType.title : dateType}]</span></td> 
+    <td><span style="color:${leaveType ? leaveType.color : '#6d4c41'}">[${leaveType ? leaveType.title : leaveType}]</span></td> 
     <td>${generateSummary(record.dates, record.startFrom, record.endTo)}</td>
     <td>(${generateConsumeSummary(record.dates, record.startFrom, record.endTo)})</td>`
         + (record.signings && record.signings.length > 0 ? `<td>${record.signings.map(signing => `${formatEmployee(signing)}${signing.pass ? ' <span style="color:lightgreen">已簽核</span>' : ' <span style="color:orangered">已退回</span>'}`).join(`<br/>`)}</td>` : '')

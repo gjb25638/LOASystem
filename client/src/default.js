@@ -1,4 +1,4 @@
-import localeConf from '@/localization/index'
+import locale from '@/localization/index'
 export default {
     compensatory: {
         keyword: '補休'
@@ -20,6 +20,7 @@ export default {
         default: false,
         icon: 'event',
         class: ['brown', 'darken-1', 'white--text'],
+        color: "#6D4C41",
         name: '',
         title: '',
         consumes: {
@@ -39,11 +40,12 @@ export default {
     leaveTypes: [
         {
             index: 0,
-            enabled: false,
+            enabled: true,
             icon: 'hotel',
             class: ['amber', 'white--text'],
+            color: "#FFC107",
             name: 'sick',
-            title: localeConf.shared.dateTypes.sick,
+            title: locale.shared.leaveTypes.sick,
             consumes: {
                 days: 0,
                 hours: 0,
@@ -64,8 +66,9 @@ export default {
             enabled: false,
             icon: 'local_hospital',
             class: ['deep-orange', 'white--text'],
+            color: "#FF5722",
             name: 'familyCare',
-            title: `${localeConf.shared.dateTypes.familyCare}(${localeConf.shared.dateTypes.personal})`,
+            title: `${locale.shared.leaveTypes.familyCare}(${locale.shared.leaveTypes.personal})`,
             consumes: {
                 days: 0,
                 hours: 0
@@ -83,11 +86,12 @@ export default {
         },
         {
             index: 2,
-            enabled: false,
+            enabled: true,
             icon: 'announcement',
             class: ['deep-orange', 'white--text'],
+            color: "#FF5722",
             name: 'personal',
-            title: localeConf.shared.dateTypes.personal,
+            title: locale.shared.leaveTypes.personal,
             consumes: {
                 days: 0,
                 hours: 0
@@ -108,8 +112,9 @@ export default {
             enabled: false,
             icon: 'local_airport',
             class: ['light-blue', 'white--text'],
+            color: "#03A9F4",
             name: 'annual',
-            title: localeConf.shared.dateTypes.annual,
+            title: locale.shared.leaveTypes.annual,
             consumes: {
                 days: 0,
                 hours: 0
@@ -130,8 +135,9 @@ export default {
             enabled: false,
             icon: 'favorite',
             class: ['pink', 'lighten-3', 'white--text'],
+            color: "#F48FB1",
             name: 'menstrual',
-            title: localeConf.shared.dateTypes.menstrual,
+            title: locale.shared.leaveTypes.menstrual,
             consumes: {
                 days: 0,
                 hours: 0
@@ -152,8 +158,9 @@ export default {
             enabled: false,
             icon: 'pregnant_woman',
             class: ['pink', 'lighten-3', 'white--text'],
+            color: "#F48FB1",
             name: 'preManternity',
-            title: localeConf.shared.dateTypes.preManternity,
+            title: locale.shared.leaveTypes.preManternity,
             consumes: {
                 days: 0,
                 hours: 0
@@ -174,8 +181,9 @@ export default {
             enabled: false,
             icon: 'airline_seat_flat_angled',
             class: ['pink', 'lighten-3', 'white--text'],
+            color: "#F48FB1",
             name: 'manternityMiscarriage',
-            title: localeConf.shared.dateTypes.manternityMiscarriage,
+            title: locale.shared.leaveTypes.manternityMiscarriage,
             consumes: {
                 days: 0,
                 hours: 0
@@ -196,8 +204,9 @@ export default {
             enabled: false,
             icon: 'people_outline',
             class: ['pink', 'lighten-3', 'white--text'],
+            color: "#F48FB1",
             name: 'accompanyingManternity',
-            title: localeConf.shared.dateTypes.accompanyingManternity,
+            title: locale.shared.leaveTypes.accompanyingManternity,
             consumes: {
                 days: 0,
                 hours: 0
@@ -218,8 +227,9 @@ export default {
             enabled: false,
             icon: 'wc',
             class: ['red', 'accent-3', 'white--text'],
+            color: "#FF1744",
             name: 'marriage',
-            title: localeConf.shared.dateTypes.marriage,
+            title: locale.shared.leaveTypes.marriage,
             consumes: {
                 days: 0,
                 hours: 0
@@ -240,8 +250,9 @@ export default {
             enabled: false,
             icon: 'hourglass_empty',
             class: ['blue-grey', 'white--text'],
+            color: "#607D8B",
             name: 'funeral',
-            title: localeConf.shared.dateTypes.funeral,
+            title: locale.shared.leaveTypes.funeral,
             consumes: {
                 days: 0,
                 hours: 0
@@ -261,9 +272,10 @@ export default {
             index: 10,
             enabled: false,
             icon: 'directions_run',
-            class: ['theme', 'white--text'],
+            class: ['purple', 'accent-2', 'white--text'],
+            color: "#E040FB",
             name: 'businessTrip',
-            title: localeConf.shared.dateTypes.businessTrip,
+            title: locale.shared.leaveTypes.businessTrip,
             consumes: {
                 days: 0,
                 hours: 0
@@ -284,8 +296,9 @@ export default {
             enabled: false,
             icon: 'local_airport',
             class: ['light-blue', 'lighten-4', 'white--text'],
+            color: "#B3E5FC",
             name: 'annualPreRequest',
-            title: localeConf.shared.dateTypes.annualPreRequest,
+            title: locale.shared.leaveTypes.annualPreRequest,
             consumes: {
                 days: 0,
                 hours: 0

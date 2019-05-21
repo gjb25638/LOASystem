@@ -1,6 +1,6 @@
 export default {
     en: {
-        dateTypes: {
+        leaveTypes: {
             sick: "sick leave",
             familyCare: "family care leave",
             personal: "personal leave",
@@ -21,14 +21,15 @@ export default {
         message: {
             already_signed_the_record: "You have Signed it Already",
             wrong_password: "Incorrect Password",
-            wrong_user_name: "There\"s no this Person"
+            wrong_user_name: "Incorrect Name",
+            restored_successfully: "Restored Successfully"
         },
         title: {
             systemNotification: "System Info: "
         }
     },
     zh: {
-        dateTypes: {
+        leaveTypes: {
             sick: "普通傷病假",
             familyCare: "家庭照顧假",
             personal: "事假",
@@ -48,11 +49,12 @@ export default {
         },
         message: {
             already_signed_the_record: "您已經簽核過了",
-            wrong_password: "密碼錯誤",
-            wrong_user_name: "沒這個人",
+            wrong_password: "密碼有錯",
+            wrong_user_name: "名稱有錯",
             token_validation_failed: "權證驗證失敗",
             password_updated_successfully: "密碼更新成功, 請重新登入",
-            employee_updated_successfully: "Email 更新成功"
+            employee_updated_successfully: "Email 更新成功",
+            restored_successfully: "還原成功"
         },
         title: {
             systemNotification: "系統通知: "

@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style lang="scss">
@@ -23,10 +23,10 @@ export default {
 }
 #app *:not(i) {
   font-size: 18px;
-  font-family: 'Courier New', Courier, monospace, 'Microsoft JhengHei';
+  font-family: "Courier New", Courier, monospace, "Microsoft JhengHei";
 }
 .v-text-field__details {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 .min-width-380 {
   min-width: 380px;
@@ -39,5 +39,34 @@ export default {
 }
 .min-width-100 {
   min-width: 100px;
+}
+.float-right {
+  float: right;
+}
+.flash {
+  -webkit-animation: flash ease-in 2s infinite;
+  animation: flash ease-in 2s infinite;
+}
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

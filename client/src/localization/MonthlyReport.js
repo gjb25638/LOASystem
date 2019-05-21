@@ -1,38 +1,18 @@
 export default {
     en: {
-        input: {
-            search: "Search"
-        },
-        label: {
-            showAll: "Show All"
-        },
-        toolbar: {
-            day: "Day",
-            month: "Month",
-            year: "Year"
-        },
-        th: {
-            employeeInfo: 'Employee Info',
-            dateGroupStat: 'Date Stat',
-            leaveTypeGroupStat: 'Leave Type Stat',
-        }
+        showResigners: "Show Resigners",
+        employeeInfo: 'Employee Info',
+        dateGroupStat: 'Date Stat',
+        leaveTypeGroupStat: 'Leave Type Stat',
+        day: "Day",
+        title: "Monthly Report"
     },
     zh: {
-        input: {
-            search: "檢索"
-        },
-        label: {
-            showAll: "顯示全部"
-        },
-        toolbar: {
-            day: "日",
-            month: "月",
-            year: "年"
-        },
-        th: {
-            employeeInfo: '員工資訊',
-            dateGroupStat: '每日統計',
-            leaveTypeGroupStat: '假別統計'
-        }
+        showResigners: "顯示離職人員",
+        employeeInfo: '員工資訊',
+        dateGroupStat: '每日統計',
+        leaveTypeGroupStat: '假別統計',
+        day: "日",
+        title: "月度報表"
     }
 }

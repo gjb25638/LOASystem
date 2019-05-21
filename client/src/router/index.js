@@ -8,6 +8,7 @@ import AnnualReport from '@/views/Report/AnnualReport'
 import CompensatoryList from '@/views/CompensatoryList'
 import Login from '@/views/Login'
 import LeaveTypeInfo from '@/views/LeaveTypeInfo'
+import Calendar from '@/views/Calendar'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/leavetype',
       name: 'LeaveTypeInfo',
       component: LeaveTypeInfo
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar
     }
   ]
 })

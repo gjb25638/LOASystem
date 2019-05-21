@@ -6,19 +6,24 @@
   "scripts": {
     "start": "npx nodemon src/app.js",
     "dev": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config test/unit/jest.conf.js --coverage",
+    "test:debug": "node --inspect-brk D:\\repos\\LOASystem\\server\\node_modules\\jest\\bin\\jest.js --runInBand --config test/unit/jest.conf.js --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "cryptr": "^4.0.2",
     "express": "^4.16.2",
-    "mongoose": "^5.0.2",
+    "mongoose": "^5.2.10",
     "morgan": "^1.9.0",
-    "nodemon": "^1.14.11",
-    "bcrypt": "^3.0.1",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^5.1.1",
+    "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }

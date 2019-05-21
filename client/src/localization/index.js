@@ -4,15 +4,12 @@ import Login from '@/localization/Login'
 import EmployeeAction from '@/localization/EmployeeAction'
 import Detail from '@/localization/Detail'
 import RecordList from '@/localization/RecordList'
-import MenuBar from '@/localization/MenuBar'
+import NavDrawer from '@/localization/NavDrawer'
 import shared from '@/localization/shared'
 import SigningBlock from '@/localization/SigningBlock'
 import SigningTooltip from '@/localization/SigningTooltip'
 import LeaveTypeRefreshedNotification from '@/localization/LeaveTypeRefreshedNotification'
 import LeaveTypeContainer from '@/localization/LeaveTypeContainer'
-import LeaveTypeRow from '@/localization/LeaveTypeRow'
-import LeaveTypeSelectedBlock from '@/localization/LeaveTypeSelectedBlock'
-import LeaveTypeBlock from '@/localization/LeaveTypeBlock'
 import LeaveTypeTooltip from '@/localization/LeaveTypeTooltip'
 import SystemNotification from '@/localization/SystemNotification'
 import CompensatoryList from '@/localization/CompensatoryList'
@@ -24,6 +21,10 @@ import LeaveForm from '@/localization/LeaveForm'
 import LeaveContainer from '@/localization/LeaveContainer'
 import LeaveTypeInfo from '@/localization/LeaveTypeInfo'
 import MonthlyReport from '@/localization/MonthlyReport';
+import EmployeeInfo from '@/localization/EmployeeInfo';
+import Calendar from '@/localization/Calendar';
+import LeaveTakingBlock from '@/localization/LeaveTakingBlock';
+import LeaveDetailInfo from '@/localization/LeaveDetailInfo';
 
 export default {
   en: {
@@ -33,17 +34,14 @@ export default {
     Login: Login.en,
     Detail: Detail.en,
     RecordList: RecordList.en,
-    MenuBar: MenuBar.en,
+    NavDrawer: NavDrawer.en,
     shared: shared.en,
     SigningBlock: SigningBlock.en,
     SigningTooltip: SigningTooltip.en,
     LeaveTypeRefreshedNotification: LeaveTypeRefreshedNotification.en,
     SystemNotification: SystemNotification.en,
     CompensatoryList: CompensatoryList.en,
-    LeaveTypeBlock: LeaveTypeBlock.en,
     LeaveTypeContainer: LeaveTypeContainer.en,
-    LeaveTypeRow: LeaveTypeRow.en,
-    LeaveTypeSelectedBlock: LeaveTypeSelectedBlock.en,
     LeaveTypeTooltip: LeaveTypeTooltip.en,
     AnnualReport: AnnualReport.en,
     EmployeeProfile: EmployeeProfile.en,
@@ -53,6 +51,10 @@ export default {
     LeaveContainer: LeaveContainer.en,
     LeaveTypeInfo: LeaveTypeInfo.zh,
     MonthlyReport: MonthlyReport.en,
+    EmployeeInfo: EmployeeInfo.en,
+    Calendar: Calendar.en,
+    LeaveTakingBlock: LeaveTakingBlock.en,
+    LeaveDetailInfo: LeaveDetailInfo.en,
   },
   zh: {
     Report: Report.zh,
@@ -61,17 +63,14 @@ export default {
     Login: Login.zh,
     Detail: Detail.zh,
     RecordList: RecordList.zh,
-    MenuBar: MenuBar.zh,
+    NavDrawer: NavDrawer.zh,
     shared: shared.zh,
     SigningBlock: SigningBlock.zh,
     SigningTooltip: SigningTooltip.zh,
     LeaveTypeRefreshedNotification: LeaveTypeRefreshedNotification.zh,
     SystemNotification: SystemNotification.zh,
     CompensatoryList: CompensatoryList.zh,
-    LeaveTypeBlock: LeaveTypeBlock.zh,
     LeaveTypeContainer: LeaveTypeContainer.zh,
-    LeaveTypeRow: LeaveTypeRow.zh,
-    LeaveTypeSelectedBlock: LeaveTypeSelectedBlock.zh,
     LeaveTypeTooltip: LeaveTypeTooltip.zh,
     AnnualReport: AnnualReport.zh,
     EmployeeProfile: EmployeeProfile.zh,
@@ -81,6 +80,10 @@ export default {
     LeaveContainer: LeaveContainer.zh,
     LeaveTypeInfo: LeaveTypeInfo.zh,
     MonthlyReport: MonthlyReport.zh,
+    EmployeeInfo: EmployeeInfo.zh,
+    Calendar: Calendar.zh,
+    LeaveTakingBlock: LeaveTakingBlock.zh,
+    LeaveDetailInfo: LeaveDetailInfo.zh,
   }
 }["zh"]
 //[navigator ? navigator.language.substr(0, 2) : "zh"]

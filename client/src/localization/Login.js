@@ -1,40 +1,20 @@
 export default {
     en: {
-        toolbar: {
-            title: "LOA System"
-        },
-        input: {
-            username: "English Name (case-insensitive)",
-            password: "Password",
-            validation: {
-                noEmpty: "Not Allow Empty",
-                notAEnglishName: "This is not a name"
-            }
-        },
-        btn: {
-            login: "login"
-        },
-        tooltip: {
-            title: "Leave of Absence System"
-        }
+        title: "LOA System",
+        username: "English Name (case-insensitive)",
+        password: "Password",
+        login: "LOGIN",
+        tooltip: "Leave of Absence System",
+        noempty: "No Empty Allowed",
+        notengname: "Not A English Name"
     },
     zh: {
-        toolbar: {
-            title: "請假系統"
-        },
-        input: {
-            username: "英文名(不需分大小寫)",
-            password: "密碼",
-            validation: {
-                noEmpty: "不可空白",
-                notAEnglishName: "這不是英文名"
-            }
-        },
-        btn: {
-            login: "登入"
-        },
-        tooltip: {
-            title: "請假系統"
-        }
+        title: "請假系統",
+        username: "英文名(不需分大小寫)",
+        password: "密碼",
+        login: "登入",
+        tooltip: "Leave of Absence System",
+        noempty: "不可空白",
+        notengname: "這不是英文名"
     }
 }
