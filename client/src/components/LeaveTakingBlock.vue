@@ -123,7 +123,7 @@ export default {
           endTo: record.apply.endTo,
           leaveType: record.name,
           dates: record.apply.dates.map(date => new Date(date)),
-          agent: record.apply.agent,
+          remarks: record.apply.remarks,
           signings: [],
           totals: {
             days: record.apply.totalHours === 0 ? record.apply.dates.length : 0,

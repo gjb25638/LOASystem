@@ -13,10 +13,10 @@ module.exports = {
     transformToAnnualInfo
 }
 
-function produce({ loginuser, employees, year, month, groupby }) {
+function produce({ loginuser, employees, year, month, groupby, sdehsra }) {
     return {
         fullControl: c.predicate.isAdministrator(loginuser),
-        report: month ? produceMonthly({ loginuser, employees, year, month, groupby }) : produceAnnual({ loginuser, employees, year, groupby })
+        report: month ? produceMonthly({ loginuser, employees, year, month, groupby, sdehsra }) : produceAnnual({ loginuser, employees, year, groupby })
     }
 }
 
@@ -49,9 +49,9 @@ function produceAnnual({ loginuser, employees, year, groupby }) {
         })
 }
 
-function produceMonthly({ loginuser, employees, year, month, groupby }) {
+function produceMonthly({ loginuser, employees, year, month, groupby, sdehsra }) {
     return employees
-        .filter(employee => c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee))
+        .filter(employee => c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee, true, sdehsra))
         .map(employee => {
             const bascInfo = getBasicInfo(employee)
             if (groupby) {

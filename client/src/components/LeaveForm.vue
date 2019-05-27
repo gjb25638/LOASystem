@@ -101,8 +101,8 @@
             <v-flex xs12>
               <v-text-field
                 :disabled="!leaveType.title"
-                :label="loalocale.self.agent"
-                v-model="apply.agent"
+                :label="loalocale.self.remarks"
+                v-model="apply.remarks"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -151,7 +151,7 @@ export default {
       endTo: null,
       dates: [],
       totalHours: 0,
-      agent: "",
+      remarks: "",
       remainings: {
         days: 0,
         hours: 0
@@ -198,7 +198,7 @@ export default {
         endTo: null,
         dates: [],
         totalHours: 0,
-        agent: "",
+        remarks: "",
         remainings: {
           days: 0,
           hours: 0

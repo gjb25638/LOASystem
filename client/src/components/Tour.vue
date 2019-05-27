@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-btn small dark fab bottom left color="grey" icon @click="tour">
-      <v-icon>info</v-icon>
+    <v-btn bottom right icon @click="tour">
+      <v-icon color="blue-grey">info</v-icon>
     </v-btn>
-    <v-tour name="tour" :steps="steps" :options="options" color="grey"></v-tour>
+    <v-tour name="tour" :steps="steps" :options="options"></v-tour>
   </div>
 </template>
 <script>

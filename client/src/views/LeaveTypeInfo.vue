@@ -58,7 +58,7 @@
     <v-card>
       <v-layout>
         <v-flex xs12>
-          <v-card-title class="memo" v-for="info in loalocale.self.otherInfos" :key="info">{{info}}</v-card-title>
+          <v-card-title class="remarks" v-for="info in loalocale.self.otherInfos" :key="info">{{info}}</v-card-title>
         </v-flex>
       </v-layout>
     </v-card>
@@ -104,7 +104,7 @@ export default {
 .float-left {
   float: left;
 }
-.memo {
+.remarks {
   color: #cddc39;
 }
 .highlight {

@@ -11,6 +11,7 @@
         @next="$refs.calendar.next()"
         @tolastest="(date) => calendarDate = formatDate(date)"
       >
+        <tour :steps="steps"></tour>
         <v-switch
           class="switch-1"
           v-if="!notASigner"
@@ -20,9 +21,19 @@
         <v-switch
           class="switch-2"
           v-if="!notASigner"
+          :disabled="showOnlyYours"
           :label="loalocale.self.showOnlyUsername"
           v-model="showOnlyUsername"
         ></v-switch>
+        <v-select
+          v-if="!notASigner"
+          :disabled="showOnlyYours"
+          v-model="selectedDept"
+          :items="deptOptions"
+          item-text="text"
+          item-value="value"
+          :label="loalocale.self.dept"
+        ></v-select>
       </calendar-controller>
       <v-card-text>
         <v-sheet>
@@ -82,7 +93,6 @@
     <system-notification v-model="systemNotification" @close="systemNotification.visible = false">
       <div>{{systemNotification.text}}</div>
     </system-notification>
-    <tour :steps="steps"></tour>
   </page-container>
 </template>
 <script>
@@ -97,6 +107,7 @@ import Tour from "@/components/Tour";
 import EmployeeService from "@/services/EmployeeService";
 import utility from "@/utility";
 import colors from "@/colors";
+import defaultConf from "@/default";
 export default {
   name: "Calendar",
   components: {
@@ -109,27 +120,31 @@ export default {
     "leave-detail-info": LeaveDetailInfo,
     tour: Tour
   },
-  data: () => ({
-    calendarDate: utility.formatDate("now"),
-    leaves: [],
-    year: "",
-    month: "",
-    dialog: false,
-    showOnlyYours: true,
-    showOnlyUsername: false,
-    notASigner: false,
-    report: [],
-    leaveTypes: [],
-    systemNotification: {
-      level: "warning",
-      text: "",
-      visible: false,
-      handler: () => {}
-    },
-    selectedDate: "",
-    loading: false,
-    steps: []
-  }),
+  data() {
+    return {
+      calendarDate: utility.formatDate("now"),
+      leaves: [],
+      year: "",
+      month: "",
+      dialog: false,
+      showOnlyYours: true,
+      showOnlyUsername: false,
+      notASigner: false,
+      report: [],
+      leaveTypes: [],
+      systemNotification: {
+        level: "warning",
+        text: "",
+        visible: false,
+        handler: () => {}
+      },
+      selectedDate: "",
+      loading: false,
+      steps: [],
+      deptOptions: [],
+      selectedDept: ""
+    };
+  },
   computed: {
     leaveGroups() {
       const map = {};
@@ -140,6 +155,11 @@ export default {
   async mounted() {
     this.getRecords();
     this.getLeaveTypes();
+    this.deptOptions = [
+      { text: this.loalocale.self.allDept, value: "" },
+      ...defaultConf.deptOptions.map(dept => ({ text: dept, value: dept }))
+    ];
+    this.selectedDept = this.loginuser.dept ? this.loginuser.dept : "";
   },
   methods: {
     async getLeaveTypes() {
@@ -168,7 +188,10 @@ export default {
         year: this.year,
         month: this.month,
         loginuser: this.loginuser.username,
-        token: this.loginuser.token
+        token: this.loginuser.token,
+        sdehsra: defaultConf.deptsThatSameDeptEmployeeHavingSameReadAccess.includes(
+          this.loginuser.dept
+        )
       });
       this.loading = false;
       this.report = report;
@@ -214,6 +237,9 @@ export default {
         .filter(
           employee =>
             !this.showOnlyYours || employee.username === this.loginuser.username
+        )
+        .filter(
+          employee => !this.selectedDept || employee.dept === this.selectedDept
         )
         .forEach((employee, index) => {
           employee.records.forEach(record => {
@@ -266,8 +292,13 @@ export default {
     },
     showOnlyYours() {
       this.leaves = this.toLeaves(this.report);
+      this.showOnlyUsername = false;
+      this.selectedDept = this.loginuser.dept;
     },
     showOnlyUsername() {
+      this.leaves = this.toLeaves(this.report);
+    },
+    selectedDept() {
       this.leaves = this.toLeaves(this.report);
     }
   }

@@ -4,7 +4,7 @@ export default {
         from: "From",
         to: "To",
         totals: "Totals",
-        agent: "Agent",
+        remarks: "Remarks",
         hour: "hours",
         take: "Take"
     },
@@ -13,7 +13,7 @@ export default {
         from: "從",
         to: "到",
         totals: "總共",
-        agent: "代理人",
+        remarks: "備註",
         hour: "小時",
         take: "請假"
     }

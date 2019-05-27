@@ -13,6 +13,12 @@ module.exports = {
         get: (req, res) => monthly({ req, res }),
         groupby: {
             get: (req, res) => monthly({ req, res, groupby: true })
+        },
+        /**
+         * sdehsra === same dept employees have same read access
+         */
+        sdehsra: {
+            get: (req, res) => monthly({ req, res, sdehsra: true })
         }
     }
 }
@@ -34,7 +40,7 @@ function annual({ req, res, groupby }) {
     })
 }
 
-function monthly({ req, res, groupby }) {
+function monthly({ req, res, groupby, sdehsra }) {
     Employee.findOne(c.conditions.validLoginuser(req.params.loginuser, req.params.token), (err, loginuser) => {
         if (err) {
             res.send({ success: false, message: err })
@@ -45,7 +51,7 @@ function monthly({ req, res, groupby }) {
                 } else {
                     const year = parseInt(req.params.year)
                     const month = parseInt(req.params.month)
-                    res.send(r.produce({ loginuser, employees, year, month, groupby }))
+                    res.send(r.produce({ loginuser, employees, year, month, groupby, sdehsra }))
                 }
             })
         } else {

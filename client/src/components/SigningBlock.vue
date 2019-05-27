@@ -73,7 +73,13 @@ export default {
   data: () => ({}),
   computed: {
     needToSign() {
-      return !this.record.pass && !this.sameAsCurrentUser;
+      return (
+        !this.record.pass &&
+        !this.sameAsCurrentUser &&
+        this.record.signers.some(
+          signer => signer.username === this.loginuser.username
+        )
+      );
     },
     sameAsCurrentUser() {
       return (

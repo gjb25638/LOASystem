@@ -2,13 +2,13 @@ export default {
     en: {
         applied: "Applied",
         taken: "Taken",
-        agent: "Agent",
+        remarks: "Remarks",
         defaultAgent: "None"
     },
     zh: {
         applied: "申請時間",
         taken: "請假時間",
-        agent: "代理人",
+        remarks: "備註",
         defaultAgent: "無"
     }
 }

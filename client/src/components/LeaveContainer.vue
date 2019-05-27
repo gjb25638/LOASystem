@@ -13,7 +13,7 @@
             >{{getTitle(item.apply.dates, item.apply.startFrom, item.apply.endTo, item.apply.totalHours)}}</v-list-tile-sub-title>
             {{getTitle(item.apply.dates, item.apply.startFrom, item.apply.endTo, item.apply.totalHours)}}
           </v-tooltip>
-          <v-list-tile-sub-title v-if="item.apply.agent">{{getAgent(item.apply.agent)}}</v-list-tile-sub-title>
+          <v-list-tile-sub-title v-if="item.apply.remarks">{{getAgent(item.apply.remarks)}}</v-list-tile-sub-title>
         </v-list-tile-content>
         <v-list-tile-avatar v-if="!readonly || item.countdown">
           <v-tooltip bottom>
@@ -63,8 +63,8 @@ export default {
         }
       }
     },
-    getAgent(agent) {
-      return agent ? `${this.loalocale.self.agent}: ${agent}` : "";
+    getAgent(remarks) {
+      return remarks ? `${this.loalocale.self.remarks}: ${remarks}` : "";
     },
     remove(target) {
       this.$emit("remove", target);

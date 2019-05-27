@@ -1,13 +1,13 @@
 export default {
     en: {
-        agent: "Agent",
+        remarks: "Remarks",
         remainings: "Remainings",
         deadline: "Deadline",
         days: "Days",
         hours: "Hours"
     },
     zh: {
-        agent: "代理人",
+        remarks: "備註",
         remainings: "剩餘",
         deadline: "到期日",
         days: "天",

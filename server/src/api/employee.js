@@ -333,7 +333,7 @@ function updateRecord(employee, { activatedLeaveTypes, records }) {
             dates: record.dates,
             startFrom: record.startFrom,
             endTo: record.endTo,
-            agent: record.agent,
+            remarks: record.remarks,
             totals: record.totals,
             signers: employee.signers
         }

@@ -136,7 +136,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -193,7 +193,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -248,7 +248,7 @@
                 "leaveType": "personal",
                 "startFrom": "17:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -303,7 +303,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -358,7 +358,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -413,7 +413,7 @@
                 "leaveType": "personal",
                 "startFrom": "16:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -468,7 +468,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -523,7 +523,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -578,7 +578,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -633,7 +633,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "10:00",
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a7539bec001d6276ff",
@@ -858,7 +858,7 @@
                 "leaveType": "personal",
                 "startFrom": "07:00",
                 "endTo": "08:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -913,7 +913,7 @@
                 "leaveType": "補休-6/18",
                 "startFrom": "22:30",
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -968,7 +968,7 @@
                 "leaveType": "補休-9/24",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1023,7 +1023,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1078,7 +1078,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1133,7 +1133,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1192,7 +1192,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1250,7 +1250,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1305,7 +1305,7 @@
                 "leaveType": "補休-2/28",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a7539bec001d627703",
@@ -1530,7 +1530,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -1597,7 +1597,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -1652,7 +1652,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -1707,7 +1707,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -1762,7 +1762,7 @@
                 "leaveType": "sick",
                 "startFrom": "15:00",
                 "endTo": "16:00",
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -1817,7 +1817,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -1882,7 +1882,7 @@
                 "leaveType": "補休-2/7",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -1937,7 +1937,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -1992,7 +1992,7 @@
                 "leaveType": "sick",
                 "startFrom": "15:00",
                 "endTo": "16:00",
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -2057,7 +2057,7 @@
                 "leaveType": "補休-2/7",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -2112,7 +2112,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -2167,7 +2167,7 @@
                 "leaveType": "補休-2/7",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -2222,7 +2222,7 @@
                 "leaveType": "補休-2/28",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -2277,7 +2277,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -2332,7 +2332,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -2397,7 +2397,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -2452,7 +2452,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -2507,7 +2507,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -2562,7 +2562,7 @@
                 "leaveType": "補休-4/5",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Bin"
+                "remarks": "Bin"
             },
             {
                 "dates": [
@@ -2617,7 +2617,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -2662,7 +2662,7 @@
                 "leaveType": "補休-5/1",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             }
         ],
         "_id": "5bd810a8539bec001d627707",
@@ -2829,7 +2829,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -2884,7 +2884,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -2939,7 +2939,7 @@
                 "leaveType": "personal",
                 "startFrom": "17:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -2994,7 +2994,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3049,7 +3049,7 @@
                 "leaveType": "personal",
                 "startFrom": "16:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3104,7 +3104,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3159,7 +3159,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3216,7 +3216,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3272,7 +3272,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3327,7 +3327,7 @@
                 "leaveType": "sick",
                 "startFrom": "13:30",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3382,7 +3382,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d62770c",
@@ -3673,7 +3673,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -3713,7 +3713,7 @@
                 "leaveType": "funeral",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Kenny Ho"
+                "remarks": "Kenny Ho"
             },
             {
                 "dates": [
@@ -3750,7 +3750,7 @@
                 "leaveType": "補休-9/24",
                 "startFrom": "09:30",
                 "endTo": "18:30",
-                "agent": "Kenny"
+                "remarks": "Kenny"
             },
             {
                 "dates": [
@@ -3787,7 +3787,7 @@
                 "leaveType": "補休-10/10",
                 "startFrom": "09:30",
                 "endTo": "18:30",
-                "agent": "Kenny"
+                "remarks": "Kenny"
             },
             {
                 "dates": [
@@ -3824,7 +3824,7 @@
                 "leaveType": "補休-9/24",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Kenny"
+                "remarks": "Kenny"
             },
             {
                 "dates": [
@@ -3861,7 +3861,7 @@
                 "leaveType": "補休-10/10",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Kenny"
+                "remarks": "Kenny"
             }
         ],
         "_id": "5bd810a8539bec001d627711",
@@ -4077,7 +4077,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4095,7 +4095,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4113,7 +4113,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4130,7 +4130,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4147,7 +4147,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "12:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4165,7 +4165,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4183,7 +4183,7 @@
                 "leaveType": "funeral",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d627715",
@@ -4339,7 +4339,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4380,7 +4380,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4419,7 +4419,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4456,7 +4456,7 @@
                 "leaveType": "personal",
                 "startFrom": "13:30",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4493,7 +4493,7 @@
                 "leaveType": "personal",
                 "startFrom": "",
                 "endTo": "",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4531,7 +4531,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4568,7 +4568,7 @@
                 "leaveType": "sick",
                 "startFrom": "13:30",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4605,7 +4605,7 @@
                 "leaveType": "personal",
                 "startFrom": "16:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4642,7 +4642,7 @@
                 "leaveType": "personal",
                 "startFrom": "17:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4679,7 +4679,7 @@
                 "leaveType": "familyCare",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4716,7 +4716,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4753,7 +4753,7 @@
                 "leaveType": "補休-3/23",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4790,7 +4790,7 @@
                 "leaveType": "personal",
                 "startFrom": "13:30",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4827,7 +4827,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "10:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4864,7 +4864,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -4901,7 +4901,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "12:30",
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d62771a",
@@ -5098,7 +5098,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -5157,7 +5157,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -5212,7 +5212,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -5267,7 +5267,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -5323,7 +5323,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -5378,7 +5378,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -5433,7 +5433,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Vivian"
+                "remarks": "Vivian"
             },
             {
                 "dates": [
@@ -5488,7 +5488,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5533,7 +5533,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5598,7 +5598,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5653,7 +5653,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5708,7 +5708,7 @@
                 "leaveType": "補休-2/4",
                 "startFrom": "13:00",
                 "endTo": "22:00",
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5763,7 +5763,7 @@
                 "leaveType": "補休-2/6",
                 "startFrom": "13:00",
                 "endTo": "22:00",
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5818,7 +5818,7 @@
                 "leaveType": "補休-2/4",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5873,7 +5873,7 @@
                 "leaveType": "補休-2/6",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "姿姿"
+                "remarks": "姿姿"
             },
             {
                 "dates": [
@@ -5928,7 +5928,7 @@
                 "leaveType": "補休-4/4",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "vivian"
+                "remarks": "vivian"
             },
             {
                 "dates": [
@@ -5983,7 +5983,7 @@
                 "leaveType": "補休-4/4",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "VIVIAN"
+                "remarks": "VIVIAN"
             }
         ],
         "_id": "5bd810a8539bec001d62771e",
@@ -6133,7 +6133,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -6188,7 +6188,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d627722",
@@ -6459,7 +6459,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -6514,7 +6514,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "陳姿伶"
+                "remarks": "陳姿伶"
             },
             {
                 "dates": [
@@ -6579,7 +6579,7 @@
                 "leaveType": "補休-11/1",
                 "startFrom": "13:30",
                 "endTo": "16:00",
-                "agent": "美宣"
+                "remarks": "美宣"
             },
             {
                 "dates": [
@@ -6644,7 +6644,7 @@
                 "leaveType": "補休-11/1",
                 "startFrom": "09:00",
                 "endTo": "12:30",
-                "agent": "美宣"
+                "remarks": "美宣"
             },
             {
                 "dates": [
@@ -6699,7 +6699,7 @@
                 "leaveType": "補休-11/1",
                 "startFrom": "09:00",
                 "endTo": "12:00",
-                "agent": "廖國濱"
+                "remarks": "廖國濱"
             },
             {
                 "dates": [
@@ -6754,7 +6754,7 @@
                 "leaveType": "補休-11/1",
                 "startFrom": "13:00",
                 "endTo": "16:00",
-                "agent": "廖國濱"
+                "remarks": "廖國濱"
             },
             {
                 "dates": [
@@ -6809,7 +6809,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "陳姿伶"
+                "remarks": "陳姿伶"
             },
             {
                 "dates": [
@@ -6874,7 +6874,7 @@
                 "leaveType": "補休-2/4",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "阿濱"
+                "remarks": "阿濱"
             },
             {
                 "dates": [
@@ -6939,7 +6939,7 @@
                 "leaveType": "補休-2/5",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "陳姿伶"
+                "remarks": "陳姿伶"
             },
             {
                 "dates": [
@@ -6994,7 +6994,7 @@
                 "leaveType": "補休-2/6",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "Olivia"
+                "remarks": "Olivia"
             },
             {
                 "dates": [
@@ -7049,7 +7049,7 @@
                 "leaveType": "補休-2/7",
                 "startFrom": "07:00",
                 "endTo": "16:00",
-                "agent": "Olivia"
+                "remarks": "Olivia"
             },
             {
                 "dates": [
@@ -7104,7 +7104,7 @@
                 "leaveType": "補休-2/4",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿濱"
+                "remarks": "阿濱"
             },
             {
                 "dates": [
@@ -7159,7 +7159,7 @@
                 "leaveType": "補休-2/5",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "vivi"
+                "remarks": "vivi"
             },
             {
                 "dates": [
@@ -7214,7 +7214,7 @@
                 "leaveType": "補休-2/6",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Olivia"
+                "remarks": "Olivia"
             },
             {
                 "dates": [
@@ -7269,7 +7269,7 @@
                 "leaveType": "補休-2/7",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Olivia"
+                "remarks": "Olivia"
             },
             {
                 "dates": [
@@ -7324,7 +7324,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "vivi"
+                "remarks": "vivi"
             },
             {
                 "dates": [
@@ -7379,7 +7379,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿bin"
+                "remarks": "阿bin"
             },
             {
                 "dates": [
@@ -7434,7 +7434,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿bin"
+                "remarks": "阿bin"
             },
             {
                 "dates": [
@@ -7489,7 +7489,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "vivi"
+                "remarks": "vivi"
             },
             {
                 "dates": [
@@ -7544,7 +7544,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "vivi"
+                "remarks": "vivi"
             },
             {
                 "dates": [
@@ -7599,7 +7599,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿美"
+                "remarks": "阿美"
             },
             {
                 "dates": [
@@ -7654,7 +7654,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿賓"
+                "remarks": "阿賓"
             },
             {
                 "dates": [
@@ -7709,7 +7709,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "阿賓"
+                "remarks": "阿賓"
             },
             {
                 "dates": [
@@ -7764,7 +7764,7 @@
                 "leaveType": "補休-5/1",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "rock"
+                "remarks": "rock"
             }
         ],
         "_id": "5bd810a8539bec001d627726",
@@ -7965,7 +7965,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8003,7 +8003,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8050,7 +8050,7 @@
                 "leaveType": "personal",
                 "startFrom": "13:00",
                 "endTo": "22:00",
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -8087,7 +8087,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "Rock"
+                "remarks": "Rock"
             },
             {
                 "dates": [
@@ -8124,7 +8124,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8161,7 +8161,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8198,7 +8198,7 @@
                 "leaveType": "sick",
                 "startFrom": "17:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8235,7 +8235,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8272,7 +8272,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8309,7 +8309,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8346,7 +8346,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8383,7 +8383,7 @@
                 "leaveType": "補休-2/5",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8420,7 +8420,7 @@
                 "leaveType": "補休-2/28",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8457,7 +8457,7 @@
                 "leaveType": "補休-4/4",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8494,7 +8494,7 @@
                 "leaveType": "補休-4/5",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8531,7 +8531,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8568,7 +8568,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8605,7 +8605,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8643,7 +8643,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d62772a",
@@ -8795,7 +8795,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8852,7 +8852,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8927,7 +8927,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -8982,7 +8982,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9037,7 +9037,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9102,7 +9102,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9157,7 +9157,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9212,7 +9212,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9267,7 +9267,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9322,7 +9322,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "10:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9377,7 +9377,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9432,7 +9432,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9487,7 +9487,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a8539bec001d62772f",
@@ -9639,7 +9639,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9698,7 +9698,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9753,7 +9753,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9808,7 +9808,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9863,7 +9863,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9908,7 +9908,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:00",
                 "endTo": "12:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -9963,7 +9963,7 @@
                 "leaveType": "sick",
                 "startFrom": "13:30",
                 "endTo": "14:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10018,7 +10018,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:00",
                 "endTo": "12:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10073,7 +10073,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10128,7 +10128,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10183,7 +10183,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10238,7 +10238,7 @@
                 "leaveType": "personal",
                 "startFrom": "13:30",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10303,7 +10303,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10358,7 +10358,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:00",
                 "endTo": "10:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10413,7 +10413,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10468,7 +10468,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10523,7 +10523,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10578,7 +10578,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5bd810a9539bec001d627733",
@@ -10745,7 +10745,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10800,7 +10800,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -10859,7 +10859,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": "jimmy"
+                "remarks": "jimmy"
             }
         ],
         "_id": "5bd810a9539bec001d627737",
@@ -11029,7 +11029,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11068,7 +11068,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11105,7 +11105,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "10:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11144,7 +11144,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11181,7 +11181,7 @@
                 "leaveType": "補休-11/17",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11220,7 +11220,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11268,7 +11268,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11306,7 +11306,7 @@
                 "leaveType": "personal",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11343,7 +11343,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11380,7 +11380,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11421,7 +11421,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11458,7 +11458,7 @@
                 "leaveType": "annual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11495,7 +11495,7 @@
                 "leaveType": "補休-3/23",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11532,7 +11532,7 @@
                 "leaveType": "menstrual",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11569,7 +11569,7 @@
                 "leaveType": "sick",
                 "startFrom": "15:00",
                 "endTo": "18:00",
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5c0a38647bd93b001c8c0232",
@@ -11749,7 +11749,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11804,7 +11804,7 @@
                 "leaveType": "personal",
                 "startFrom": "09:30",
                 "endTo": "13:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11869,7 +11869,7 @@
                 "leaveType": "sick",
                 "startFrom": "09:30",
                 "endTo": "18:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11934,7 +11934,7 @@
                 "leaveType": "補休-2/28",
                 "startFrom": "09:30",
                 "endTo": "18:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -11989,7 +11989,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12044,7 +12044,7 @@
                 "leaveType": "補休-2/28",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12099,7 +12099,7 @@
                 "leaveType": "personal",
                 "startFrom": "07:00",
                 "endTo": "07:30",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12154,7 +12154,7 @@
                 "leaveType": "personal",
                 "startFrom": "06:30",
                 "endTo": "09:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12209,7 +12209,7 @@
                 "leaveType": "personal",
                 "startFrom": "15:00",
                 "endTo": "17:00",
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12274,7 +12274,7 @@
                 "leaveType": "sick",
                 "startFrom": null,
                 "endTo": null,
-                "agent": ""
+                "remarks": ""
             },
             {
                 "dates": [
@@ -12308,7 +12308,7 @@
                 "leaveType": "personal",
                 "startFrom": "14:30",
                 "endTo": "15:30",
-                "agent": ""
+                "remarks": ""
             }
         ],
         "_id": "5c17225dbfcfce002c57536d",

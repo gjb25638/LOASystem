@@ -17,7 +17,7 @@
           {{loalocale.self.taken}} {{taken}}
           <span v-if="!allDay">{{timeRange}}</span>
         </div>
-        <div>{{loalocale.self.agent}} {{agent ? agent : loalocale.self.defaultAgent}}</div>
+        <div>{{loalocale.self.remarks}} {{remarks ? remarks : loalocale.self.defaultAgent}}</div>
       </div>
     </v-card-title>
     <v-card-actions v-if="signable">
@@ -62,8 +62,8 @@ export default {
     applied() {
       return utility.formatDate(this.record.appliedDate);
     },
-    agent() {
-      return this.record.agent;
+    remarks() {
+      return this.record.remarks;
     },
     timeRange() {
       return `${this.record.startFrom}-${this.record.endTo}`;

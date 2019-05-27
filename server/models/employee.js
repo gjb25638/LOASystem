@@ -34,7 +34,7 @@ var EmployeeSchema = new Schema({
     dates: [Date],
     startFrom: String,
     endTo: String,
-    agent: String,
+    remarks: String,
     totals: {
       days: Number,
       halfHours: Number

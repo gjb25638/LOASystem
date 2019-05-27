@@ -43,8 +43,9 @@ module.exports = {
          * 2. `employee` => control self
          * 3. `included in the signers of employee` => control the employees who needs `loginuser` to sign
          */
-        isEmployeeUnderLoginuserControl: (loginuser, employee, self = true) => {
+        isEmployeeUnderLoginuserControl: (loginuser, employee, self = true, sdehsra = false) => {
             return loginuser.level === 'admin' ||
+                (sdehsra && loginuser.dept === employee.dept) ||
                 (self && loginuser._id.toString() === employee._id.toString()) ||
                 employee.signers.some(signer => signer.id === loginuser._id.toString())
         },

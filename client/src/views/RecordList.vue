@@ -45,7 +45,7 @@
                 <leave-type-tooltip :info="props.item.activatedLeaveTypes"></leave-type-tooltip>
               </v-tooltip>
             </td>
-            <td class="min-width-100">{{ props.item.agent }}</td>
+            <td class="min-width-100">{{ props.item.remarks }}</td>
             <td>
               <div v-for="signing in props.item.signings" :key="signing._id">
                 <v-tooltip bottom>
@@ -163,8 +163,8 @@ export default {
         sortable: false
       },
       {
-        text: this.loalocale.self.agent,
-        value: "agent",
+        text: this.loalocale.self.remarks,
+        value: "remarks",
         sortable: false
       },
       {

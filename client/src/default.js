@@ -13,6 +13,7 @@ export default {
         }
     },
     deptOptions: ['行政部(A)', '管理部(A)', '客服部(C)', '資訊部(I)', '技術支援(S)', '業務部(B)'],
+    deptsThatSameDeptEmployeeHavingSameReadAccess: ['客服部(C)'],
     levelOptions: ['admin', 'manager', 'normal'],
     customLeaveType: {
         index: 0,

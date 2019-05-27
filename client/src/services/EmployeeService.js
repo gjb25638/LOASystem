@@ -24,7 +24,7 @@ export default {
     return Api().get(url);
   },
   getMonthly(params) {
-    const url = `monthly/${params.year}/${params.month}/${
+    const url = `monthly/${params.sdehsra ? "sdehsra/" : ""}${params.year}/${params.month}/${
       params.loginuser
       }/${encodeURIComponent(params.token)}`;
     devlog(`${config.API_URL}/${url}`)
