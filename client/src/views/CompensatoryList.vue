@@ -1,7 +1,7 @@
 <template>
   <page-container
     :title="loalocale.self.title"
-    icon="event_note"
+    icon="event_available"
     @notified="(notification) => systemNotification = notification"
   >
     <v-card class="elevation-12">

@@ -45,12 +45,10 @@
 </template>
 
 <script>
-import AnimatedCircular from "@/components/AnimatedCircular";
 import LeaveTypeRow from "@/components/LeaveTypeRow";
 export default {
   name: "LeaveTypeContainer",
   components: {
-    "animated-circular": AnimatedCircular,
     "leave-type-row": LeaveTypeRow
   },
   props: {

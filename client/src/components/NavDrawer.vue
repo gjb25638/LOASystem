@@ -1,48 +1,31 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" temporary fixed app right>
+    <v-navigation-drawer :mini-variant="mini" fixed app right>
       <v-card>
-        <v-img
-          class="white--text"
-          height="200px"
-          :src="`${config.API_URL}/avatar/${loginuser.username}`"
-        >
+        <v-img class="white--text" height="200px" :src="`${config.API_URL}/avatar/${loginuser.username}`">
           <v-tooltip bottom>
-            <v-btn
-              slot="activator"
-              icon
-              absolute
-              right
-              @click="logout($cookie, $router)"
-              color="primary"
-            >
+            <v-btn slot="activator" icon absolute right @click="logout($cookie, $router)" color="primary" v-if="!mini">
               <v-icon color="white">power_settings_new</v-icon>
             </v-btn>
-            <div>{{loalocale.self.logout}}</div>
+            {{loalocale.self.logout}}
           </v-tooltip>
         </v-img>
-        <v-card-title>
+        <v-card-title v-if="!mini">
           <employee-info :profile="loginuser" small icon></employee-info>
-          <employee-account-settings
-            :account="account"
-            @reset:email="resetEmail"
-            @reset:password="resetPWD"
-          ></employee-account-settings>
+          <employee-account-settings :account="account" @reset:email="resetEmail" @reset:password="resetPWD"></employee-account-settings>
         </v-card-title>
       </v-card>
       <v-list dense>
         <template v-for="(submenu, i) in menu">
           <template v-for="(item, j) in submenu.list">
             <v-subheader :key="`header_${i}_${j}`" v-if="item.header">{{loalocale.self.common}}</v-subheader>
-            <v-list-tile
-              :key="`list-tile_${i}_${j}`"
-              v-else
-              @click="item.action"
-              :class="{active: item.title === title}"
-            >
-              <v-list-tile-action>
-                <v-icon>{{item.icon}}</v-icon>
-              </v-list-tile-action>
+            <v-list-tile :key="`list-tile_${i}_${j}`" v-else @click="item.action" :class="{active: item.title === title}">
+              <v-tooltip left>
+                <v-list-tile-action slot="activator">
+                  <v-icon>{{item.icon}}</v-icon>
+                </v-list-tile-action>
+                {{item.title}}
+              </v-tooltip>
               <v-list-tile-content>
                 <v-list-tile-title>{{item.title}}</v-list-tile-title>
               </v-list-tile-content>
@@ -65,7 +48,9 @@
       <v-toolbar-title v-if="loginuser.level === 'admin'">
         <database-management @dbbackup="dbbackup" @dbrestore="dbrestore"></database-management>
       </v-toolbar-title>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.stop="mini = !mini">
+        <v-icon>{{mini ? "chevron_left" : "chevron_right"}}</v-icon>
+      </v-toolbar-side-icon>
     </v-toolbar>
   </div>
 </template>
@@ -93,7 +78,7 @@ export default {
     }
   },
   data: () => ({
-    drawer: null,
+    mini: true,
     dialog: false,
     config,
     menu: [],
@@ -125,7 +110,7 @@ export default {
           },
           {
             title: this.loalocale.self.compensatory,
-            icon: "view_list",
+            icon: "event_available",
             action: () => this.$router.push({ name: "CompensatoryList" })
           },
           {

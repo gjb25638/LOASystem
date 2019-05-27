@@ -23,7 +23,7 @@ export default {
 }
 #app *:not(i) {
   font-size: 18px;
-  font-family: "Courier New", Courier, monospace, "Microsoft JhengHei";
+  font-family: "Courier New", Courier, monospace;
 }
 .v-text-field__details {
   overflow: visible !important;

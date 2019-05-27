@@ -12,7 +12,7 @@
           <animated-circular
             slot="activator"
             :value="calculatePercentage(leaveType.totals, leaveType.consumes)"
-            :color="leaveType.class[0]"
+            :color="leaveType.color"
           >{{leaveType.consumes.days}}</animated-circular>
           <leave-type-tooltip :complete="leaveType.countdown" :info="leaveType"></leave-type-tooltip>
         </v-tooltip>
