@@ -8,7 +8,10 @@ import VueCookie from 'vue-cookie'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import VueTour from 'vue-tour'
+import 'vue-tour/dist/vue-tour.css'
 
+Vue.use(VueTour)
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VueCookie)

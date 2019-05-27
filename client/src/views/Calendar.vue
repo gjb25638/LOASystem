@@ -11,8 +11,14 @@
         @next="$refs.calendar.next()"
         @tolastest="(date) => calendarDate = formatDate(date)"
       >
-        <v-switch v-if="!notASigner" :label="loalocale.self.showOnlyYours" v-model="showOnlyYours"></v-switch>
         <v-switch
+          class="switch-1"
+          v-if="!notASigner"
+          :label="loalocale.self.showOnlyYours"
+          v-model="showOnlyYours"
+        ></v-switch>
+        <v-switch
+          class="switch-2"
           v-if="!notASigner"
           :label="loalocale.self.showOnlyUsername"
           v-model="showOnlyUsername"
@@ -22,6 +28,7 @@
         <v-sheet>
           <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
           <v-calendar
+            class="calendar"
             v-else
             ref="calendar"
             v-model="calendarDate"
@@ -75,6 +82,7 @@
     <system-notification v-model="systemNotification" @close="systemNotification.visible = false">
       <div>{{systemNotification.text}}</div>
     </system-notification>
+    <tour :steps="steps"></tour>
   </page-container>
 </template>
 <script>
@@ -85,6 +93,7 @@ import SystemNotification from "@/components/SystemNotification";
 import CalendarController from "@/components/CalendarController";
 import LeaveInfo from "@/components/LeaveInfo";
 import LeaveDetailInfo from "@/components/LeaveDetailInfo";
+import Tour from "@/components/Tour";
 import EmployeeService from "@/services/EmployeeService";
 import utility from "@/utility";
 import colors from "@/colors";
@@ -97,7 +106,8 @@ export default {
     "system-notification": SystemNotification,
     "calendar-controller": CalendarController,
     "leave-info": LeaveInfo,
-    "leave-detail-info": LeaveDetailInfo
+    "leave-detail-info": LeaveDetailInfo,
+    tour: Tour
   },
   data: () => ({
     calendarDate: utility.formatDate("now"),
@@ -117,7 +127,8 @@ export default {
       handler: () => {}
     },
     selectedDate: "",
-    loading: false
+    loading: false,
+    steps: []
   }),
   computed: {
     leaveGroups() {
@@ -161,8 +172,37 @@ export default {
       });
       this.loading = false;
       this.report = report;
+      this.notASigner = report.length === 1;
       this.leaves = this.toLeaves(this.report);
       this.fullControl = fullControl;
+
+      this.steps = [
+        {
+          target: ".controller  ",
+          content: this.loalocale.self.descriptionOfCalendarController
+        },
+        {
+          target: ".calendar",
+          content: this.loalocale.self.descriptionOfCalendar1
+        },
+        {
+          target: ".calendar",
+          content: this.loalocale.self.descriptionOfCalendar2
+        }
+      ];
+      if (!this.notASigner) {
+        this.steps = [
+          {
+            target: ".switch-1 .v-input__control",
+            content: this.loalocale.self.descriptionOfShowOnlyYours
+          },
+          {
+            target: ".switch-2 .v-input__control",
+            content: this.loalocale.self.descriptionOfShowOnlyUsername
+          },
+          ...this.steps
+        ];
+      }
     },
     toLeaves(report) {
       let randomColors = [];
@@ -170,7 +210,6 @@ export default {
         randomColors = colors.random(report.length);
       }
       const leaves = [];
-      this.notASigner = report.length === 1;
       report
         .filter(
           employee =>

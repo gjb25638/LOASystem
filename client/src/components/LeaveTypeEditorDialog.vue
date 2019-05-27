@@ -118,11 +118,8 @@ export default {
     datepicker: false,
     dateInput: ""
   }),
-  mounted() {},
-  watch: {
-    info() {
-      this.dateInput = this.info.deadline;
-    }
+  mounted() {
+    this.dateInput = this.info.deadline;
   },
   methods: {
     removeOne(index) {

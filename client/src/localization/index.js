@@ -25,6 +25,7 @@ import EmployeeInfo from '@/localization/EmployeeInfo';
 import Calendar from '@/localization/Calendar';
 import LeaveTakingBlock from '@/localization/LeaveTakingBlock';
 import LeaveDetailInfo from '@/localization/LeaveDetailInfo';
+import Tour from '@/localization/Tour';
 
 export default {
   en: {
@@ -55,6 +56,7 @@ export default {
     Calendar: Calendar.en,
     LeaveTakingBlock: LeaveTakingBlock.en,
     LeaveDetailInfo: LeaveDetailInfo.en,
+    Tour: Tour.en,
   },
   zh: {
     Report: Report.zh,
@@ -84,6 +86,7 @@ export default {
     Calendar: Calendar.zh,
     LeaveTakingBlock: LeaveTakingBlock.zh,
     LeaveDetailInfo: LeaveDetailInfo.zh,
+    Tour: Tour.zh,
   }
 }["zh"]
 //[navigator ? navigator.language.substr(0, 2) : "zh"]

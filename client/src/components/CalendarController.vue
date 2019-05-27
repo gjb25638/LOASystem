@@ -2,7 +2,7 @@
   <v-card-title>
     <slot></slot>
     <v-spacer></v-spacer>
-    <div>
+    <div class="controller">
       <v-btn icon flat @click="toPrev">
         <v-icon>keyboard_arrow_left</v-icon>
       </v-btn>
