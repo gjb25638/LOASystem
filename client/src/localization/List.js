@@ -8,7 +8,8 @@ export default {
         username: "English Name",
         arrivedDate: "Arrived",
         action: "Action",
-        title: "Employees"
+        title: "Employees",
+        create: "Add Employee"
     },
     zh: {
         showResigners: "顯示離職人員",
@@ -19,6 +20,7 @@ export default {
         dept: "部門單位",
         arrivedDate: "到職日期",
         action: "操作",
-        title: "員工列表"
+        title: "員工列表",
+        create: "新增員工"
     }
 }

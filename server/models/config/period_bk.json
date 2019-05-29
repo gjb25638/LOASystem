@@ -1,0 +1,54 @@
+{
+    "workday": {
+        "name": "值班時間",
+        "morning": {
+            "name": "早",
+            "startFrom": "07:00",
+            "endTo": "16:00"
+        },
+        "noon": {
+            "name": "中",
+            "startFrom": "13:00",
+            "endTo": "22:00"
+        },
+        "general": {
+            "name": "日",
+            "startFrom": "09:00",
+            "endTo": "18:00"
+        }
+    },
+    "holiday": {
+        "name": "國定假日時段",
+        "morning": {
+            "name": "早",
+            "startFrom": "07:00",
+            "endTo": "15:00"
+        },
+        "noon": {
+            "name": "中",
+            "startFrom": "15:00",
+            "endTo": "23:00"
+        },
+        "general": {
+            "name": "日",
+            "startFrom": "09:00",
+            "endTo": "18:00"
+        }
+    },
+    "summerMonday": {
+        "name": "夏令時周一(3/11開始",
+        "morning": {
+            "name": "早",
+            "startFrom": "06:00",
+            "endTo": "15:00"
+        }
+    },
+    "winterMonday": {
+        "name": "冬令時周一",
+        "morning": {
+            "name": "早",
+            "startFrom": "07:00",
+            "endTo": "16:00"
+        }
+    }
+}

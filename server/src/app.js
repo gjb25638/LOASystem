@@ -11,6 +11,7 @@ const toggle = require("./api/toggle")
 const auth = require("./api/auth")
 const report = require("./api/report")
 const dbOp = require("./api/db")
+const shift = require("./api/shift")
 const util = require("./shared/util")
 
 const Employee = require("../models/employee")
@@ -69,6 +70,13 @@ app.get('/annual/report/:year/:loginuser/:token', report.annual.groupby.get)
 app.get('/db/backup/:loginuser/:token', dbOp.backup.get)
 app.get('/db/restore/:loginuser/:token', dbOp.restore.get)
 app.get('/db/check/:loginuser/:token', dbOp.check.get)
+app.post('/shift/new/:id/:loginuser/:token', shift.post)
+app.post('/shift/delete/:id/:loginuser/:token', shift.delete)
+app.get('/shift/config/period/:loginuser/:token', shift.config.period.get)
+app.put('/shift/config/period/:loginuser/:token', shift.config.period.put)
+app.get('/shift/config/holiday/:loginuser/:token', shift.config.holiday.get)
+app.put('/shift/config/holiday/:loginuser/:token', shift.config.holiday.put)
+app.get('/shift/:year/:month/:loginuser/:token', shift.get)
 
 app.get("/avatar/:username", (req, res) => {
   const defaultFilepath = path.join(__dirname, `avatar/unknown.jpg`);

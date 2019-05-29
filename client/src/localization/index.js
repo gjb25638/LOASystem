@@ -22,9 +22,11 @@ import LeaveContainer from '@/localization/LeaveContainer'
 import LeaveTypeInfo from '@/localization/LeaveTypeInfo'
 import MonthlyReport from '@/localization/MonthlyReport';
 import EmployeeInfo from '@/localization/EmployeeInfo';
-import Calendar from '@/localization/Calendar';
+import LeaveCalendar from '@/localization/LeaveCalendar';
 import LeaveTakingBlock from '@/localization/LeaveTakingBlock';
 import LeaveDetailInfo from '@/localization/LeaveDetailInfo';
+import ShiftCalendar from '@/localization/ShiftCalendar';
+import ShiftConfig from '@/localization/ShiftConfig';
 import Tour from '@/localization/Tour';
 
 export default {
@@ -53,10 +55,12 @@ export default {
     LeaveTypeInfo: LeaveTypeInfo.zh,
     MonthlyReport: MonthlyReport.en,
     EmployeeInfo: EmployeeInfo.en,
-    Calendar: Calendar.en,
+    LeaveCalendar: LeaveCalendar.en,
     LeaveTakingBlock: LeaveTakingBlock.en,
     LeaveDetailInfo: LeaveDetailInfo.en,
     Tour: Tour.en,
+    ShiftCalendar: ShiftCalendar.en,
+    ShiftConfig: ShiftConfig.en,
   },
   zh: {
     Report: Report.zh,
@@ -83,10 +87,12 @@ export default {
     LeaveTypeInfo: LeaveTypeInfo.zh,
     MonthlyReport: MonthlyReport.zh,
     EmployeeInfo: EmployeeInfo.zh,
-    Calendar: Calendar.zh,
+    LeaveCalendar: LeaveCalendar.zh,
     LeaveTakingBlock: LeaveTakingBlock.zh,
     LeaveDetailInfo: LeaveDetailInfo.zh,
     Tour: Tour.zh,
+    ShiftCalendar: ShiftCalendar.zh,
+    ShiftConfig: ShiftConfig.zh,
   }
 }["zh"]
 //[navigator ? navigator.language.substr(0, 2) : "zh"]

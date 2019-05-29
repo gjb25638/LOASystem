@@ -109,7 +109,7 @@ import utility from "@/utility";
 import colors from "@/colors";
 import defaultConf from "@/default";
 export default {
-  name: "Calendar",
+  name: "LeaveCalendar",
   components: {
     "page-container": PageContainer,
     "employee-info": EmployeeInfo,

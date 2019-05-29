@@ -269,7 +269,7 @@ function sign(req, res) {
                                     res.send({ success: false, message: err })
                                 } else {
                                     sendLeaveSigningEmail(employee, loginuser, signedRecord)
-                                    res.send({ success: true, message: "record's signing updated successfully" })
+                                    res.send({ success: true, message: "record signing updated successfully" })
                                 }
                             })
                         } else {

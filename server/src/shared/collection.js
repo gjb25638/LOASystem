@@ -32,6 +32,12 @@ module.exports = {
                 password: token, level: "admin"
             }
         },
+        manager: (loginusername, token) => {
+            return {
+                username: new RegExp(`^${loginusername}$`, "i"),
+                password: token, level: "manager"
+            }
+        },
         underControl: (employeeUsername) => {
             return { 'signers': { $elemMatch: { username: employeeUsername } } }
         }

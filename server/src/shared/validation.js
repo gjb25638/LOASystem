@@ -13,11 +13,19 @@ module.exports = {
     /**
      * cb(err, pass, loginuser)
      */
-    signer
+    signer,
+    /**
+     * cb(err, pass)
+     */
+    manager
 }
 
 function admin(loginusername, token, cb) {
     Employee.findOne(c.conditions.administrator(loginusername, token), (err, loginuser) => cb(err, !!loginuser))
+}
+
+function manager(loginusername, token, cb) {
+    Employee.findOne(c.conditions.manager(loginusername, token), (err, loginuser) => cb(err, !!loginuser))
 }
 
 function owner(id, loginusername, token, cb) {
@@ -27,7 +35,7 @@ function owner(id, loginusername, token, cb) {
     })
 }
 
-function signer(id, loginuser, token, cb) {
+function signer(id, loginuser, token, cb, self = false) {
     Employee.findOne(c.conditions.validLoginuser(loginuser, token), (err, loginuser) => {
         if (err) {
             cb(err, false)
@@ -36,7 +44,7 @@ function signer(id, loginuser, token, cb) {
                 if (err) {
                     cb(err, false)
                 } else if (employee) {
-                    cb(err, c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee, false), loginuser)
+                    cb(err, c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee, self), loginuser)
                 } else {
                     cb(err, false)
                 }

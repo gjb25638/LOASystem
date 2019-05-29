@@ -55,6 +55,10 @@ var EmployeeSchema = new Schema({
       username: String,
       level: String,
     }]
+  }],
+  shifts: [{
+    date: Date,
+    daypart: String
   }]
 })
 

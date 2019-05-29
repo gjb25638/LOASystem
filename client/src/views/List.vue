@@ -14,8 +14,9 @@
           :label="loalocale.self.search"
           hide-details
         ></v-text-field>
-        <v-btn icon dark class="theme" @click="createEmployee" v-if="fullControl">
+        <v-btn dark class="theme add-btn" @click="createEmployee" v-if="fullControl">
           <v-icon>add</v-icon>
+          {{loalocale.self.create}}
         </v-btn>
       </v-card-title>
       <v-data-table
@@ -215,5 +216,8 @@ a.add_link {
 .disabled {
   background-color: #eee;
   color: lightgray;
+}
+.add-btn {
+  border-radius: 20px;
 }
 </style>

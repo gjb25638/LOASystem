@@ -12,6 +12,17 @@ export default {
             oneHour: '1h'
         }
     },
+    shiftDaypart: {
+        早: {
+            color: "amber lighten-3",
+        },
+        中: {
+            color: "blue-grey lighten-1",
+        },
+        日: {
+            color: "teal lighten-3",
+        }
+    },
     deptOptions: ['行政部(A)', '管理部(A)', '客服部(C)', '資訊部(I)', '技術支援(S)', '業務部(B)'],
     deptsThatSameDeptEmployeeHavingSameReadAccess: ['客服部(C)'],
     levelOptions: ['admin', 'manager', 'normal'],

@@ -144,6 +144,34 @@ export default {
     )}`;
     devlog(`${config.API_URL}/${url}`)
     return Api().get(url);
+  },
+  getShifts(params) {
+    const url = `shift/${params.year}/${params.month}/${params.loginuser}/${encodeURIComponent(
+      params.token
+    )}`;
+    devlog(`${config.API_URL}/${url}`)
+    return Api().get(url);
+  },
+  updateShift(params) {
+    const url = `shift/${params.shiftId ? "delete" : "new"}/${params.id}/${params.loginuser}/${encodeURIComponent(
+      params.token
+    )}`;
+    devlog(`${config.API_URL}/${url}`)
+    return Api().post(url, params);
+  },
+  getShiftConfig(params) {
+    const url = `shift/config/${params.type}/${params.loginuser}/${encodeURIComponent(
+      params.token
+    )}`;
+    devlog(`${config.API_URL}/${url}`)
+    return Api().get(url);
+  },
+  updateShiftConfig(params) {
+    const url = `shift/config/${params.type}/${params.loginuser}/${encodeURIComponent(
+      params.token
+    )}`;
+    devlog(`${config.API_URL}/${url}`)
+    return Api().put(url, params);
   }
 };
 

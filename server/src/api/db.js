@@ -81,8 +81,8 @@ function check(req, res) {
         if (err) {
             res.send({ success: false, message: err })
         } else if (pass) {
-            const infopath = path.join(dir, "info.txt")
-            const content = fs.readFileSync(infopath, "utf8")
+            const infoPath = path.join(dir, "info.txt")
+            const content = fs.readFileSync(infoPath, "utf8")
             res.send({ success: true, content })
         } else {
             res.send({ success: false, message: "token validation failed" })

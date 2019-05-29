@@ -8,7 +8,8 @@ import AnnualReport from '@/views/Report/AnnualReport'
 import CompensatoryList from '@/views/CompensatoryList'
 import Login from '@/views/Login'
 import LeaveTypeInfo from '@/views/LeaveTypeInfo'
-import Calendar from '@/views/Calendar'
+import LeaveCalendar from '@/views/LeaveCalendar'
+import ShiftCalendar from '@/views/ShiftCalendar'
 
 Vue.use(Router)
 
@@ -36,12 +37,12 @@ export default new Router({
       component: RecordList
     },
     {
-      path: '/annualreport',
+      path: '/report/annual',
       name: 'AnnualReport',
       component: AnnualReport
     },
     {
-      path: '/monthlyreport',
+      path: '/report/monthly',
       name: 'MonthlyReport',
       component: MonthlyReport
     },
@@ -56,9 +57,14 @@ export default new Router({
       component: LeaveTypeInfo
     },
     {
-      path: '/calendar',
-      name: 'Calendar',
-      component: Calendar
+      path: '/calendar/leave',
+      name: 'LeaveCalendar',
+      component: LeaveCalendar
+    },
+    {
+      path: '/calendar/shift',
+      name: 'ShiftCalendar',
+      component: ShiftCalendar
     }
   ]
 })

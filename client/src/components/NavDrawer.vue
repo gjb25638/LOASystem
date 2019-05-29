@@ -2,24 +2,34 @@
   <div>
     <v-navigation-drawer :mini-variant="mini" fixed app right>
       <v-card>
-        <v-img class="white--text" height="200px" :src="`${config.API_URL}/avatar/${loginuser.username}`">
-          <v-tooltip bottom>
-            <v-btn slot="activator" icon absolute right @click="logout($cookie, $router)" color="primary" v-if="!mini">
-              <v-icon color="white">power_settings_new</v-icon>
-            </v-btn>
-            {{loalocale.self.logout}}
-          </v-tooltip>
+        <v-img
+          class="white--text"
+          height="200px"
+          :src="`${config.API_URL}/avatar/${loginuser.username}`"
+        >
+          <v-btn class="nav-expander" icon @click.stop="mini = !mini">
+            <v-icon>{{mini ? "chevron_left" : "chevron_right"}}</v-icon>
+          </v-btn>
         </v-img>
         <v-card-title v-if="!mini">
           <employee-info :profile="loginuser" small icon></employee-info>
-          <employee-account-settings :account="account" @reset:email="resetEmail" @reset:password="resetPWD"></employee-account-settings>
+          <employee-account-settings
+            :account="account"
+            @reset:email="resetEmail"
+            @reset:password="resetPWD"
+          ></employee-account-settings>
         </v-card-title>
       </v-card>
       <v-list dense>
         <template v-for="(submenu, i) in menu">
           <template v-for="(item, j) in submenu.list">
-            <v-subheader :key="`header_${i}_${j}`" v-if="item.header">{{loalocale.self.common}}</v-subheader>
-            <v-list-tile :key="`list-tile_${i}_${j}`" v-else @click="item.action" :class="{active: item.title === title}">
+            <v-subheader :key="`header_${i}_${j}`" v-if="item.header">{{item.title}}</v-subheader>
+            <v-list-tile
+              :key="`list-tile_${i}_${j}`"
+              v-else
+              @click="item.action"
+              :class="{active: item.title === title}"
+            >
               <v-tooltip left>
                 <v-list-tile-action slot="activator">
                   <v-icon>{{item.icon}}</v-icon>
@@ -48,9 +58,14 @@
       <v-toolbar-title v-if="loginuser.level === 'admin'">
         <database-management @dbbackup="dbbackup" @dbrestore="dbrestore"></database-management>
       </v-toolbar-title>
-      <v-toolbar-side-icon @click.stop="mini = !mini">
-        <v-icon>{{mini ? "chevron_left" : "chevron_right"}}</v-icon>
-      </v-toolbar-side-icon>
+      <v-toolbar-title>
+        <v-tooltip bottom>
+          <v-btn slot="activator" icon @click="logout($cookie, $router)">
+            <v-icon color="white">power_settings_new</v-icon>
+          </v-btn>
+          {{loalocale.self.logout}}
+        </v-tooltip>
+      </v-toolbar-title>
     </v-toolbar>
   </div>
 </template>
@@ -99,9 +114,9 @@ export default {
             header: true
           },
           {
-            title: this.loalocale.self.calendar,
+            title: this.loalocale.self.leaveCalendar,
             icon: "event_note",
-            action: () => this.$router.push({ name: "Calendar" })
+            action: () => this.$router.push({ name: "LeaveCalendar" })
           },
           {
             title: this.loalocale.self.employees,
@@ -126,6 +141,15 @@ export default {
             title: this.loalocale.self.monthlyReport,
             icon: "view_quilt",
             action: () => this.$router.push({ name: "MonthlyReport" })
+          },
+          {
+            title: this.loalocale.self.others,
+            header: true
+          },
+          {
+            title: this.loalocale.self.shiftCalendar,
+            icon: "schedule",
+            action: () => this.$router.push({ name: "ShiftCalendar" })
           }
         ]
       }
@@ -174,5 +198,11 @@ export default {
 <style scoped>
 .active {
   background: rgba(0, 0, 0, 0.04);
+}
+.nav-expander,
+.nav-expander::before {
+  border-radius: 0;
+  width: 20px;
+  background: rgba(0, 0, 0, 0.2);
 }
 </style>
