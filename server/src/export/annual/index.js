@@ -25,7 +25,7 @@ function populate(year, data, cb) {
                     stringFormat(header.title.format, [`${year1}-${year2}`])
                 cell.value(title)
             })
-            const enabledEmployees = data.report.filter(employee => employee.enabled)
+            const enabledEmployees = data.filter(employee => employee.enabled)
             enabledEmployees.forEach((employee, index) => {
                 const rowNumber = index + 1 + 1
                 headers.forEach(header => {
@@ -88,7 +88,7 @@ function populate(year, data, cb) {
             })
             headers.filter(header => isNotEmployeeInfoArea(header.dataKey) && isLTReportArea(header.dataKey.leaveType))
                 .forEach(header => {
-                    const cell = sheet.cell(`${header.name}${data.report.length + 2}`)
+                    const cell = sheet.cell(`${header.name}${data.length + 2}`)
                     header.styles.forEach(style => cell.style(style.name, style.value))
                     const key = header.dataKey.unit ? `${header.dataKey.leaveType}.${header.dataKey.unit}` : header.dataKey.leaveType
                     cell.value(totalsToString(sumUpTotals(allLTsTotalsCounters[key])))
