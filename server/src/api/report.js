@@ -1,6 +1,7 @@
 const Employee = require("../../models/employee")
 const c = require("../shared/collection")
 const r = require("../shared/report")
+const ea = require("../export/annual/index")
 
 module.exports = {
     annual: {
@@ -19,6 +20,11 @@ module.exports = {
          */
         sdehsra: {
             get: (req, res) => monthly({ req, res, sdehsra: true })
+        }
+    },
+    export: {
+        annual: {
+            get: annualExport
         }
     }
 }
@@ -56,6 +62,26 @@ function monthly({ req, res, groupby, sdehsra }) {
             })
         } else {
             res.send({ success: false, message: "token validation failed" })
+        }
+    })
+}
+
+function annualExport(req, res) {
+    Employee.findOne(c.conditions.validLoginuser(req.params.loginuser, req.params.token), (err, loginuser) => {
+        if (err) {
+            res.send({ success: false, message: err })
+        } else if (loginuser) {
+            Employee.find(c.conditions.all(), null, (err, employees) => {
+                if (err) {
+                    res.send({ success: false, message: err })
+                } else {
+                    const year = parseInt(req.params.year)
+                    ea.populate(year, r.produce({ loginuser, employees, year, groupby: true }).report, (data, fileName) => {
+                        res.attachment(fileName);
+                        res.send(data);
+                    })
+                }
+            }).sort({ arrivedDate: 1 })
         }
     })
 }

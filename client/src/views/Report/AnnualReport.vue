@@ -10,10 +10,14 @@
           @tolastest="(date) => calendarDate = date"
         >
           <v-switch
+            v-if="fullControl && !loading"
             :label="loalocale.self.showResigners"
-            v-if="fullControl"
             v-model="showResigners"
           ></v-switch>
+          <v-btn @click="download" v-if="!loading">
+            <v-icon>get_app</v-icon>
+            {{loalocale.self.download}}
+          </v-btn>
         </calendar-controller>
         <v-progress-linear v-if="loading" :indeterminate="true"></v-progress-linear>
         <v-data-table
@@ -152,6 +156,18 @@ export default {
     this.getRecords();
   },
   methods: {
+    download() {
+      const url = EmployeeService.downloadURL.exportReport({
+        year: this.year,
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token,
+        period: "annual"
+      });
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style = "display:none";
+      document.body.appendChild(iframe);
+    },
     async getRecords() {
       this.loading = true;
       const {

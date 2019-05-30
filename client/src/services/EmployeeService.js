@@ -124,13 +124,6 @@ export default {
     devlog(`${config.API_URL}/${url}`)
     return Api().get(url);
   },
-  dbbackup(params) {
-    const url = `db/backup/${params.loginuser}/${encodeURIComponent(
-      params.token
-    )}`;
-    devlog(`${config.API_URL}/${url}`)
-    return Api().get(url);
-  },
   dbrestore(params) {
     const url = `db/restore/${params.loginuser}/${encodeURIComponent(
       params.token
@@ -172,6 +165,22 @@ export default {
     )}`;
     devlog(`${config.API_URL}/${url}`)
     return Api().put(url, params);
+  },
+  downloadURL: {
+    exportReport(params) {
+      const url = `${config.API_URL}/${params.period}/export/report/${params.year}/${
+        params.loginuser
+        }/${encodeURIComponent(params.token)}`;
+      devlog(url)
+      return url;
+    },
+    dbbackup(params) {
+      const url = `${config.API_URL}/db/backup/${params.loginuser}/${encodeURIComponent(
+        params.token
+      )}`;
+      devlog(url)
+      return url;
+    },
   }
 };
 

@@ -21,7 +21,9 @@
     "mongoose": "^5.2.10",
     "morgan": "^1.9.0",
     "nodemailer": "^5.1.1",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "uuid": "^3.3.2",
+    "xlsx-populate": "git+https://github.com/LesterLyu/xlsx-populate.git#beta"
   },
   "devDependencies": {
     "jest": "^24.8.0"

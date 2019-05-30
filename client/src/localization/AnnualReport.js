@@ -6,7 +6,8 @@ export default {
         monthGroupStat: 'Month Stat',
         leaveTypeGroupStat: 'Leave Type Stat',
         annualStat: 'Annual Stat',
-        title: "Annual Report"
+        title: "Annual Report",
+        download: "Download"
     },
     zh: {
         showResigners: '顯示離職人員',
@@ -15,6 +16,7 @@ export default {
         monthGroupStat: '每月統計',
         leaveTypeGroupStat: '假別統計',
         annualStat: '特休統計',
-        title: "年度報表"
+        title: "年度報表",
+        download: "下載"
     }
 }

@@ -30,19 +30,16 @@ export default {
     this.check();
   },
   methods: {
-    async backup() {
-      const { data } = await EmployeeService.dbbackup({
+    backup() {
+      const url = EmployeeService.downloadURL.dbbackup({
         loginuser: this.loginuser.username,
         token: this.loginuser.token
       });
       this.check();
-      this.$emit("dbbackup");
-      const url = window.URL.createObjectURL(new Blob([data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", new Date().toLocaleString() + ".bk");
-      document.body.appendChild(link);
-      link.click();
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style = "display:none";
+      document.body.appendChild(iframe);
     },
     async restore() {
       const {

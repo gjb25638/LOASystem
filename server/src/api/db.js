@@ -39,7 +39,8 @@ function backup(req, res) {
                     const infopath = path.join(dir, "info.txt")
                     fs.writeFileSync(bkpath, encrypted)
                     fs.writeFileSync(infopath, rightnow)
-                    res.download(path.join(dir, "bk"))
+                    res.attachment(`${rightnow}.bk`);
+                    res.send(encrypted);
                 }
             })
         } else {
@@ -64,8 +65,8 @@ function restore(req, res) {
                         if (err) {
                             res.send({ success: false, message: err })
                         } else {
-                            restoreData(util.importJSON("../../backup", "all.json"), res)
-                            // restoreData(JSON.parse(decrypted), res)
+                            // restoreData(util.importJSON("../../backup", "all.json"), res)
+                            restoreData(JSON.parse(decrypted), res)
                         }
                     })
                 }
