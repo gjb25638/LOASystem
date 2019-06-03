@@ -1,0 +1,573 @@
+[
+  {
+    "title": "員工\n編號",
+    "dataKey": "employeeID",
+    "name": "A",
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": "姓名",
+    "dataKey": "name",
+    "name": "B",
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": "英文名",
+    "dataKey": "username",
+    "name": "C",
+    "styles": [
+      {
+        "name": "rightBorderStyle",
+        "value": "thick"
+      }
+    ],
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": {
+      "format": "{0}月1日\n({1})"
+    },
+    "dataKey": {
+      "day": 0
+    },
+    "name": "D",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月2日\n({1})"
+    },
+    "dataKey": {
+      "day": 1
+    },
+    "name": "E",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月3日\n({1})"
+    },
+    "dataKey": {
+      "day": 2
+    },
+    "name": "F",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月4日\n({1})"
+    },
+    "dataKey": {
+      "day": 3
+    },
+    "name": "G",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月5日\n({1})"
+    },
+    "dataKey": {
+      "day": 4
+    },
+    "name": "H",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月6日\n({1})"
+    },
+    "dataKey": {
+      "day": 5
+    },
+    "name": "I",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月7日\n({1})"
+    },
+    "dataKey": {
+      "day": 6
+    },
+    "name": "J",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月8日\n({1})"
+    },
+    "dataKey": {
+      "day": 7
+    },
+    "name": "K",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月9日\n({1})"
+    },
+    "dataKey": {
+      "day": 8
+    },
+    "name": "L",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月10日\n({1})"
+    },
+    "dataKey": {
+      "day": 9
+    },
+    "name": "M",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月11日\n({1})"
+    },
+    "dataKey": {
+      "day": 10
+    },
+    "name": "N",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月12日\n({1})"
+    },
+    "dataKey": {
+      "day": 11
+    },
+    "name": "O",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月13日\n({1})"
+    },
+    "dataKey": {
+      "day": 12
+    },
+    "name": "P",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月14日\n({1})"
+    },
+    "dataKey": {
+      "day": 13
+    },
+    "name": "Q",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月15日\n({1})"
+    },
+    "dataKey": {
+      "day": 14
+    },
+    "name": "R",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月16日\n({1})"
+    },
+    "dataKey": {
+      "day": 15
+    },
+    "name": "S",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月17日\n({1})"
+    },
+    "dataKey": {
+      "day": 16
+    },
+    "name": "T",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月18日\n({1})"
+    },
+    "dataKey": {
+      "day": 17
+    },
+    "name": "U",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月19日\n({1})"
+    },
+    "dataKey": {
+      "day": 18
+    },
+    "name": "V",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月20日\n({1})"
+    },
+    "dataKey": {
+      "day": 19
+    },
+    "name": "W",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月21日\n({1})"
+    },
+    "dataKey": {
+      "day": 20
+    },
+    "name": "X",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月22日\n({1})"
+    },
+    "dataKey": {
+      "day": 21
+    },
+    "name": "Y",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月23日\n({1})"
+    },
+    "dataKey": {
+      "day": 22
+    },
+    "name": "Z",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月24日\n({1})"
+    },
+    "dataKey": {
+      "day": 23
+    },
+    "name": "AA",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月25日\n({1})"
+    },
+    "dataKey": {
+      "day": 24
+    },
+    "name": "AB",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月26日\n({1})"
+    },
+    "dataKey": {
+      "day": 25
+    },
+    "name": "AC",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月27日\n({1})"
+    },
+    "dataKey": {
+      "day": 26
+    },
+    "name": "AD",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月28日\n({1})"
+    },
+    "dataKey": {
+      "day": 27
+    },
+    "name": "AE",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月29日\n({1})"
+    },
+    "dataKey": {
+      "day": 28
+    },
+    "name": "AF",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月30日\n({1})"
+    },
+    "dataKey": {
+      "day": 29
+    },
+    "name": "AG",
+    "area": "DayReport"
+  },
+  {
+    "title": {
+      "format": "{0}月31日\n({1})"
+    },
+    "dataKey": {
+      "day": 30
+    },
+    "name": "AH",
+    "area": "DayReport"
+  },
+  {
+    "title": "特休",
+    "dataKey": {
+      "leaveType": "annual"
+    },
+    "name": "AI",
+    "styles": [
+      {
+        "name": "leftBorderStyle",
+        "value": "thick"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "補休",
+    "dataKey": {
+      "leaveType": "compensatory",
+      "unit": "day"
+    },
+    "name": "AJ",
+    "merged": "AK",
+    "area": "LTReport"
+  },
+  {
+    "title": "補休",
+    "dataKey": {
+      "leaveType": "compensatory",
+      "unit": "hour"
+    },
+    "name": "AK",
+    "area": "LTReport"
+  },
+  {
+    "title": "公出/公假",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "AL",
+    "merged": "AM",
+    "area": "LTReport"
+  },
+  {
+    "title": "公出/公假",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "AM",
+    "area": "LTReport"
+  },
+  {
+    "title": "婚假",
+    "dataKey": {
+      "leaveType": "marriage"
+    },
+    "name": "AN",
+    "area": "LTReport"
+  },
+  {
+    "title": "喪假",
+    "dataKey": {
+      "leaveType": "funeral"
+    },
+    "name": "AO",
+    "area": "LTReport"
+  },
+  {
+    "title": "生理假",
+    "dataKey": {
+      "leaveType": "menstrual"
+    },
+    "name": "AP",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "3F51B5"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "病假",
+    "dataKey": {
+      "leaveType": "sick",
+      "unit": "day"
+    },
+    "name": "AQ",
+    "merged": "AR",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "病假",
+    "dataKey": {
+      "leaveType": "sick",
+      "unit": "hour"
+    },
+    "name": "AR",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "事假",
+    "dataKey": {
+      "leaveType": "personal",
+      "unit": "day"
+    },
+    "name": "AS",
+    "merged": "AT",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "事假",
+    "dataKey": {
+      "leaveType": "personal",
+      "unit": "hour"
+    },
+    "name": "AT",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "家庭照顧假",
+    "dataKey": {
+      "leaveType": "familyCare",
+      "unit": "day"
+    },
+    "name": "AU",
+    "merged": "AV",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "家庭照顧假",
+    "dataKey": {
+      "leaveType": "familyCare",
+      "unit": "hour"
+    },
+    "name": "AV",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "曠職",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "AW",
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "遲到/\n忘刷\n卡(次)",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "AX",
+    "styles": [
+      {
+        "name": "rightBorderStyle",
+        "value": "thick"
+      },
+      {
+        "name": "fontSize",
+        "value": 12
+      }
+    ],
+    "area": "LTReport"
+  },
+  {
+    "title": "剩餘\n特休",
+    "dataKey": {
+      "index": 0,
+      "type": "remaining"
+    },
+    "name": "AY",
+    "area": "AnnualInfo"
+  },
+  {
+    "title": "使用\n期限",
+    "dataKey": {
+      "index": 0,
+      "type": "deadline"
+    },
+    "name": "AZ",
+    "width": 14,
+    "area": "AnnualInfo"
+  },
+  {
+    "title": "到職日",
+    "dataKey": "arrivedDate",
+    "name": "BA",
+    "width": 14,
+    "area": "EmployeeInfo",
+    "styles": [
+      {
+        "name": "fontSize",
+        "value": 12
+      }
+    ]
+  }
+]

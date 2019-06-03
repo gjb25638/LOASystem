@@ -1,0 +1,359 @@
+[
+  {
+    "title": "員工\n編號",
+    "dataKey": "employeeID",
+    "name": "A",
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": "姓名",
+    "dataKey": "name",
+    "name": "B",
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": "英文名",
+    "dataKey": "username",
+    "name": "C",
+    "styles": [
+      {
+        "name": "rightBorderStyle",
+        "value": "thick"
+      }
+    ],
+    "area": "EmployeeInfo"
+  },
+  {
+    "title": "1月",
+    "dataKey": {
+      "month": 0
+    },
+    "name": "D",
+    "area": "MonthReport"
+  },
+  {
+    "title": "2月",
+    "dataKey": {
+      "month": 1
+    },
+    "name": "E",
+    "area": "MonthReport"
+  },
+  {
+    "title": "3月",
+    "dataKey": {
+      "month": 2
+    },
+    "name": "F",
+    "area": "MonthReport"
+  },
+  {
+    "title": "4月",
+    "dataKey": {
+      "month": 3
+    },
+    "name": "G",
+    "area": "MonthReport"
+  },
+  {
+    "title": "5月",
+    "dataKey": {
+      "month": 4
+    },
+    "name": "H",
+    "area": "MonthReport"
+  },
+  {
+    "title": "6月",
+    "dataKey": {
+      "month": 5
+    },
+    "name": "I",
+    "area": "MonthReport"
+  },
+  {
+    "title": "7月",
+    "dataKey": {
+      "month": 6
+    },
+    "name": "J",
+    "area": "MonthReport"
+  },
+  {
+    "title": "8月",
+    "dataKey": {
+      "month": 7
+    },
+    "name": "K",
+    "area": "MonthReport"
+  },
+  {
+    "title": "9月",
+    "dataKey": {
+      "month": 8
+    },
+    "name": "L",
+    "area": "MonthReport"
+  },
+  {
+    "title": "10月",
+    "dataKey": {
+      "month": 9
+    },
+    "name": "M",
+    "area": "MonthReport"
+  },
+  {
+    "title": "11月",
+    "dataKey": {
+      "month": 10
+    },
+    "name": "N",
+    "area": "MonthReport"
+  },
+  {
+    "title": "12月",
+    "dataKey": {
+      "month": 11
+    },
+    "name": "O",
+    "area": "MonthReport"
+  },
+  {
+    "title": "特休",
+    "dataKey": {
+      "leaveType": "annual"
+    },
+    "styles": [
+      {
+        "name": "leftBorderStyle",
+        "value": "thick"
+      }
+    ],
+    "name": "P",
+    "area": "LTReport"
+  },
+  {
+    "title": "補休",
+    "dataKey": {
+      "leaveType": "compensatory",
+      "unit": "day"
+    },
+    "name": "Q",
+    "merged": "R",
+    "area": "LTReport"
+  },
+  {
+    "title": "補休",
+    "dataKey": {
+      "leaveType": "compensatory",
+      "unit": "hour"
+    },
+    "name": "R",
+    "area": "LTReport"
+  },
+  {
+    "title": "公出/公假",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "S",
+    "merged": "T",
+    "area": "LTReport"
+  },
+  {
+    "title": "公出/公假",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "name": "T",
+    "area": "LTReport"
+  },
+  {
+    "title": "婚假",
+    "dataKey": {
+      "leaveType": "marriage"
+    },
+    "name": "U",
+    "area": "LTReport"
+  },
+  {
+    "title": "喪假",
+    "dataKey": {
+      "leaveType": "funeral"
+    },
+    "name": "V",
+    "area": "LTReport"
+  },
+  {
+    "title": "生理假",
+    "dataKey": {
+      "leaveType": "menstrual"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "3F51B5"
+      }
+    ],
+    "name": "W",
+    "area": "LTReport"
+  },
+  {
+    "title": "病假",
+    "dataKey": {
+      "leaveType": "sick",
+      "unit": "day"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "X",
+    "merged": "Y",
+    "area": "LTReport"
+  },
+  {
+    "title": "病假",
+    "dataKey": {
+      "leaveType": "sick",
+      "unit": "hour"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "Y",
+    "area": "LTReport"
+  },
+  {
+    "title": "事假",
+    "dataKey": {
+      "leaveType": "personal",
+      "unit": "day"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "Z",
+    "merged": "AA",
+    "area": "LTReport"
+  },
+  {
+    "title": "事假",
+    "dataKey": {
+      "leaveType": "personal",
+      "unit": "hour"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "AA",
+    "area": "LTReport"
+  },
+  {
+    "title": "家庭照顧假",
+    "dataKey": {
+      "leaveType": "familyCare",
+      "unit": "day"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "AB",
+    "merged": "AC",
+    "area": "LTReport"
+  },
+  {
+    "title": "家庭照顧假",
+    "dataKey": {
+      "leaveType": "familyCare",
+      "unit": "hour"
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "AC",
+    "area": "LTReport"
+  },
+  {
+    "title": "曠職",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "styles": [
+      {
+        "name": "fontColor",
+        "value": "F44336"
+      }
+    ],
+    "name": "AD",
+    "area": "LTReport"
+  },
+  {
+    "title": "遲到/忘刷卡",
+    "dataKey": {
+      "leaveType": ""
+    },
+    "styles": [
+      {
+        "name": "rightBorderStyle",
+        "value": "thick"
+      },
+      {
+        "name": "fontSize",
+        "value": 12
+      }
+    ],
+    "name": "AE",
+    "area": "LTReport"
+  },
+  {
+    "title": "年度\n剩餘特休",
+    "dataKey": {
+      "index": 1,
+      "type": "remaining"
+    },
+    "name": "AF",
+    "area": "AnnualInfo"
+  },
+  {
+    "title": "使用\n期限",
+    "dataKey": {
+      "index": 1,
+      "type": "deadline"
+    },
+    "width": 14,
+    "name": "AG",
+    "area": "AnnualInfo"
+  },
+  {
+    "title": "到職日",
+    "dataKey": "arrivedDate",
+    "name": "AH",
+    "width": 14,
+    "area": "EmployeeInfo",
+    "styles": [
+      {
+        "name": "fontSize",
+        "value": 12
+      }
+    ]
+  }
+]

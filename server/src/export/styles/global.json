@@ -1,0 +1,34 @@
+{
+  "styles": [
+    {
+      "name": "fontSize",
+      "value": 14
+    },
+    {
+      "name": "wrapText",
+      "value": true
+    },
+    {
+      "name": "horizontalAlignment",
+      "value": "center"
+    },
+    {
+      "name": "topBorderStyle",
+      "value": "thin"
+    },
+    {
+      "name": "bottomBorderStyle",
+      "value": "thin"
+    },
+    {
+      "name": "rightBorderStyle",
+      "value": "thin"
+    },
+    {
+      "name": "leftBorderStyle",
+      "value": "thin"
+    }
+  ],
+  "height": 70,
+  "width": 10
+}

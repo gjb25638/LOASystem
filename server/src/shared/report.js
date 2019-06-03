@@ -62,8 +62,14 @@ function produceMonthly({ loginuser, employees, year, month, groupby, sdehsra })
                         leaveTypeGroup.totals = u.calculateTotals(leaveTypeGroup.list)
                         return leaveTypeGroup
                     })
+                const annualLeaves = employee.records
+                    .filter(record =>
+                        c.predicate.isRecordAllSignedPass(record) &&
+                        record.leaveType === 'annual')
+                const annualInfo = transformToAnnualInfo(annualLeaves, getAnnualLTTotalDays(employee.arrivedDate, year))
                 bascInfo.recordGroups = recordGroups
                 bascInfo.leaveTypeGroups = leaveTypeGroups
+                bascInfo.annualInfo = annualInfo
                 return bascInfo
             } else {
                 const records = shrink(employee.records, year, month, false)
@@ -163,7 +169,9 @@ function filterWithin(records, year, month) {
                 dateInfo && dateInfo.year === year &&
                 (!month || dateInfo.month === month))
         if (anyDateOfRecordWithin) {
-            result.push(record)
+            const dates = filterMatchedDates(record.dates,
+                (month ? { month } : { year }))
+            result.push(u.renew(record, { dates, totals: { days: dates.length, halfHours: record.totals.halfHours } }))
         }
     })
     return result;
@@ -181,9 +189,7 @@ function groupBy(records, month) {
                 const index = month ? dateInfo.day - 1 : dateInfo.month - 1;
                 const exists = result[index].some(x => x._id === record._id)
                 if (!exists) {
-                    const dates = filterMatchedDates(record.dates,
-                        (month ? { day: index + 1 } : { month: index + 1 }))
-                    result[index].push(u.renew(record, { dates }))
+                    result[index].push(record)
                 }
             })
     })
@@ -193,7 +199,7 @@ function groupBy(records, month) {
 function filterMatchedDates(dates, info) {
     return dates.filter(dateInfo =>
         (info.month && u.toDateInfo(dateInfo).month === info.month) ||
-        (info.day && u.toDateInfo(dateInfo).day === info.day))
+        (info.year && u.toDateInfo(dateInfo).year === info.year))
 }
 
 function groupByLeaveType(records) {

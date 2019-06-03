@@ -6,7 +6,7 @@
       <v-btn icon flat @click="toPrev">
         <v-icon>keyboard_arrow_left</v-icon>
       </v-btn>
-      {{ year }}{{ annual ? '' : `/${month + 1}` }}
+      {{ year }}{{ annual ? '' : `/${month}` }}
       <v-btn icon flat @click="toNext">
         <v-icon>keyboard_arrow_right</v-icon>
       </v-btn>
@@ -35,7 +35,7 @@ export default {
       return this.calendarDate.getFullYear();
     },
     month() {
-      return this.calendarDate.getMonth();
+      return this.calendarDate.getMonth() + 1;
     },
     date() {
       return this.calendarDate.getDate();
@@ -44,14 +44,14 @@ export default {
   methods: {
     toPrev() {
       const newDate = this.annual
-        ? new Date(this.year - 1, this.month, this.date)
-        : new Date(this.year, this.month - 1, this.date);
+        ? new Date(this.year - 1, this.month, 1)
+        : new Date(this.year, this.month - 1 - 1, 1);
       this.$emit("prev", newDate);
     },
     toNext() {
       const newDate = this.annual
-        ? new Date(this.year + 1, this.month, this.date)
-        : new Date(this.year, this.month + 1, this.date);
+        ? new Date(this.year + 1, this.month, 1)
+        : new Date(this.year, this.month + 1 - 1, 1);
       this.$emit("next", newDate);
     },
     toLastest() {

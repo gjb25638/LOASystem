@@ -1,0 +1,46 @@
+{
+  "EmployeeInfo": {},
+  "MonthReport": {
+    "styles": [
+      {
+        "name": "fontSize",
+        "value": 12
+      },
+      {
+        "name": "verticalAlignment",
+        "value": "top"
+      }
+    ],
+    "width": 11
+  },
+  "DayReport": {
+    "styles": [
+      {
+        "name": "fontSize",
+        "value": 12
+      },
+      {
+        "name": "verticalAlignment",
+        "value": "top"
+      }
+    ],
+    "width": 11
+  },
+  "LTReport": {
+    "width": 6,
+    "styles": [
+      {
+        "name": "verticalAlignment",
+        "value": "center"
+      }
+    ]
+  },
+  "AnnualInfo": {
+    "styles": [
+      {
+        "name": "fontSize",
+        "value": 12
+      }
+    ]
+  }
+}
