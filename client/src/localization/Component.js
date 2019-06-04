@@ -1,6 +1,4 @@
 export default {
-    en: {
-    },
-    zh: {
-    }
-}
+  en: {},
+  zh: {}
+};

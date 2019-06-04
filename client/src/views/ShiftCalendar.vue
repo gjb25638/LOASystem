@@ -11,6 +11,10 @@
         @next="$refs.calendar.next()"
         @tolastest="(date) => calendarDate = formatDate(date)"
       >
+        <v-btn @click="download">
+          <v-icon>get_app</v-icon>
+          {{loalocale.self.download}}
+        </v-btn>
         <v-btn-toggle v-model="selectedEmployee" v-if="!readonly">
           <v-tooltip v-for="employee in employees" :key="employee.username" bottom>
             <v-btn :value="employee" slot="activator">{{employee.username}}</v-btn>
@@ -26,15 +30,9 @@
             v-model="calendarDate"
             type="month"
             color="primary"
-            @click:date="toggleHoliday"
           >
             <template v-slot:day="{ date }">
-              <v-divider
-                v-if="holidays.includes(date)"
-                label
-                style="border-top-width:4px;"
-                color="red lighten-1"
-              ></v-divider>
+              <div style="font-size:10px">{{getHolidayTitle(date)}}</div>
               <v-btn-toggle v-if="shiftGroups[date] && !readonly">
                 <v-chip :color="daypartConf['早'].color" outline label @click="add(date, '早')">早</v-chip>
                 <v-chip :color="daypartConf['中'].color" outline label @click="add(date, '中')">中</v-chip>
@@ -192,17 +190,30 @@ export default {
     }
   },
   async mounted() {
-    this.getShiftConfig();
+    this.getHoliday();
     this.getShifts();
   },
   methods: {
-    async getShiftConfig() {
+    download() {
+      const url = EmployeeService.downloadURL.exportShift({
+        year: this.calendarDateYear,
+        month: this.calendarDateMonth,
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token
+      });
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style = "display:none";
+      document.body.appendChild(iframe);
+    },
+    async getHoliday() {
       const {
         data: { holidays }
-      } = await EmployeeService.getShiftConfig({
+      } = await EmployeeService.getHoliday({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
-        type: "holiday"
+        year: this.calendarDateYear,
+        month: this.calendarDateMonth
       });
       this.holidays = holidays;
     },
@@ -216,10 +227,14 @@ export default {
         month: this.calendarDateMonth
       });
       this.fullControl = fullControl;
-      this.employees = employees;
+      this.employees = this.filter(employees);
       if (initDefault) {
-        this.selectedEmployee = employees.length > 0 ? employees[0] : undefined;
+        this.selectedEmployee =
+          this.employees.length > 0 ? this.employees[0] : undefined;
       }
+    },
+    filter(employees) {
+      return employees.filter(e => defaultConf.shiftDepts.includes(e.dept));
     },
     async add(date, daypart) {
       if (!this.readonly) {
@@ -262,33 +277,22 @@ export default {
         }
       }
     },
-    async toggleHoliday(dateObj) {
-      if (this.holidays.includes(dateObj.date)) {
-        this.holidays = this.holidays.filter(date => dateObj.date !== date);
+    getHolidayTitle(date) {
+      if (this.holidays.length > 0) {
+        const dateObj = new Date(date);
+        const holiday = this.holidays.find(
+          h => new Date(h.date).toDateString() === dateObj.toDateString()
+        );
+        return holiday ? holiday.title : "";
       } else {
-        this.holidays.push(dateObj.date);
-      }
-      const {
-        data: { success, message }
-      } = await EmployeeService.updateShiftConfig({
-        type: "holiday",
-        loginuser: this.loginuser.username,
-        token: this.loginuser.token,
-        config: {
-          holidays: this.holidays
-        }
-      });
-      if (success) {
-      } else {
-        this.systemNotification.level = "warning";
-        this.systemNotification.text = utility.lookUpCustomMessage(message);
-        this.systemNotification.visible = true;
+        return "";
       }
     },
     formatDate: utility.formatDate
   },
   watch: {
     calendarDate() {
+      this.getHoliday();
       this.getShifts();
     }
   }

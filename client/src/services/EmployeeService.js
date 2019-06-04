@@ -159,6 +159,13 @@ export default {
     devlog(`${config.API_URL}/${url}`);
     return Api().get(url);
   },
+  getHoliday(params) {
+    const url = `holiday/${params.year}/${params.month}/${
+      params.loginuser
+    }/${encodeURIComponent(params.token)}`;
+    devlog(`${config.API_URL}/${url}`);
+    return Api().get(url);
+  },
   updateShiftConfig(params) {
     const url = `shift/config/${params.type}/${
       params.loginuser
@@ -180,6 +187,14 @@ export default {
           params.token
         )}`;
       }
+      devlog(url);
+      return url;
+    },
+    exportShift(params) {
+      let url;
+      url = `${config.API_URL}/shift/export/${params.year}/${params.month}/${
+        params.loginuser
+      }/${encodeURIComponent(params.token)}`;
       devlog(url);
       return url;
     },

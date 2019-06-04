@@ -263,7 +263,8 @@ export default {
               days: lt.totals.days,
               hours: lt.totals.halfHours ? lt.totals.halfHours / 2 : 0
             },
-            deadline: utility.formatDate(lt.deadline)
+            deadline: utility.formatDate(lt.deadline),
+            halfHoursEnabled: lt.halfHoursEnabled
           });
         }
       });

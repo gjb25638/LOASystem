@@ -32,7 +32,8 @@ const {
   hideColumn,
   setTextAlign,
   setRichTextFontColor,
-  findFontColor
+  findFontColor,
+  setNoBorder
 } = require("./util/style");
 const {
   initSheet,
@@ -53,24 +54,25 @@ function produce(workbook, employees, { year, month, sheetName }) {
   headers.forEach(
     ({ area, styles, width, height, merged, dataKey, title, name }) => {
       const rowNumber = 1;
-      const { column, cell } = init(sheet, name, rowNumber, {
+      const { cell } = init(sheet, name, rowNumber, {
         area,
         styles,
         width,
         height
       });
-      if (isDayReportArea(area, dataKey.day)) {
-        const day = dataKey.day + 1;
-        const date = new Date(year, month - 1, day);
-        chineseWeekday = getChineseWeekday(year, month, day);
-        if (isOverMaxDayOfMonth(year, month, day) || isSunday(date)) {
-          hideColumn(column);
+      setBorder(cell, border.bottom.style, border.style.thick);
+      if (isEmployeeInfoArea(area)) {
+        if (dataKey === "arrivedDate") {
+          setNoBorder(cell);
         }
+      } else if (isMonthReportArea(area, dataKey.month)) {
+        setTextAlign(cell, align.direction.vertical, align.bottom);
+      } else if (isAnnualInfoArea(area, dataKey.index)) {
+        setNoBorder(cell);
       }
       if (merged) {
         mergeCells(cell, initCell(sheet, merged, rowNumber));
       }
-      setBorder(cell, border.bottom.style, border.style.thick);
       const cellValue = isStringFormat(title)
         ? stringFormat(
             title.format,
@@ -82,7 +84,6 @@ function produce(workbook, employees, { year, month, sheetName }) {
   );
 
   const ltTotalsMap = {};
-  const absencesMap = [];
   // Body
   filteredEmployees.forEach((e, index) => {
     const rowNumber = index + 1 + 1;
@@ -95,6 +96,9 @@ function produce(workbook, employees, { year, month, sheetName }) {
       });
       if (isLastEmployee(filteredEmployees.length, index)) {
         setBorder(cell, border.bottom.style, border.style.double);
+        if (dataKey === "arrivedDate") {
+          setNoBorder(cell);
+        }
       }
       if (isEmployeeInfoArea(area)) {
         cell.value(e[dataKey]);
@@ -109,7 +113,6 @@ function produce(workbook, employees, { year, month, sheetName }) {
             const value = totalsToString(x.totals, x.key) + "\n";
             setRichTextFontColor(richText, value, fontColor);
           });
-          updateAbsencesMap(absencesMap, month);
         }
       } else if (isLTReportArea(area, dataKey.leaveType)) {
         const leaveType = dataKey.leaveType;
@@ -143,6 +146,10 @@ function produce(workbook, employees, { year, month, sheetName }) {
           }
         }
       } else if (isAnnualInfoArea(area, dataKey.index)) {
+        setBorder(cell, border.top.style, undefined);
+        setBorder(cell, border.bottom.style, undefined);
+        setBorder(cell, border.left.style, undefined);
+        setBorder(cell, border.right.style, undefined);
         const type = dataKey.type;
         const deadlineThisYear = year + e.arrivedDate.substr(4);
         const deadlineDateThisYear = new Date(deadlineThisYear);
@@ -168,20 +175,10 @@ function produce(workbook, employees, { year, month, sheetName }) {
       width,
       height
     });
-    setBorder(cell, border.bottom.style, border.style.thick);
-    setTextAlign(cell, align.direction.horizontal, align.center);
-    setTextAlign(cell, align.direction.vertical, align.center);
-    if (isEmployeeInfoArea(area)) {
-      if (name == "B") {
-        cell.value("休假/公出人數");
-        setTextAlign(cell, align.direction.horizontal, align.right);
-        mergeCells(cell, initCell(sheet, "C", lastRowNumber));
-      }
-    } else if (isMonthReportArea(area, dataKey.month)) {
-      const month = dataKey.month;
-      const amount = absencesMap[month];
-      cell.value(amount ? `${amount}人` : "");
-    } else if (isLTReportArea(area, dataKey.leaveType)) {
+    setNoBorder(cell);
+    if (isLTReportArea(area, dataKey.leaveType)) {
+      setTextAlign(cell, align.direction.horizontal, align.center);
+      setTextAlign(cell, align.direction.vertical, align.center);
       const leaveType = dataKey.leaveType;
       const unit = dataKey.unit;
       const key = unit ? `${leaveType}.${unit}` : leaveType;
@@ -197,13 +194,5 @@ function updateLTTotalsMap(ltTotalsMap, totals, ltName, unit) {
     ltTotalsMap[key].push(totals);
   } else {
     ltTotalsMap[key] = [totals];
-  }
-}
-
-function updateAbsencesMap(absencesMap, month) {
-  if (absencesMap[month]) {
-    absencesMap[month]++;
-  } else {
-    absencesMap[month] = 1;
   }
 }

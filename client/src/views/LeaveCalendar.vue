@@ -48,6 +48,7 @@
             @click:date="selectDate"
           >
             <template v-slot:day="{ date }">
+              <div style="font-size:10px">{{getHolidayTitle(date)}}</div>
               <template v-for="(event, index) in leaveGroups[date]">
                 <v-menu
                   :key="index"
@@ -142,7 +143,8 @@ export default {
       loading: false,
       steps: [],
       deptOptions: [],
-      selectedDept: ""
+      selectedDept: "",
+      holidays: []
     };
   },
   computed: {
@@ -154,6 +156,7 @@ export default {
   },
   async mounted() {
     this.getRecords();
+    this.getHoliday();
     this.getLeaveTypes();
     this.deptOptions = [
       { text: this.loalocale.self.allDept, value: "" },
@@ -284,11 +287,34 @@ export default {
         this.systemNotification.visible = true;
       }
     },
+    async getHoliday() {
+      const {
+        data: { holidays }
+      } = await EmployeeService.getHoliday({
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token,
+        year: this.year,
+        month: this.month
+      });
+      this.holidays = holidays;
+    },
+    getHolidayTitle(date) {
+      if (this.holidays.length > 0) {
+        const dateObj = new Date(date);
+        const holiday = this.holidays.find(
+          h => new Date(h.date).toDateString() === dateObj.toDateString()
+        );
+        return holiday ? holiday.title : "";
+      } else {
+        return "";
+      }
+    },
     formatDate: utility.formatDate
   },
   watch: {
     calendarDate() {
       this.getRecords();
+      this.getHoliday();
     },
     showOnlyYours() {
       this.leaves = this.toLeaves(this.report);

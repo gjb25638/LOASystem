@@ -72,7 +72,7 @@ function totalsToString({ days, hours }, leaveType = "") {
     familyCare: "家照"
   };
   return (
-    (map[leaveType] ? map[leaveType] : leaveType) +
+    (map[leaveType] ? map[leaveType] : leaveType ? map.compensatory : "") +
     (leaveType ? " " : "") +
     (days > 0 ? (leaveType ? "1天" : `${days}天`) : "") +
     (hours > 0 ? `${hours}H` : "")

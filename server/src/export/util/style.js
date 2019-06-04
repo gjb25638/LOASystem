@@ -1,4 +1,5 @@
 const leaveTypeUtil = require("./leave-type");
+const { align, border } = require("../styles/const");
 
 module.exports = {
   setBorder,
@@ -7,7 +8,9 @@ module.exports = {
   setRichTextFontColor,
   findStyle,
   findFontColor,
-  setFontColor
+  setFontColor,
+  setWrapText,
+  setNoBorder
 };
 
 function setBorder(cell, name, value) {
@@ -42,4 +45,15 @@ function findFontColor(headers, leaveType) {
     ? findStyle(header.styles, "fontColor")
     : undefined;
   return fontColorStyle ? fontColorStyle.value : undefined;
+}
+
+function setWrapText(cell) {
+  cell.style("wrapText", true);
+}
+
+function setNoBorder(cell) {
+  setBorder(cell, border.top.style, undefined);
+  setBorder(cell, border.bottom.style, undefined);
+  setBorder(cell, border.left.style, undefined);
+  setBorder(cell, border.right.style, undefined);
 }

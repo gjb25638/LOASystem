@@ -307,7 +307,7 @@
     "area": "LTReport"
   },
   {
-    "title": "遲到/忘刷卡",
+    "title": "遲到\n/忘刷卡\n(次)",
     "dataKey": {
       "leaveType": ""
     },
@@ -353,6 +353,22 @@
       {
         "name": "fontSize",
         "value": 12
+      },
+      {
+        "name": "topBorderStyle",
+        "value": null
+      },
+      {
+        "name": "bottomBorderStyle",
+        "value": null
+      },
+      {
+        "name": "leftBorderStyle",
+        "value": null
+      },
+      {
+        "name": "rightBorderStyle",
+        "value": null
       }
     ]
   }

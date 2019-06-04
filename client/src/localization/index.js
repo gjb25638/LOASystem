@@ -1,33 +1,33 @@
-import Report from '@/localization/Report'
-import List from '@/localization/List'
-import Login from '@/localization/Login'
-import EmployeeAction from '@/localization/EmployeeAction'
-import Detail from '@/localization/Detail'
-import RecordList from '@/localization/RecordList'
-import NavDrawer from '@/localization/NavDrawer'
-import shared from '@/localization/shared'
-import SigningBlock from '@/localization/SigningBlock'
-import SigningTooltip from '@/localization/SigningTooltip'
-import LeaveTypeRefreshedNotification from '@/localization/LeaveTypeRefreshedNotification'
-import LeaveTypeContainer from '@/localization/LeaveTypeContainer'
-import LeaveTypeTooltip from '@/localization/LeaveTypeTooltip'
-import SystemNotification from '@/localization/SystemNotification'
-import CompensatoryList from '@/localization/CompensatoryList'
-import AnnualReport from '@/localization/AnnualReport'
-import EmployeeProfile from '@/localization/EmployeeProfile'
-import EmployeeAccountSettings from '@/localization/EmployeeAccountSettings'
-import LeaveTypeEditorDialog from '@/localization/LeaveTypeEditorDialog'
-import LeaveForm from '@/localization/LeaveForm'
-import LeaveContainer from '@/localization/LeaveContainer'
-import LeaveTypeInfo from '@/localization/LeaveTypeInfo'
-import MonthlyReport from '@/localization/MonthlyReport';
-import EmployeeInfo from '@/localization/EmployeeInfo';
-import LeaveCalendar from '@/localization/LeaveCalendar';
-import LeaveTakingBlock from '@/localization/LeaveTakingBlock';
-import LeaveDetailInfo from '@/localization/LeaveDetailInfo';
-import ShiftCalendar from '@/localization/ShiftCalendar';
-import ShiftConfig from '@/localization/ShiftConfig';
-import Tour from '@/localization/Tour';
+import Report from "@/localization/Report";
+import List from "@/localization/List";
+import Login from "@/localization/Login";
+import EmployeeAction from "@/localization/EmployeeAction";
+import Detail from "@/localization/Detail";
+import RecordList from "@/localization/RecordList";
+import NavDrawer from "@/localization/NavDrawer";
+import shared from "@/localization/shared";
+import SigningBlock from "@/localization/SigningBlock";
+import SigningTooltip from "@/localization/SigningTooltip";
+import LeaveTypeRefreshedNotification from "@/localization/LeaveTypeRefreshedNotification";
+import LeaveTypeContainer from "@/localization/LeaveTypeContainer";
+import LeaveTypeTooltip from "@/localization/LeaveTypeTooltip";
+import SystemNotification from "@/localization/SystemNotification";
+import CompensatoryList from "@/localization/CompensatoryList";
+import AnnualReport from "@/localization/AnnualReport";
+import EmployeeProfile from "@/localization/EmployeeProfile";
+import EmployeeAccountSettings from "@/localization/EmployeeAccountSettings";
+import LeaveTypeEditorDialog from "@/localization/LeaveTypeEditorDialog";
+import LeaveForm from "@/localization/LeaveForm";
+import LeaveContainer from "@/localization/LeaveContainer";
+import LeaveTypeInfo from "@/localization/LeaveTypeInfo";
+import MonthlyReport from "@/localization/MonthlyReport";
+import EmployeeInfo from "@/localization/EmployeeInfo";
+import LeaveCalendar from "@/localization/LeaveCalendar";
+import LeaveTakingBlock from "@/localization/LeaveTakingBlock";
+import LeaveDetailInfo from "@/localization/LeaveDetailInfo";
+import ShiftCalendar from "@/localization/ShiftCalendar";
+import ShiftConfig from "@/localization/ShiftConfig";
+import Tour from "@/localization/Tour";
 
 export default {
   en: {
@@ -60,7 +60,7 @@ export default {
     LeaveDetailInfo: LeaveDetailInfo.en,
     Tour: Tour.en,
     ShiftCalendar: ShiftCalendar.en,
-    ShiftConfig: ShiftConfig.en,
+    ShiftConfig: ShiftConfig.en
   },
   zh: {
     Report: Report.zh,
@@ -92,7 +92,7 @@ export default {
     LeaveDetailInfo: LeaveDetailInfo.zh,
     Tour: Tour.zh,
     ShiftCalendar: ShiftCalendar.zh,
-    ShiftConfig: ShiftConfig.zh,
+    ShiftConfig: ShiftConfig.zh
   }
-}["zh"]
+}["zh"];
 //[navigator ? navigator.language.substr(0, 2) : "zh"]

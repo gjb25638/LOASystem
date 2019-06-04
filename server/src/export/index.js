@@ -1,13 +1,28 @@
 const XlsxPopulate = require("xlsx-populate");
 const annual = require("./annual");
 const monthly = require("./monthly");
+const shift = require("./shift");
 
 module.exports = {
-  populate
+  populate,
+  populateShift
 };
 
 function populate({ year, month }, employees, cb) {
   const { fileName, sheetName, produce } = getNames({ year, month });
+  XlsxPopulate.fromBlankAsync()
+    .then(workbook =>
+      produce(workbook, employees, {
+        year,
+        month,
+        sheetName
+      }).outputAsync()
+    )
+    .then(data => cb(data, fileName));
+}
+
+function populateShift({ year, month }, employees, cb) {
+  const { fileName, sheetName, produce } = getShiftNames({ year, month });
   XlsxPopulate.fromBlankAsync()
     .then(workbook =>
       produce(workbook, employees, {
@@ -33,4 +48,12 @@ function getNames({ year, month }) {
       produce: annual.produce
     };
   }
+}
+
+function getShiftNames({ year, month }) {
+  return {
+    fileName: `${year}年${month}月客服班表.xlsx`,
+    sheetName: `${year}-${month}班表`,
+    produce: shift.produce
+  };
 }

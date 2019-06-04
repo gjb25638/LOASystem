@@ -13,7 +13,8 @@ module.exports = {
   isHoliday,
   isMakeUpWorkday,
   isEmployeeWorkingShifts,
-  isCompensatoryLT
+  isCompensatoryLT,
+  isStringValue
 };
 
 function isStringValue(value) {

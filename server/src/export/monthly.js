@@ -40,7 +40,8 @@ const {
   setTextAlign,
   setRichTextFontColor,
   setFontColor,
-  findFontColor
+  findFontColor,
+  setNoBorder
 } = require("./util/style");
 const {
   initSheet,
@@ -70,18 +71,25 @@ function produce(workbook, employees, { year, month, sheetName }) {
         height
       });
       let chineseWeekday;
-      if (isDayReportArea(area, dataKey.day)) {
+      setBorder(cell, border.bottom.style, border.style.thick);
+      if (isEmployeeInfoArea(area)) {
+        if (dataKey === "arrivedDate") {
+          setNoBorder(cell);
+        }
+      } else if (isDayReportArea(area, dataKey.day)) {
+        setTextAlign(cell, align.direction.vertical, align.bottom);
         const day = dataKey.day + 1;
         const date = new Date(year, month - 1, day);
         chineseWeekday = getChineseWeekday(year, month, day);
         if (isOverMaxDayOfMonth(year, month, day) || isSunday(date)) {
           hideColumn(column);
         }
+      } else if (isAnnualInfoArea(area, dataKey.index)) {
+        setNoBorder(cell);
       }
       if (merged) {
         mergeCells(cell, initCell(sheet, merged, rowNumber));
       }
-      setBorder(cell, border.bottom.style, border.style.thick);
       const cellValue = isStringFormat(title)
         ? stringFormat(title.format, month, chineseWeekday)
         : title;
@@ -102,7 +110,14 @@ function produce(workbook, employees, { year, month, sheetName }) {
         height
       });
       if (isLastEmployee(filteredEmployees.length, index)) {
-        setBorder(cell, border.bottom.style, border.style.double);
+        if (
+          isAnnualInfoArea(area, dataKey.index) ||
+          dataKey === "arrivedDate"
+        ) {
+          setNoBorder(cell);
+        } else {
+          setBorder(cell, border.bottom.style, border.style.double);
+        }
       }
       if (isEmployeeInfoArea(area)) {
         cell.value(e[dataKey]);
@@ -199,6 +214,9 @@ function produce(workbook, employees, { year, month, sheetName }) {
     setTextAlign(cell, align.direction.horizontal, align.center);
     setTextAlign(cell, align.direction.vertical, align.center);
     if (isEmployeeInfoArea(area)) {
+      if (dataKey === "arrivedDate") {
+        setNoBorder(cell);
+      }
       if (name == "B") {
         cell.value("休假/公出人數");
         setTextAlign(cell, align.direction.horizontal, align.right);
@@ -221,6 +239,8 @@ function produce(workbook, employees, { year, month, sheetName }) {
       const unit = dataKey.unit;
       const key = unit ? `${leaveType}.${unit}` : leaveType;
       cell.value(totalsToString(sumUpTotalsList(ltTotalsMap[key])));
+    } else if (isAnnualInfoArea(area, dataKey.index)) {
+      setNoBorder(cell);
     }
   });
   return workbook;

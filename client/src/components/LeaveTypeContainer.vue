@@ -18,7 +18,7 @@
         ></leave-type-row>
         <v-list-tile avatar v-if="!readonly && helper">
           <v-list-tile-avatar>
-            <v-icon :class="['brown', 'darken-1', 'white--text']">event</v-icon>
+            <v-icon :class="['teal', 'lighten-3', 'white--text']">event</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-text-field :label="this.loalocale.self.others" v-model="customTypeName"></v-text-field>

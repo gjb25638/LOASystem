@@ -42,6 +42,8 @@ module.exports = {
   fontColor: {
     red: "F44336",
     blue: "3F51B5",
-    grey: "7B8C9E"
+    grey: "CFD8DC",
+    white: "FFFFFF",
+    black: "000000"
   }
 };

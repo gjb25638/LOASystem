@@ -30,7 +30,9 @@ function init(sheet, columnName, rowNumber, { area, styles, width, height }) {
   const row = initRow(sheet, rowNumber);
   const cell = initCell(sheet, columnName, rowNumber);
   constructGlobal(column, row, cell);
-  constructArea(column, row, cell, area);
+  if (area) {
+    constructArea(column, row, cell, area);
+  }
   construct(column, row, cell, { styles, width, height });
   return { column, row, cell };
 }
