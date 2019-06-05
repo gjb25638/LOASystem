@@ -72,7 +72,8 @@ function post(req, res) {
             ) {
               employee.shifts.push({
                 date: req.body.shift.date,
-                daypart: req.body.shift.daypart
+                daypart: req.body.shift.daypart,
+                primary: req.body.shift.primary
               });
               employee.save(err => {
                 if (err) {
@@ -113,34 +114,36 @@ function _delete(req, res) {
           if (err) {
             res.send({ success: false, message: err });
           } else {
-            const shift = employee.shifts.find(
-              shift => shift._id.toString() === req.body.shiftId
-            );
-            const shiftDateInfo = u.toDateInfo(shift.date);
-            const currentDateInfo = u.toDateInfo(new Date());
-            if (
-              shiftDateInfo.month >= currentDateInfo.month &&
-              shiftDateInfo.year >= currentDateInfo.year
-            ) {
-              employee.shifts = employee.shifts.filter(
-                shift => shift._id.toString() !== req.body.shiftId
+            try {
+              const shift = employee.shifts.find(
+                shift => shift._id.toString() === req.body.shiftId
               );
-              employee.save(err => {
-                if (err) {
-                  res.send({ success: false, message: err });
-                } else {
-                  res.send({
-                    success: true,
-                    message: "shift deleted successfully"
-                  });
-                }
-              });
-            } else {
-              res.send({
-                success: false,
-                message: "unable to update expired shift"
-              });
-            }
+              const shiftDateInfo = u.toDateInfo(shift.date);
+              const currentDateInfo = u.toDateInfo(new Date());
+              if (
+                shiftDateInfo.month >= currentDateInfo.month &&
+                shiftDateInfo.year >= currentDateInfo.year
+              ) {
+                employee.shifts = employee.shifts.filter(
+                  shift => shift._id.toString() !== req.body.shiftId
+                );
+                employee.save(err => {
+                  if (err) {
+                    res.send({ success: false, message: err });
+                  } else {
+                    res.send({
+                      success: true,
+                      message: "shift deleted successfully"
+                    });
+                  }
+                });
+              } else {
+                res.send({
+                  success: false,
+                  message: "unable to update expired shift"
+                });
+              }
+            } catch (e) {}
           }
         });
       } else {

@@ -49,6 +49,7 @@
                   >
                     <v-avatar tile>{{item.shift.daypart}}</v-avatar>
                     {{item.employee.username}}
+                    <v-icon class="primary-shifter" v-if="item.shift.primary">star_border</v-icon>
                   </v-chip>
                 </div>
               </template>
@@ -207,9 +208,7 @@ export default {
       document.body.appendChild(iframe);
     },
     async getHoliday() {
-      const {
-        data: { holidays }
-      } = await EmployeeService.getHoliday({
+      const { data: { holidays } } = await EmployeeService.getHoliday({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         year: this.calendarDateYear,
@@ -238,6 +237,7 @@ export default {
     },
     async add(date, daypart) {
       if (!this.readonly) {
+        const primary = !this.alreadyHaveShifter(date, daypart);
         const {
           data: { success, message }
         } = await EmployeeService.updateShift({
@@ -245,8 +245,9 @@ export default {
           token: this.loginuser.token,
           id: this.selectedEmployee._id,
           shift: {
-            date: date,
-            daypart: daypart
+            date,
+            daypart,
+            primary
           }
         });
         if (success) {
@@ -257,6 +258,15 @@ export default {
           this.systemNotification.visible = true;
         }
       }
+    },
+    alreadyHaveShifter(date, daypart) {
+      return Object.keys(this.shiftGroups).some(
+        dateStr =>
+          dateStr === date &&
+          this.shiftGroups[dateStr] &&
+          this.shiftGroups[dateStr].length > 0 &&
+          this.shiftGroups[dateStr].some(item => item.shift.daypart === daypart)
+      );
     },
     async remove(employeeId, shiftId) {
       if (!this.readonly) {
@@ -299,4 +309,8 @@ export default {
 };
 </script>
 <style>
+.primary-shifter {
+  position: absolute;
+  right: 10px;
+}
 </style>

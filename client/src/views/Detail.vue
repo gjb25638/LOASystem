@@ -97,7 +97,7 @@ export default {
     fullControl: false,
     signerOptions: [
       {
-        _id: "",
+        id: "",
         dept: "",
         name: "",
         username: "",
@@ -140,13 +140,19 @@ export default {
       );
     },
     async getEmployees() {
-      const {
-        data: { employees }
-      } = await EmployeeService.fetchForLightweight({
-        loginuser: this.loginuser.username,
-        token: this.loginuser.token
-      });
-      this.signerOptions = employees;
+      const { data: { employees } } = await EmployeeService.fetchForLightweight(
+        {
+          loginuser: this.loginuser.username,
+          token: this.loginuser.token
+        }
+      );
+      this.signerOptions = employees.map(e => ({
+        id: e._id,
+        dept: e.dept,
+        name: e.name,
+        username: e.username,
+        level: e.level
+      }));
     },
     async getEmployee() {
       const {
@@ -210,9 +216,7 @@ export default {
           id: this.$route.params.id,
           signers: this.profile.signers
         };
-        let {
-          data: { success, message }
-        } = this.isEditMode
+        let { data: { success, message } } = this.isEditMode
           ? await EmployeeService.update(params)
           : await EmployeeService.add(params);
 

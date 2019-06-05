@@ -1,7 +1,7 @@
 <template>
   <v-dialog max-width="350" v-model="dialog">
     <v-btn icon slot="activator">
-      <v-icon class="flash" color="yellow">storage</v-icon>
+      <v-icon color="yellow">storage</v-icon>
     </v-btn>
     <v-card>
       <v-card-title class="theme">
@@ -42,9 +42,7 @@ export default {
       document.body.appendChild(iframe);
     },
     async restore() {
-      const {
-        data: { success, message }
-      } = await EmployeeService.dbrestore({
+      const { data: { success, message } } = await EmployeeService.dbrestore({
         loginuser: this.loginuser.username,
         token: this.loginuser.token
       });

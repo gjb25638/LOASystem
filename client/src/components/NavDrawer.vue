@@ -7,7 +7,7 @@
           height="200px"
           :src="`${config.API_URL}/avatar/${loginuser.username}`"
         >
-          <v-btn class="nav-expander" icon @click.stop="mini = !mini">
+          <v-btn class="nav-expander flash" icon @click.stop="mini = !mini">
             <v-icon>{{mini ? "chevron_left" : "chevron_right"}}</v-icon>
           </v-btn>
         </v-img>

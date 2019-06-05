@@ -94,7 +94,10 @@ app.get("/shift/:year/:month/:loginuser/:token", shift.get);
 
 app.get("/avatar/:username", (req, res) => {
   const defaultFilepath = path.join(__dirname, `avatar/unknown.jpg`);
-  const filepath = path.join(__dirname, `avatar/${req.params.username}.jpg`);
+  const filepath = path.join(
+    __dirname,
+    `avatar/${req.params.username.toLowerCase()}.jpg`
+  );
   if (fs.existsSync(filepath)) {
     res.sendFile(filepath);
   } else {

@@ -217,7 +217,7 @@ function getShifters(employees, date, daypart) {
         s.daypart === daypart
     );
     if (shift) {
-      result.push(e.username);
+      result.push(shift.primary ? `${e.username}(主)` : e.username);
     }
   });
   return result.join("\n");

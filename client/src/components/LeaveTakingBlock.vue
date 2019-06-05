@@ -80,6 +80,11 @@ export default {
     }
   },
   data: () => ({
+    systemNotification: {
+      level: "warning",
+      text: "",
+      visible: false
+    },
     selectedLT: {
       class: "",
       icon: "",
@@ -131,9 +136,7 @@ export default {
           }
         };
       });
-      const {
-        data: { success, message }
-      } = await EmployeeService.updateLOA({
+      const { data: { success, message } } = await EmployeeService.updateLOA({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         id: this.employeeId,
@@ -231,6 +234,7 @@ export default {
             // totals days - consumes days = 1 day left, but the applied time > 9 hours(=1 work day).
             this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
             this.systemNotification.visible = true;
+            this.$emit("notified", this.systemNotification);
             return;
           }
         } else {
@@ -242,6 +246,7 @@ export default {
             // consume hours + applied time > totals hours.
             this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
             this.systemNotification.visible = true;
+            this.$emit("notified", this.systemNotification);
             return;
           }
         }
@@ -253,6 +258,7 @@ export default {
         // consume days + chosen dates > totals days.
         this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
         this.systemNotification.visible = true;
+        this.$emit("notified", this.systemNotification);
         return;
       }
       const personalLeaveType = this.formattedLeaveTypes.find(
@@ -281,6 +287,7 @@ export default {
         ) {
           this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
           this.systemNotification.visible = true;
+          this.$emit("notified", this.systemNotification);
           return;
         }
       }

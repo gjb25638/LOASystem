@@ -2,7 +2,6 @@
   <v-app id="inspire">
     <page-container :title="loalocale.self.title" icon="view_list">
       <v-card class="elevation-12">
-        {{calendarDate.getMonth()}}
         <calendar-controller
           :calendarDate="calendarDate"
           @prev="(date) => calendarDate = date"

@@ -89,6 +89,7 @@
         @picked="leavePicked"
         @cancel="dialog = false"
         :date="selectedDate"
+        @notified="(notification) => systemNotification = notification"
       ></leave-taking-block>
     </v-dialog>
     <system-notification v-model="systemNotification" @close="systemNotification.visible = false">
@@ -166,9 +167,7 @@ export default {
   },
   methods: {
     async getLeaveTypes() {
-      const {
-        data: { activatedLeaveTypes }
-      } = await EmployeeService.get({
+      const { data: { activatedLeaveTypes } } = await EmployeeService.get({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         id: this.loginuser._id
@@ -288,9 +287,7 @@ export default {
       }
     },
     async getHoliday() {
-      const {
-        data: { holidays }
-      } = await EmployeeService.getHoliday({
+      const { data: { holidays } } = await EmployeeService.getHoliday({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         year: this.year,

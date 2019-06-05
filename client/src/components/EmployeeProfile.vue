@@ -127,7 +127,7 @@ export default {
     signerOptions: {
       type: Array,
       default: () => ({
-        _id: "",
+        id: "",
         dept: "",
         name: "",
         username: "",
