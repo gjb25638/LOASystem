@@ -11,6 +11,7 @@
         @next="$refs.calendar.next()"
         @tolastest="(date) => calendarDate = formatDate(date)"
       >
+        <v-chip v-if="access.message" label outline>{{access.message}}</v-chip>
         <v-btn @click="download">
           <v-icon>get_app</v-icon>
           {{loalocale.self.download}}
@@ -111,7 +112,7 @@ export default {
       return (
         (this.loginuser.level !== "manager" &&
           this.loginuser.level !== "admin") ||
-        this.expired
+        this.access.expired
       );
     },
     shiftGroups() {
@@ -171,14 +172,51 @@ export default {
       );
       return map;
     },
-    expired() {
+    access() {
       const currentDateObj = new Date();
+      const currentDate = currentDateObj.getDate();
       const currentDateMonth = currentDateObj.getMonth() + 1;
       const currentDateYear = currentDateObj.getFullYear();
-      return (
+      if (
         this.calendarDateMonth < currentDateMonth ||
         this.calendarDateYear < currentDateYear
-      );
+      ) {
+        return {
+          expired: true,
+          message: this.loalocale.self.expired
+        };
+      } else {
+        const workdaysBeforeCurrentMonthEnds = 2;
+        if (
+          this.calendarDateMonth === currentDateMonth &&
+          this.calendarDateYear === currentDateYear
+        ) {
+          const expiredDateCandidates = Array.apply(null, { length: 7 })
+            .map(
+              (value, index) =>
+                new Date(currentDateYear, currentDateMonth, 0 - index)
+            )
+            .filter(date => date.getDay() !== 6 && date.getDay() !== 0);
+          const expiredDate =
+            expiredDateCandidates[workdaysBeforeCurrentMonthEnds];
+          return {
+            expired: currentDate >= expiredDate.getDate(),
+            message: `${this.loalocale.self.expiredAt}: ${utility.formatDate(
+              expiredDate
+            )}`
+          };
+        } else {
+          return {
+            expired: false,
+            message: `${
+              this.loalocale.self.expiredAt
+            }: ${this.loalocale.self.workdaysBeforeCurrentMonthEnds.replace(
+              "{0}",
+              workdaysBeforeCurrentMonthEnds
+            )}`
+          };
+        }
+      }
     },
     calendarDateObj() {
       return new Date(this.calendarDate);
@@ -208,7 +246,9 @@ export default {
       document.body.appendChild(iframe);
     },
     async getHoliday() {
-      const { data: { holidays } } = await EmployeeService.getHoliday({
+      const {
+        data: { holidays }
+      } = await EmployeeService.getHoliday({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         year: this.calendarDateYear,
