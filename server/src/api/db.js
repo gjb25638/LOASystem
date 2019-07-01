@@ -32,7 +32,9 @@ function backup(req, res) {
         if (err) {
           res.send({ success: false, message: err });
         } else {
-          const rightnow = new Date().toLocaleString();
+          const rightnow = new Date().toLocaleString("zh-TW", {
+            timeZone: "Asia/Taipei"
+          });
           const cryptr = new Cryptr("infostrum");
           const encrypted = cryptr.encrypt(JSON.stringify(employees));
           const bkpath = path.join(dir, "bk");

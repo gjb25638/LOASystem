@@ -198,7 +198,7 @@ export default {
             )
             .filter(date => date.getDay() !== 6 && date.getDay() !== 0);
           const expiredDate =
-            expiredDateCandidates[workdaysBeforeCurrentMonthEnds];
+            expiredDateCandidates[workdaysBeforeCurrentMonthEnds - 1];
           return {
             expired: currentDate >= expiredDate.getDate(),
             message: `${this.loalocale.self.expiredAt}: ${utility.formatDate(
@@ -246,9 +246,7 @@ export default {
       document.body.appendChild(iframe);
     },
     async getHoliday() {
-      const {
-        data: { holidays }
-      } = await EmployeeService.getHoliday({
+      const { data: { holidays } } = await EmployeeService.getHoliday({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         year: this.calendarDateYear,

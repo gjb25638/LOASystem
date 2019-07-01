@@ -35,11 +35,10 @@ export default {
         loginuser: this.loginuser.username,
         token: this.loginuser.token
       });
-      this.check();
       const iframe = document.createElement("iframe");
-      iframe.src = url;
       iframe.style = "display:none";
       document.body.appendChild(iframe);
+      iframe.src = url;
     },
     async restore() {
       const { data: { success, message } } = await EmployeeService.dbrestore({
@@ -57,6 +56,13 @@ export default {
       });
       this.content = content;
       this.$emit("dbcheck", success, message, content);
+    }
+  },
+  watch: {
+    dialog(value) {
+      if (value) {
+        this.check();
+      }
     }
   }
 };

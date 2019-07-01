@@ -116,6 +116,7 @@ function refreshAnnualPreRequestLT(deadline, annualPreRequestLT, totalsDays) {
 
 function getLTDeadLine(period, specificToday = undefined) {
   const today = specificToday ? specificToday : new Date();
+  today.setHours(0, 0, 0, 0);
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
   if (period === "year") {
@@ -133,6 +134,7 @@ function isRefreshable(deadline, period, specificToday = undefined) {
 
 function getAnnualLTDeadline(arrivedDate, specificToday = undefined) {
   const today = specificToday ? specificToday : new Date();
+  today.setHours(0, 0, 0, 0);
   const currentYear = today.getFullYear();
   const arrivedMonth = arrivedDate.getMonth();
   const arrivedDay = arrivedDate.getDate();
@@ -161,6 +163,7 @@ function isAnnualLTRefreshable(
 
 function getAnnualLTTotalDays(arrivedDate, specificToday = undefined) {
   const today = specificToday ? specificToday : new Date();
+  today.setHours(0, 0, 0, 0);
   const monthAmount = u.diffMonth(arrivedDate, today);
   const seniority = Math.floor(monthAmount / 12);
   return {
