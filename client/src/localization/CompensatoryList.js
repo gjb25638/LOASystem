@@ -10,7 +10,9 @@ export default {
     level: "Level",
     action: "Action",
     compensatory: "Compensatory",
-    title: "Compensatory"
+    title: "Compensatory",
+    download: "Download",
+    showAllHavingCompensatoryLT: "Show Having Compensatory LT"
   },
   zh: {
     showResigners: "顯示離職人員",
@@ -23,6 +25,8 @@ export default {
     level: "帳號身分",
     compensatory: "補休假(已用/總共)",
     search: "檢索",
-    title: "補休"
+    title: "補休",
+    download: "下載",
+    showAllHavingCompensatoryLT: "顯示所有未/已休完"
   }
 };

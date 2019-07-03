@@ -2,10 +2,14 @@ const XlsxPopulate = require("xlsx-populate");
 const annual = require("./annual");
 const monthly = require("./monthly");
 const shift = require("./shift");
+const e = require("./employee");
+const c = require("./compensatory");
 
 module.exports = {
   populate,
-  populateShift
+  populateShift,
+  populateEmployee,
+  populateCompensatory
 };
 
 function populate({ year, month }, employees, cb) {
@@ -30,6 +34,38 @@ function populateShift({ year, month }, employees, cb) {
         month,
         sheetName
       }).outputAsync()
+    )
+    .then(data => cb(data, fileName));
+}
+
+function populateEmployee({ year }, employee, cb) {
+  const fileName = `${employee.name}-${year}年度考勤表.xlsx`;
+  const sheetName = `${employee.name}-${year}`;
+
+  XlsxPopulate.fromBlankAsync()
+    .then(workbook =>
+      e
+        .produce(workbook, employee, {
+          year,
+          sheetName
+        })
+        .outputAsync()
+    )
+    .then(data => cb(data, fileName));
+}
+
+function populateCompensatory({ year }, employees, cb) {
+  const fileName = `${year}年底剩餘補休.xlsx`;
+  const sheetName = `${year}`;
+
+  XlsxPopulate.fromBlankAsync()
+    .then(workbook =>
+      c
+        .produce(workbook, employees, {
+          year,
+          sheetName
+        })
+        .outputAsync()
     )
     .then(data => cb(data, fileName));
 }

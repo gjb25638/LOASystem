@@ -118,7 +118,7 @@ export default {
     return Api().put(url);
   },
   compensatory(params) {
-    const url = `employees/compensatory/${
+    const url = `employees/compensatory/${params.year}/${
       params.loginuser
     }/${encodeURIComponent(params.token)}`;
     devlog(`${config.API_URL}/${url}`);
@@ -193,6 +193,22 @@ export default {
     exportShift(params) {
       let url;
       url = `${config.API_URL}/shift/export/${params.year}/${params.month}/${
+        params.loginuser
+      }/${encodeURIComponent(params.token)}`;
+      devlog(url);
+      return url;
+    },
+    exportEmployee(params) {
+      let url;
+      url = `${config.API_URL}/employee/export/${params.year}/${
+        params.username
+      }/${params.loginuser}/${encodeURIComponent(params.token)}`;
+      devlog(url);
+      return url;
+    },
+    exportCompensatory(params) {
+      let url;
+      url = `${config.API_URL}/compensatory/export/${params.year}/${
         params.loginuser
       }/${encodeURIComponent(params.token)}`;
       devlog(url);

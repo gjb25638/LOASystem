@@ -5,7 +5,7 @@ export default {
     to: "To",
     totals: "Totals",
     remarks: "Remarks",
-    hour: "hours",
+    hour: "hours(please take leave with half hour unit)",
     take: "Take"
   },
   zh: {
@@ -14,7 +14,7 @@ export default {
     to: "到",
     totals: "總共",
     remarks: "備註",
-    hour: "小時",
+    hour: "小時(請以半小時為單位)",
     take: "請假"
   }
 };

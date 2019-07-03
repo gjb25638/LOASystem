@@ -65,7 +65,7 @@ function sendLeaveTakingEmail({ taker, signers, records }) {
 function sendEmail({ tos, subject, body }) {
     const emails = tos.filter(to => !!to);
     if (emails.length > 0) {
-        var options = {
+        const options = {
             from: sendingFrom,
             to: emails[0],
             cc: emails.length > 1 ? emails.slice(1).join(',') : '',

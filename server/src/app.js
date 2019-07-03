@@ -49,7 +49,7 @@ db.once("open", () => {
 app.get("/employees/:loginuser/:token", employees.get);
 app.get("/employees/lightweight/:loginuser/:token", employees.lightweight.get);
 app.get(
-  "/employees/compensatory/:loginuser/:token",
+  "/employees/compensatory/:year/:loginuser/:token",
   employees.compensatory.get
 );
 app.post("/employee/:loginuser/:token", employee.post);
@@ -80,6 +80,14 @@ app.get(
 app.get(
   "/monthly/export/report/:year/:month/:loginuser/:token",
   report.export.monthly.get
+);
+app.get(
+  "/employee/export/:year/:username/:loginuser/:token",
+  report.export.employee.get
+);
+app.get(
+  "/compensatory/export/:year/:loginuser/:token",
+  report.export.compensatory.get
 );
 app.get("/shift/export/:year/:month/:loginuser/:token", shift.export.get);
 app.get("/db/backup/:loginuser/:token", dbOp.backup.get);

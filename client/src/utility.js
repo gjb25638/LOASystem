@@ -10,25 +10,43 @@ export default {
   },
   formatDate: dateString => {
     if (dateString) {
-      const date = dateString === "now" ? new Date() : new Date(dateString)
-      const year = date.getFullYear().toString()
-      let month = (date.getMonth() + 1).toString()
-      let day = date.getDate().toString()
-      if (month.length < 2) month = '0' + month
-      if (day.length < 2) day = '0' + day
-      return [year, month, day].join('-');
+      const date = dateString === "now" ? new Date() : new Date(dateString);
+      const year = date.getFullYear().toString();
+      let month = (date.getMonth() + 1).toString();
+      let day = date.getDate().toString();
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+      return [year, month, day].join("-");
     } else {
-      return ""
+      return "";
     }
   },
   exportExcel: html => {
     window.open(
       "data:application/vnd.ms-excel," +
-      encodeURIComponent(
-        '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>' +
-        html
-      )
+        encodeURIComponent(
+          '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>' +
+            html
+        )
     );
+  },
+  checkIsHalfHourUnit: (startFrom, endTo) => {
+    if (startFrom && endTo) {
+      const startfromMinutes =
+        parseInt(startFrom.substr(0, 2)) * 60 +
+        parseInt(startFrom.substr(3, 2));
+      const endToMinutes =
+        parseInt(endTo.substr(0, 2)) * 60 + parseInt(endTo.substr(3, 2));
+      if (endToMinutes > startfromMinutes) {
+        return (endToMinutes - startfromMinutes) % 30 === 0;
+      } else {
+        return false;
+      }
+    } else if (!startFrom && !endTo) {
+      return false;
+    } else {
+      return true;
+    }
   },
   calculateTotalHours: (startFrom, endTo) => {
     if (startFrom && endTo) {
@@ -78,19 +96,21 @@ export default {
     }
   },
   lookUpCustomMessage: msg => {
-    const customMessage = msg.replace ? locale.shared.message[msg.replace(/\s+/g, "_")] : "";
+    const customMessage = msg.replace
+      ? locale.shared.message[msg.replace(/\s+/g, "_")]
+      : "";
     return customMessage ? customMessage : msg;
   },
   lookUpLeaveTypeIconNClass: (leaveType, outline = false) => {
     const target = defaultConf.leaveTypes.find(type => type.name === leaveType);
     return {
       icon: target ? target.icon : defaultConf.customLeaveType.icon,
-      class: target ? target.class : defaultConf.customLeaveType.class,
+      class: target ? target.class : defaultConf.customLeaveType.class
     };
   },
-  lookUpLeaveType: (leaveType) => {
+  lookUpLeaveType: leaveType => {
     const target = defaultConf.leaveTypes.find(type => type.name === leaveType);
-    return target ? target : defaultConf.customLeaveType
+    return target ? target : defaultConf.customLeaveType;
   },
   stringFormat: (template, ...values) => {
     values.forEach((v, i) => {

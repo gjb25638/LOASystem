@@ -2,6 +2,7 @@ const Employee = require("../../models/employee");
 const c = require("../shared/collection");
 const r = require("../shared/report");
 const e = require("../export/index");
+const es = require("../api/employees");
 
 module.exports = {
   annual: {
@@ -28,6 +29,12 @@ module.exports = {
     },
     monthly: {
       get: monthlyExport
+    },
+    employee: {
+      get: employee
+    },
+    compensatory: {
+      get: compensatory
     }
   }
 };
@@ -128,6 +135,63 @@ function monthlyExport(req, res) {
             );
           }
         }).sort({ arrivedDate: 1 });
+      }
+    }
+  );
+}
+
+function employee(req, res) {
+  Employee.findOne(
+    c.conditions.validLoginuser(req.params.loginuser, req.params.token),
+    (err, loginuser) => {
+      if (err) {
+        res.send({ success: false, message: err });
+      } else if (loginuser) {
+        Employee.find(
+          c.conditions.employee(req.params.username),
+          null,
+          (err, employee) => {
+            if (err) {
+              res.send({ success: false, message: err });
+            } else {
+              const year = parseInt(req.params.year);
+              e.populateEmployee({ year }, employee[0], (data, fileName) => {
+                res.attachment(fileName);
+                res.send(data);
+              });
+            }
+          }
+        ).sort({ arrivedDate: 1 });
+      }
+    }
+  );
+}
+
+function compensatory(req, res) {
+  Employee.findOne(
+    c.conditions.validLoginuser(req.params.loginuser, req.params.token),
+    (err, loginuser) => {
+      if (err) {
+        res.send({ success: false, message: err });
+      } else if (loginuser) {
+        Employee.find(c.conditions.all(), null, (err, employees) => {
+          if (err) {
+            res.send({ success: false, message: err });
+          } else {
+            const year = parseInt(req.params.year);
+            e.populateCompensatory(
+              { year },
+              es.produceCompensatoryInfosOfEmployees(loginuser, employees, year)
+                .employees,
+              (data, fileName) => {
+                res.attachment(fileName);
+                res.send(data);
+              }
+            );
+          }
+        });
+      } else {
+        res.send({ success: false, message: "login user is not found" });
       }
     }
   );

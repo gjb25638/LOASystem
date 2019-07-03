@@ -48,10 +48,10 @@ export default {
       hours: 0
     },
     totals: {
-      days: 0,
+      days: 1,
       hours: 0
     },
-    deadline: "",
+    deadline: new Date().toISOString().substr(0, 10),
     dialog: false,
     datepicker: false,
     countdown: true,

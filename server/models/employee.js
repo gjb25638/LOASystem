@@ -29,7 +29,8 @@ var EmployeeSchema = new Schema({
         days: Number,
         halfHours: Number
       },
-      deadline: Date
+      deadline: Date,
+      stashed: Boolean
     }
   ],
   records: [

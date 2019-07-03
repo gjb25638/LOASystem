@@ -7,7 +7,7 @@
           height="200px"
           :src="`${config.API_URL}/avatar/${loginuser.username}`"
         >
-          <v-btn class="nav-expander flash" icon @click.stop="mini = !mini">
+          <v-btn class="nav-expander" icon @click.stop="mini = !mini">
             <v-icon>{{mini ? "chevron_left" : "chevron_right"}}</v-icon>
           </v-btn>
         </v-img>
@@ -203,6 +203,6 @@ export default {
 .nav-expander::before {
   border-radius: 0;
   width: 20px;
-  background: rgba(0, 0, 0, 0.2);
+  background: #faf05e91;
 }
 </style>

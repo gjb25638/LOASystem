@@ -10,16 +10,6 @@
               @pickOne="pick1LT"
               helper
             ></leave-type-container>
-            <v-layout row wrap>
-              <v-flex>
-                <v-expansion-panel dark>
-                  <v-expansion-panel-content>
-                    <div slot="header">{{ loalocale.self.unavailableLTs }}</div>
-                    <leave-type-container :leaveTypes="unavailableLTs" :readonly="!fullControl"></leave-type-container>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-flex>
-            </v-layout>
             <leave-form
               :dates="date ? [date] : []"
               :leave-type="selectedLT"
@@ -95,12 +85,12 @@ export default {
     records: []
   }),
   computed: {
-    availableLTs: function() {
+    availableLTs() {
       return this.formattedLeaveTypes.filter(lt => {
-        return !this.isEditMode || !this.isLTAvailable(lt);
+        return !this.isEditMode || (!this.isLTAvailable(lt) && !lt.stashed);
       });
     },
-    unavailableLTs: function() {
+    unavailableLTs() {
       return this.formattedLeaveTypes.filter(lt => {
         return this.isLTAvailable(lt);
       });
@@ -136,7 +126,9 @@ export default {
           }
         };
       });
-      const { data: { success, message } } = await EmployeeService.updateLOA({
+      const {
+        data: { success, message }
+      } = await EmployeeService.updateLOA({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         id: this.employeeId,
@@ -185,6 +177,7 @@ export default {
           newLeaveTypes.push({
             ...customLeaveType,
             index: newLeaveTypes.length,
+            stashed: lt.stashed,
             enabled: true,
             title: lt.name,
             name: lt.name,

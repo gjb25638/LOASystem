@@ -76,6 +76,7 @@ export default {
     },
     importOne() {
       this.$emit("importOne", this.customTypeName);
+      this.customTypeName = "";
     },
     removeOne(index) {
       this.$emit("removeOne", index);

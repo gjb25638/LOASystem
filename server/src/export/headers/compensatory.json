@@ -1,0 +1,130 @@
+[
+    {
+        "title": "員工\n編號",
+        "dataKey": "employeeID",
+        "name": "A",
+        "area": "EmployeeInfo"
+    },
+    {
+        "title": "姓名",
+        "dataKey": "name",
+        "name": "B",
+        "area": "EmployeeInfo"
+    },
+    {
+        "title": "英文名",
+        "dataKey": "username",
+        "name": "C",
+        "styles": [
+            {
+                "name": "rightBorderStyle",
+                "value": "thick"
+            }
+        ],
+        "area": "EmployeeInfo"
+    },
+    {
+        "title": "1月",
+        "dataKey": {
+            "month": 0
+        },
+        "name": "D",
+        "area": "MonthReport"
+    },
+    {
+        "title": "2月",
+        "dataKey": {
+            "month": 1
+        },
+        "name": "E",
+        "area": "MonthReport"
+    },
+    {
+        "title": "3月",
+        "dataKey": {
+            "month": 2
+        },
+        "name": "F",
+        "area": "MonthReport"
+    },
+    {
+        "title": "4月",
+        "dataKey": {
+            "month": 3
+        },
+        "name": "G",
+        "area": "MonthReport"
+    },
+    {
+        "title": "5月",
+        "dataKey": {
+            "month": 4
+        },
+        "name": "H",
+        "area": "MonthReport"
+    },
+    {
+        "title": "6月",
+        "dataKey": {
+            "month": 5
+        },
+        "name": "I",
+        "area": "MonthReport"
+    },
+    {
+        "title": "7月",
+        "dataKey": {
+            "month": 6
+        },
+        "name": "J",
+        "area": "MonthReport"
+    },
+    {
+        "title": "8月",
+        "dataKey": {
+            "month": 7
+        },
+        "name": "K",
+        "area": "MonthReport"
+    },
+    {
+        "title": "9月",
+        "dataKey": {
+            "month": 8
+        },
+        "name": "L",
+        "area": "MonthReport"
+    },
+    {
+        "title": "10月",
+        "dataKey": {
+            "month": 9
+        },
+        "name": "M",
+        "area": "MonthReport"
+    },
+    {
+        "title": "11月",
+        "dataKey": {
+            "month": 10
+        },
+        "name": "N",
+        "area": "MonthReport"
+    },
+    {
+        "title": "12月",
+        "dataKey": {
+            "month": 11
+        },
+        "name": "O",
+        "area": "MonthReport"
+    },
+    {
+        "title": "補休",
+        "dataKey": {
+            "leaveType": "compensatory"
+        },
+        "name": "P",
+        "area": "LTReport"
+    }
+]

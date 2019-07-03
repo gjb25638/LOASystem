@@ -1,0 +1,30 @@
+[
+    {
+        "title": "申請日期",
+        "dataKey": "appliedDate",
+        "name": "A",
+        "width": 15,
+        "height": 40
+    },
+    {
+        "title": "休假日期\n與時間",
+        "dataKey": "dates",
+        "name": "B",
+        "width": 15,
+        "height": 40
+    },
+    {
+        "title": "總計",
+        "dataKey": "totals",
+        "name": "C",
+        "width": 20,
+        "height": 40
+    },
+    {
+        "title": "簽核人 - 簽核時間",
+        "dataKey": "signings",
+        "name": "D",
+        "width": 50,
+        "height": 40
+    }
+]

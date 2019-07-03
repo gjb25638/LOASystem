@@ -55,11 +55,7 @@
                   :label="loalocale.self.from"
                   prepend-icon="access_time"
                 ></v-text-field>
-                <v-time-picker
-                  v-model="apply.startFrom"
-                  format="24hr"
-                  :allowed-minutes="allowedMinutes"
-                >
+                <v-time-picker v-model="apply.startFrom" format="24hr">
                   <v-spacer></v-spacer>
                   <v-btn
                     flat
@@ -71,12 +67,7 @@
             </v-flex>
             <v-flex v-if="leaveType.halfHoursEnabled && apply.dates.length === 1" xs5>
               <v-dialog ref="endToDialog" v-model="dialog.endTo" lazy width="290px">
-                <v-text-field
-                  slot="activator"
-                  v-model="apply.endTo"
-                  :label="loalocale.self.to"
-                  :allowed-minutes="allowedMinutes"
-                ></v-text-field>
+                <v-text-field slot="activator" v-model="apply.endTo" :label="loalocale.self.to"></v-text-field>
                 <v-time-picker v-model="apply.endTo" format="24hr">
                   <v-spacer></v-spacer>
                   <v-btn flat class="theme" @click="calculateTotals($refs.endToDialog, 'endTo')">OK</v-btn>
@@ -169,6 +160,13 @@ export default {
   methods: {
     calculateTotals(dialog, target) {
       dialog.save(this.apply[target]);
+      if (
+        !utility.checkIsHalfHourUnit(this.apply.startFrom, this.apply.endTo)
+      ) {
+        this.apply.totalHours = 0;
+        this.apply.endTo = this.apply.startFrom = null;
+        return;
+      }
       this.apply.totalHours = utility.calculateTotalHours(
         this.apply.startFrom,
         this.apply.endTo
@@ -181,9 +179,6 @@ export default {
     checkDates(dialog, target) {
       this.apply[target] = this.apply[target].slice(0, 5).sort();
       dialog.save(this.apply[target]);
-    },
-    allowedMinutes(minutes) {
-      return minutes === 30 || minutes === 0;
     },
     clear() {
       this.apply.startFrom = null;

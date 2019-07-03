@@ -27,6 +27,11 @@
           >{{leaveType.enabled ? 'check_box' : 'check_box_outline_blank'}}</v-icon>
         </v-btn>
       </v-list-tile-action>
+      <v-list-tile-action v-if="!readonly && !leaveType.default">
+        <v-btn icon ripple @click="leaveType.stashed = !leaveType.stashed">
+          <v-icon>{{leaveType.stashed ? 'inbox' : 'move_to_inbox'}}</v-icon>
+        </v-btn>
+      </v-list-tile-action>
     </v-list-tile>
     {{leaveType.title}}
   </v-tooltip>

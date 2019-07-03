@@ -8,16 +8,26 @@
       <employee-info :profile="profile" icon email></employee-info>
     </template>
     <v-card class="elevation-12">
-      <v-card-title>
+      <calendar-controller
+        annual
+        :calendarDate="calendarDate"
+        @prev="(date) => calendarDate = date"
+        @next="(date) => calendarDate = date"
+        @tolastest="(date) => calendarDate = date"
+      >
         <v-switch :label="loalocale.self.showRejects" v-model="showRejects"></v-switch>
-        <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
           append-icon="search"
           :label="loalocale.self.search"
           single-line
         ></v-text-field>
-      </v-card-title>
+        <v-spacer></v-spacer>
+        <v-btn @click="download">
+          <v-icon>get_app</v-icon>
+          {{loalocale.self.download}}
+        </v-btn>
+      </calendar-controller>
       <v-data-table
         :pagination.sync="pagination"
         :search="search"
@@ -94,6 +104,7 @@ import SystemNotification from "@/components/SystemNotification";
 import PageContainer from "../components/PageContainer";
 import EmployeeInfo from "../components/EmployeeInfo";
 import EmployeeService from "@/services/EmployeeService";
+import CalendarController from "@/components/CalendarController";
 import utility from "@/utility";
 export default {
   name: "RecordList",
@@ -102,9 +113,11 @@ export default {
     "leave-type-tooltip": LeaveTypeTooltip,
     "system-notification": SystemNotification,
     "page-container": PageContainer,
-    "employee-info": EmployeeInfo
+    "employee-info": EmployeeInfo,
+    "calendar-controller": CalendarController
   },
   data: () => ({
+    calendarDate: new Date(),
     showRejects: false,
     systemNotification: {
       level: "warning",
@@ -133,9 +146,16 @@ export default {
   }),
   computed: {
     filteredRecords() {
-      return this.records.filter(
-        r => this.showRejects || r.signings.every(s => s.pass)
-      );
+      return this.records
+        .filter(
+          record => this.showRejects || record.signings.every(s => s.pass)
+        )
+        .filter(record =>
+          record.dates.some(date => new Date(date).getFullYear() === this.year)
+        );
+    },
+    year() {
+      return this.calendarDate.getFullYear();
     }
   },
   created() {
@@ -184,6 +204,18 @@ export default {
     this.getRecords();
   },
   methods: {
+    download() {
+      const url = EmployeeService.downloadURL.exportEmployee({
+        year: this.year,
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token,
+        username: this.profile.username
+      });
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.style = "display:none";
+      document.body.appendChild(iframe);
+    },
     async getRecords() {
       const {
         data: {

@@ -31,7 +31,17 @@
                 <v-expansion-panel dark>
                   <v-expansion-panel-content>
                     <div slot="header">{{ loalocale.self.unavailableLTs }}</div>
-                    <leave-type-container :leaveTypes="unavailableLTs" :readonly="!fullControl"></leave-type-container>
+                    <v-expansion-panel
+                      class="insider"
+                      dark
+                      v-for="group in unavailableLTsGroups"
+                      :key="group.year"
+                    >
+                      <v-expansion-panel-content>
+                        <div slot="header">- {{ group.year }} ({{group.list.length}})</div>
+                        <leave-type-container :leaveTypes="group.list" :readonly="!fullControl"></leave-type-container>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-flex>
@@ -110,13 +120,27 @@ export default {
   computed: {
     availableLTs() {
       return this.leaveTypes.filter(lt => {
-        return !this.isEditMode || !this.isAvailableLT(lt);
+        return !this.isEditMode || (!this.isAvailableLT(lt) && !lt.stashed);
       });
     },
     unavailableLTs() {
       return this.leaveTypes.filter(lt => {
-        return this.isAvailableLT(lt);
+        return this.isAvailableLT(lt) || lt.stashed;
       });
+    },
+    unavailableLTsGroups() {
+      const groups = [];
+      this.unavailableLTs.forEach(leaveType => {
+        const date = new Date(leaveType.deadline);
+        const year = date.getFullYear();
+        const group = groups.find(g => g.year === year);
+        if (group) {
+          group.list.push(leaveType);
+        } else {
+          groups.push({ list: [leaveType], year });
+        }
+      });
+      return groups;
     }
   },
   mounted() {
@@ -140,12 +164,12 @@ export default {
       );
     },
     async getEmployees() {
-      const { data: { employees } } = await EmployeeService.fetchForLightweight(
-        {
-          loginuser: this.loginuser.username,
-          token: this.loginuser.token
-        }
-      );
+      const {
+        data: { employees }
+      } = await EmployeeService.fetchForLightweight({
+        loginuser: this.loginuser.username,
+        token: this.loginuser.token
+      });
       this.signerOptions = employees.map(e => ({
         id: e._id,
         dept: e.dept,
@@ -216,7 +240,9 @@ export default {
           id: this.$route.params.id,
           signers: this.profile.signers
         };
-        let { data: { success, message } } = this.isEditMode
+        let {
+          data: { success, message }
+        } = this.isEditMode
           ? await EmployeeService.update(params)
           : await EmployeeService.add(params);
 
@@ -256,7 +282,8 @@ export default {
           newLeaveTypes.push({
             ...customLeaveType,
             index: newLeaveTypes.length,
-            enabled: true,
+            enabled: lt.enabled,
+            stashed: lt.stashed,
             title: lt.name,
             name: lt.name,
             consumes: {
@@ -335,5 +362,10 @@ export default {
 <style lang="scss" scoped>
 .float-right {
   float: right;
+}
+</style>
+<style>
+.insider .v-expansion-panel__header {
+  padding: 12px 50px !important;
 }
 </style>

@@ -12,7 +12,8 @@ export default {
     totals: "Totals",
     action: "Action",
     hours: "Hours",
-    days: "Days"
+    days: "Days",
+    download: "Download"
   },
   zh: {
     search: "檢索",
@@ -27,6 +28,7 @@ export default {
     totals: "總計",
     action: "操作",
     hours: "時",
-    days: "日"
+    days: "日",
+    download: "下載"
   }
 };
