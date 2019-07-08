@@ -302,9 +302,13 @@ function isFutureRecord(record, year, month) {
   return record.dates.some(date => {
     const dateObj = new Date(date);
     const recordYear = dateObj.getFullYear();
-    return (
-      recordYear > year ||
-      (month ? recordYear === year && dateObj.getMonth() > month - 1 : true)
-    );
+    if (month) {
+      return (
+        recordYear > year ||
+        (recordYear === year && dateObj.getMonth() > month - 1)
+      );
+    } else {
+      return recordYear > year;
+    }
   });
 }
