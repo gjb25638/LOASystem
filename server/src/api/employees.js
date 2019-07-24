@@ -66,6 +66,10 @@ function produce(loginuser, employees, lightweight) {
         c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee)
       )
       .map(employee => {
+        let annualInfo = employee.activatedLeaveTypes.find(
+          lt => lt.name === "annual"
+        );
+        annualInfo = annualInfo ? annualInfo : { consumes: {}, totals: {} };
         const lightweightInfo = {
           _id: employee._id,
           enabled: employee.enabled,
@@ -73,14 +77,13 @@ function produce(loginuser, employees, lightweight) {
           name: employee.name,
           level: employee.level,
           dept: employee.dept,
-          annualInfo: employee.activatedLeaveTypes.find(
-            lt => lt.name === "annual"
-          )
+          annualInfo
         };
         return lightweight
           ? lightweightInfo
           : {
               ...lightweightInfo,
+              password: employee.password,
               employeeID: employee.employeeID,
               signers: employee.signers,
               arrivedDate: employee.arrivedDate,
@@ -102,9 +105,16 @@ function produceCompensatoryInfosOfEmployees(loginuser, employees, year) {
         c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee)
       )
       .map(employee => {
+        const compensatoryLTs = employee.activatedLeaveTypes.filter(
+          c.predicate.isCompensatoryLeaveType
+        );
         const compensatoryRecords = employee.records
           .filter(c.predicate.isCompensatoryRecord)
-          .filter(record => !c.predicate.isRecordSignedReject(record))
+          .filter(
+            record =>
+              !c.predicate.isRecordSignedReject(record) &&
+              !isRecordWaitForSigningByRecord(record, compensatoryLTs)
+          )
           .map(record => {
             if (record && isFutureRecord(record, year)) {
               record.totals.days = 0;
@@ -112,15 +122,13 @@ function produceCompensatoryInfosOfEmployees(loginuser, employees, year) {
             }
             return record;
           });
-        const compensatoryLTs = employee.activatedLeaveTypes.filter(
-          c.predicate.isCompensatoryLeaveType
-        );
         return compensatoryRecords.length > 0
           ? produceCompensatoryInfo(
               employee,
               compensatoryRecords,
               compensatoryLTs,
-              year
+              year,
+              employee.records
             )
           : undefined;
       })
@@ -132,7 +140,8 @@ function produceCompensatoryInfo(
   { _id, employeeID, dept, name, username, enabled, arrivedDate },
   compensatoryRecords,
   compensatoryLTs,
-  year
+  year,
+  records
 ) {
   const consumes = util.calculateTotals(compensatoryRecords);
   const totals = util.sumUp(compensatoryLTs.map(leaveType => leaveType.totals));
@@ -154,22 +163,26 @@ function produceCompensatoryInfo(
       .filter(
         leaveType =>
           !c.predicate.isLeaveTypeNoMoreLeaves(leaveType) ||
-          checkIsFutureRecord(compensatoryRecords, leaveType.name, year)
+          checkIsFutureRecord(compensatoryRecords, leaveType.name, year) ||
+          (c.predicate.isLeaveTypeNoMoreLeaves(leaveType) &&
+            isRecordWaitForSigningByLeaveType(records, leaveType))
       )
       .map(leaveType => {
         return {
           leaveType: leaveType.name,
           daysNHours: {
-            days: checkIsFutureRecord(compensatoryRecords, leaveType.name, year)
-              ? 0
-              : leaveType.consumes.days,
-            hours: checkIsFutureRecord(
-              compensatoryRecords,
-              leaveType.name,
-              year
-            )
-              ? 0
-              : leaveType.consumes.halfHours / 2,
+            days:
+              checkIsFutureRecord(compensatoryRecords, leaveType.name, year) ||
+              (c.predicate.isLeaveTypeNoMoreLeaves(leaveType) &&
+                isRecordWaitForSigningByLeaveType(records, leaveType))
+                ? 0
+                : leaveType.consumes.days,
+            hours:
+              checkIsFutureRecord(compensatoryRecords, leaveType.name, year) ||
+              (c.predicate.isLeaveTypeNoMoreLeaves(leaveType) &&
+                isRecordWaitForSigningByLeaveType(records, leaveType))
+                ? 0
+                : leaveType.consumes.halfHours / 2,
             totalDays: leaveType.totals.days,
             totalHours: leaveType.totals.halfHours / 2
           },
@@ -200,4 +213,25 @@ function checkIsFutureRecord(compensatoryRecords, leaveTypeName, year) {
 
 function isFutureRecord(record, year) {
   return new Date(record.dates[0]).getFullYear() > year;
+}
+
+function isRecordWaitForSigningByRecord(record, leaveTypes) {
+  const leaveType = leaveTypes.find(lt => lt.name === record.leaveType);
+  return (
+    leaveType &&
+    (leaveType.consumes.days > 0 || leaveType.consumes.halfHours > 0) &&
+    !c.predicate.isRecordSignedReject(record) &&
+    !c.predicate.isRecordAllSignedPass(record)
+  );
+}
+
+function isRecordWaitForSigningByLeaveType(records, leaveType) {
+  const record = records.find(r => r.leaveType === leaveType.name);
+  return (
+    record &&
+    c.predicate.isCompensatoryRecord(record) &&
+    (leaveType.consumes.days > 0 || leaveType.consumes.halfHours > 0) &&
+    !c.predicate.isRecordSignedReject(record) &&
+    !c.predicate.isRecordAllSignedPass(record)
+  );
 }
