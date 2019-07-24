@@ -1,0 +1,112 @@
+{
+    "Blanche": {
+        "sick": {
+            "days": 0,
+            "hours": 3
+        },
+        "personal": {
+            "days": 2,
+            "hours": 1
+        }
+    },
+    "Tom": {
+        "sick": {
+            "days": 0,
+            "hours": 1.5
+        },
+        "personal": {
+            "days": 2,
+            "hours": 4.5
+        }
+    },
+    "Anson": {
+        "sick": {
+            "days": 3,
+            "hours": 0
+        },
+        "personal": {
+            "days": 0,
+            "hours": 2
+        }
+    },
+    "Vivian": {
+        "sick": {
+            "days": 2,
+            "hours": 0
+        },
+        "personal": {
+            "days": 1,
+            "hours": 0
+        }
+    },
+    "Sean": {
+        "sick": {
+            "days": 1,
+            "hours": 4.5
+        },
+        "personal": {
+            "days": 1,
+            "hours": 17.5
+        }
+    },
+    "Joann": {
+        "sick": {
+            "days": 0,
+            "hours": 0
+        },
+        "personal": {
+            "days": 0,
+            "hours": 3.5
+        }
+    },
+    "Claire": {
+        "sick": {
+            "days": 0,
+            "hours": 4.5
+        },
+        "personal": {
+            "days": 0,
+            "hours": 2
+        }
+    },
+    "Olivia": {
+        "sick": {
+            "days": 0,
+            "hours": 1
+        },
+        "personal": {
+            "days": 0,
+            "hours": 0
+        }
+    },
+    "Chaol": {
+        "sick": {
+            "days": 0,
+            "hours": 0
+        },
+        "personal": {
+            "days": 0,
+            "hours": 3
+        }
+    },
+    "Andy": {
+        "sick": {
+            "days": 2,
+            "hours": 0
+        },
+        "personal": {
+            "days": 0,
+            "hours": 11
+        }
+    },
+    "Robert": {
+        "sick": {
+            "days": 0,
+            "hours": 0
+        },
+        "personal": {
+            "days": 0,
+            "hours": 1
+        }
+    }
+}

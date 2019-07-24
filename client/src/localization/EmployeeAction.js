@@ -2,6 +2,7 @@ export default {
   en: {
     records: "Records",
     edit: "Edit",
+    view: "View",
     delete: "Delete",
     disable: "Disable",
     enable: "Enable",
@@ -11,6 +12,7 @@ export default {
   zh: {
     records: "紀錄",
     edit: "編輯",
+    view: "檢視",
     delete: "刪除",
     disable: "停用",
     enable: "啟用",

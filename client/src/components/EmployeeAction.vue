@@ -11,6 +11,12 @@
         v-bind:to="{ name: 'Detail', params: { id: employee._id } }"
       >{{loalocale.self.edit}}</router-link>
     </span>
+    <span v-else>
+      |
+      <router-link
+        v-bind:to="{ name: 'Detail', params: { id: employee._id } }"
+      >{{loalocale.self.view}}</router-link>
+    </span>
     <span v-if="fullControl && !sameAsCurrentUser">
       |
       <a

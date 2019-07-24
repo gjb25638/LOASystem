@@ -133,7 +133,10 @@ export default {
         token: this.loginuser.token,
         id: this.employeeId,
         records: records,
-        activatedLeaveTypes: this.formattedLeaveTypes.map(lt => {
+        activatedLeaveTypes: this.undoAccumulateLTsCosumes(
+          this.formattedLeaveTypes,
+          records
+        ).map(lt => {
           return {
             ...lt,
             consumes: {
@@ -152,6 +155,20 @@ export default {
       if (familyCare) {
         const personal = leaveTypes.find(lt => lt.name === "personal");
         personal.consumes.days += familyCare.consumes.days;
+      }
+      return leaveTypes;
+    },
+    undoAccumulateLTsCosumes(leaveTypes, records) {
+      const familyCare = leaveTypes.find(lt => lt.name === "familyCare");
+      if (familyCare) {
+        const personal = leaveTypes.find(lt => lt.name === "personal");
+        personal.consumes.days -= familyCare.consumes.days;
+        const familyCareRecord = records.find(
+          r => r.leaveType === "familyCare"
+        );
+        if (familyCareRecord.dates.length > 0) {
+          personal.consumes.days += familyCareRecord.dates.length;
+        }
       }
       return leaveTypes;
     },
@@ -225,7 +242,8 @@ export default {
             apply.totalHours >= 8
           ) {
             // totals days - consumes days = 1 day left, but the applied time > 9 hours(=1 work day).
-            this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
+            this.systemNotification.text =
+              this.loalocale.self.runOutQotaOfLeave + "A";
             this.systemNotification.visible = true;
             this.$emit("notified", this.systemNotification);
             return;
@@ -237,7 +255,8 @@ export default {
             this.selectedLT.totals.hours
           ) {
             // consume hours + applied time > totals hours.
-            this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
+            this.systemNotification.text =
+              this.loalocale.self.runOutQotaOfLeave + "B";
             this.systemNotification.visible = true;
             this.$emit("notified", this.systemNotification);
             return;
@@ -249,7 +268,8 @@ export default {
         this.selectedLT.totals.days
       ) {
         // consume days + chosen dates > totals days.
-        this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
+        this.systemNotification.text =
+          this.loalocale.self.runOutQotaOfLeave + "C";
         this.systemNotification.visible = true;
         this.$emit("notified", this.systemNotification);
         return;
@@ -271,14 +291,13 @@ export default {
         if (
           personalLeaveType.consumes.days * 8 +
             personalLeaveType.consumes.hours +
-            familyCareLeaveType.consumes.days * 8 +
-            familyCareLeaveType.consumes.hours +
             (apply.dates.length === 1 && apply.totalHours > 0
               ? apply.totalHours
               : apply.dates.length * 8) >
           personalLeaveType.totals.days * 8
         ) {
-          this.systemNotification.text = this.loalocale.self.runOutQotaOfLeave;
+          this.systemNotification.text =
+            this.loalocale.self.runOutQotaOfLeave + "D";
           this.systemNotification.visible = true;
           this.$emit("notified", this.systemNotification);
           return;
