@@ -72,13 +72,15 @@ function produce(loginuser, employees, lightweight) {
           username: employee.username,
           name: employee.name,
           level: employee.level,
-          dept: employee.dept
+          dept: employee.dept,
+          annualInfo: employee.activatedLeaveTypes.find(
+            lt => lt.name === "annual"
+          )
         };
         return lightweight
           ? lightweightInfo
           : {
               ...lightweightInfo,
-              password: employee.password,
               employeeID: employee.employeeID,
               signers: employee.signers,
               arrivedDate: employee.arrivedDate,

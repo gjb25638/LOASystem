@@ -33,7 +33,7 @@
             :class="props.item.enabled ? '' : 'disabled'"
           >
             <td>{{ props.item.employeeID }}</td>
-            <td class="min-width-120">
+            <td class="min-width-160">
               {{ props.item.name }}
               <v-badge left v-if="props.item.unSigningRecords.length > 0">
                 <v-icon color="blue">textsms</v-icon>
@@ -42,6 +42,12 @@
             <td>{{ props.item.username }}</td>
             <td class="min-width-120">{{ props.item.dept }}</td>
             <td class="min-width-160">{{ formatDate(props.item.arrivedDate) }}</td>
+            <td class="min-width-160">
+              {{ generateleaveTypeSummary({
+              days: props.item.annualInfo.consumes.days,
+              hours:props.item.annualInfo.consumes.halfHours / 2, totalDays:props.item.annualInfo.totals.days, totalHours:props.item.annualInfo.totals.halfHours / 2
+              }) }}
+            </td>
             <td class="min-width-380">
               <employee-action
                 :key="props.item._id"
@@ -89,6 +95,7 @@ import LeaveTypeRefreshedNotification from "@/components/LeaveTypeRefreshedNotif
 import PageContainer from "@/components/PageContainer";
 import EmployeeService from "@/services/EmployeeService";
 import utility from "@/utility";
+import reportUtility from "@/reportUtility";
 export default {
   name: "List",
   components: {
@@ -124,6 +131,7 @@ export default {
       { text: this.loalocale.self.username, value: "username" },
       { text: this.loalocale.self.dept, value: "dept" },
       { text: this.loalocale.self.arrivedDate, value: "arrivedDate" },
+      { text: this.loalocale.self.annualInfo, value: "annualInfo" },
       { text: this.loalocale.self.action, value: "" }
     ];
   },
@@ -196,7 +204,8 @@ export default {
         this.systemNotification.visible = true;
       }
     },
-    formatDate: utility.formatDate
+    formatDate: utility.formatDate,
+    generateleaveTypeSummary: reportUtility.generateleaveTypeSummary
   }
 };
 </script>
