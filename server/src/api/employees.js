@@ -108,7 +108,8 @@ function produce(loginuser, employees, lightweight) {
           dept: employee.dept,
           annualInfo,
           nextAnnualInfo,
-          isAnnualLTRefreshable
+          isAnnualLTRefreshable:
+            isAnnualLTRefreshable && nextAnnualInfo.totals.days > 0
         };
         return lightweight
           ? lightweightInfo
