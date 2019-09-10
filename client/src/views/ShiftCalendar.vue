@@ -50,7 +50,7 @@
                   >
                     <v-avatar tile>{{item.shift.daypart}}</v-avatar>
                     {{item.employee.username}}
-                    <v-icon class="primary-shifter" v-if="item.shift.primary">star_border</v-icon>
+                    <v-icon class="primary-shifter" v-if="showPrimary(shiftGroups[date], item)">star_border</v-icon>
                   </v-chip>
                 </div>
               </template>
@@ -233,6 +233,12 @@ export default {
     this.getShifts();
   },
   methods: {
+    showPrimary(items, item) {
+      const filteredItems = items.filter(
+        x => x.shift.daypart === item.shift.daypart
+      );
+      return filteredItems.length > 1 && item.shift.primary;
+    },
     download() {
       const url = EmployeeService.downloadURL.exportShift({
         year: this.calendarDateYear,

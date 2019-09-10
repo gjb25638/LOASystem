@@ -85,7 +85,7 @@ module.exports = {
       return record.signers.length > 0
         ? allSignersOfTheRecordHaveSigned &&
             record.signings.every(signing => signing.pass)
-        : true;
+        : !isRecordSignedReject(record);
     },
     isCompensatoryLeaveType: leaveType => {
       return leaveType.enabled && leaveType.name.startsWith("補休");

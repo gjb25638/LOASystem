@@ -209,7 +209,7 @@ function getDaysGroupByWeek(year, month) {
 }
 
 function getShifters(employees, date, daypart) {
-  const result = [];
+  const matchedShifts = [];
   employees.forEach(e => {
     const shift = e.shifts.find(
       s =>
@@ -217,8 +217,16 @@ function getShifters(employees, date, daypart) {
         s.daypart === daypart
     );
     if (shift) {
-      result.push(shift.primary ? `${e.username}(主)` : e.username);
+      matchedShifts.push({
+        primary: shift.primary,
+        username: e.username
+      });
     }
   });
+
+  const result = matchedShifts.map(x =>
+    matchedShifts.length > 1 && x.primary ? `${x.username}(主)` : x.username
+  );
+
   return result.join("\n");
 }

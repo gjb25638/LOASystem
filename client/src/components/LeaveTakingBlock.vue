@@ -126,9 +126,7 @@ export default {
           }
         };
       });
-      const {
-        data: { success, message }
-      } = await EmployeeService.updateLOA({
+      const { data: { success, message } } = await EmployeeService.updateLOA({
         loginuser: this.loginuser.username,
         token: this.loginuser.token,
         id: this.employeeId,
@@ -166,7 +164,11 @@ export default {
         const familyCareRecord = records.find(
           r => r.leaveType === "familyCare"
         );
-        if (familyCareRecord.dates.length > 0) {
+        if (
+          familyCareRecord &&
+          familyCareRecord.dates &&
+          familyCareRecord.dates.length > 0
+        ) {
           personal.consumes.days += familyCareRecord.dates.length;
         }
       }
