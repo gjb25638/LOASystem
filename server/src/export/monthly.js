@@ -196,7 +196,9 @@ function produce(workbook, employees, { year, month, sheetName }) {
         if (type === "remaining") {
           const remainingTotals = { days: totalDays - totals.days };
           const remainingStr = totalsToString(remainingTotals);
-          cell.value((remainingStr ? remainingStr : "0天") + `/${totalDays}`);
+          cell.value(
+            (remainingStr ? remainingStr : "0天") + `/${e.actualTotalDays}`
+          );
           rewriteIfEmployeeWorkUnderHalfYear(cell, e.arrivedDate);
         } else if (type === "deadline") {
           cell.value(`${deadline.substr(5, 4)}${e.arrivedDate.substr(4)}`);

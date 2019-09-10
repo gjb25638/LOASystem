@@ -103,6 +103,28 @@
                     </v-card>
                   </v-flex>
                 </v-data-iterator>
+                <v-data-iterator
+                  :items="[props.item.actualTotalDays]"
+                  :rows-per-page-items="1"
+                  content-tag="v-layout"
+                  row
+                  wrap
+                  hide-actions
+                >
+                  <v-flex slot="item" slot-scope="subprops">
+                    <v-card>
+                      <v-card-title>
+                        <h4>實際天數</h4>
+                      </v-card-title>
+                      <v-divider></v-divider>
+                      <v-list dense>
+                        <v-list-tile>
+                          <v-list-tile-content>{{ subprops.item }}</v-list-tile-content>
+                        </v-list-tile>
+                      </v-list>
+                    </v-card>
+                  </v-flex>
+                </v-data-iterator>
               </td>
             </tr>
           </template>

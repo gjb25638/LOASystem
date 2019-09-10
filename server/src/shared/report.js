@@ -44,13 +44,19 @@ function produceAnnual({ loginuser, employees, year, groupby }) {
             record.leaveType === "annual" &&
             !isFutureRecord(record, year)
         );
+        const annualLT = employee.activatedLeaveTypes.find(
+          lt => lt.name === "annual"
+        );
+        const actualTotalDays = annualLT ? annualLT.totals.days : 0;
         const annualInfo = transformToAnnualInfo(
           annualLeaves,
-          getAnnualLTTotalDays(employee.arrivedDate, year)
+          getAnnualLTTotalDays(employee.arrivedDate, year),
+          annualLT
         );
         basic.recordGroups = recordGroups;
         basic.leaveTypeGroups = leaveTypeGroups;
         basic.annualInfo = annualInfo;
+        basic.actualTotalDays = actualTotalDays;
         return basic;
       } else {
         basic.records = records;
@@ -93,13 +99,19 @@ function produceMonthly({
             record.leaveType === "annual" &&
             !isFutureRecord(record, year, month)
         );
+        const annualLT = employee.activatedLeaveTypes.find(
+          lt => lt.name === "annual"
+        );
+        const actualTotalDays = annualLT ? annualLT.totals.days : 0;
         const annualInfo = transformToAnnualInfo(
           annualLeaves,
-          getAnnualLTTotalDays(employee.arrivedDate, year)
+          getAnnualLTTotalDays(employee.arrivedDate, year),
+          annualLT
         );
         bascInfo.recordGroups = recordGroups;
         bascInfo.leaveTypeGroups = leaveTypeGroups;
         bascInfo.annualInfo = annualInfo;
+        bascInfo.actualTotalDays = actualTotalDays;
         return bascInfo;
       } else {
         const records = shrink(employee.records, year, month, false);

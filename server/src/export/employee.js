@@ -139,10 +139,15 @@ function totalsToString({ days, hours }, leaveType) {
     menstrual: "生理",
     sick: "病假",
     personal: "事假",
-    familyCare: "家照"
+    familyCare: "家照",
+    businessTrip: "出差"
   };
   return (
-    (map[leaveType] ? map[leaveType] : leaveType ? map.compensatory : "") +
+    (leaveType
+      ? map[leaveType]
+        ? map[leaveType]
+        : leaveType.replace(/\d{4}\/\d{1,2}\/\d{1,2}/, "")
+      : "") +
     (leaveType ? " " : "") +
     (days > 0 ? `${days}天` : "") +
     (hours > 0 ? `${hours}H` : "")
