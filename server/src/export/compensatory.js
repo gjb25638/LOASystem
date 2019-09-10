@@ -8,7 +8,7 @@ const {
 } = require("./condition/general");
 const { sumUpTotalsList } = require("./util/general");
 const { setBorder, setTextAlign } = require("./util/style");
-const { initSheet, init } = require("./util/xlsx-populate");
+const { initSheet, init, initSheetTitle } = require("./util/xlsx-populate");
 
 module.exports = {
   produce
@@ -20,9 +20,11 @@ function produce(workbook, employees, { year, sheetName }) {
     e.leaveTypes = filterLeaveTypes(e.leaveTypes, year);
     return e;
   });
+  initSheetTitle(sheet, sheetName, headers);
+  const firstRowNumber = 2;
   // Head
   headers.forEach(({ area, styles, width, height, dataKey, title, name }) => {
-    const rowNumber = 1;
+    const rowNumber = firstRowNumber;
     const { cell } = init(sheet, name, rowNumber, {
       area,
       styles,
@@ -39,7 +41,7 @@ function produce(workbook, employees, { year, sheetName }) {
 
   // Body
   filteredEmployees.forEach((e, index) => {
-    const rowNumber = index + 1 + 1;
+    const rowNumber = index + firstRowNumber + 1;
     headers.forEach(({ area, styles, width, height, dataKey, name }) => {
       const { cell, column } = init(sheet, name, rowNumber, {
         area,

@@ -40,7 +40,7 @@ function populateShift({ year, month }, employees, cb) {
 
 function populateEmployee({ year }, employee, cb) {
   const fileName = `${employee.name}-${year}年度考勤表.xlsx`;
-  const sheetName = `${employee.name}-${year}`;
+  const sheetName = `${employee.name}-${year}年度考勤表`;
 
   XlsxPopulate.fromBlankAsync()
     .then(workbook =>
@@ -56,7 +56,7 @@ function populateEmployee({ year }, employee, cb) {
 
 function populateCompensatory({ year }, employees, cb) {
   const fileName = `${year}年底剩餘補休.xlsx`;
-  const sheetName = `${year}`;
+  const sheetName = `${year}年底剩餘補休`;
 
   XlsxPopulate.fromBlankAsync()
     .then(workbook =>
@@ -74,13 +74,13 @@ function getNames({ year, month }) {
   if (month) {
     return {
       fileName: `${year}年${month}月考勤表.xlsx`,
-      sheetName: `${year}-${month}考勤總表`,
+      sheetName: `${year}年${month}月考勤表`,
       produce: monthly.produce
     };
   } else {
     return {
       fileName: `${year}年度考勤表.xlsx`,
-      sheetName: `${year}總表`,
+      sheetName: `${year}年度考勤表`,
       produce: annual.produce
     };
   }

@@ -39,7 +39,8 @@ const {
   initSheet,
   init,
   initCell,
-  mergeCells
+  mergeCells,
+  initSheetTitle
 } = require("./util/xlsx-populate");
 
 module.exports = {
@@ -49,11 +50,13 @@ module.exports = {
 function produce(workbook, employees, { year, month, sheetName }) {
   const sheet = initSheet(workbook, sheetName);
   const filteredEmployees = filterEmployees(employees);
-  const lastRowNumber = filteredEmployees.length + 1 + 1;
+  initSheetTitle(sheet, sheetName, headers);
+  const firstRowNumber = 2;
+  const lastRowNumber = filteredEmployees.length + firstRowNumber + 1;
   // Head
   headers.forEach(
     ({ area, styles, width, height, merged, dataKey, title, name }) => {
-      const rowNumber = 1;
+      const rowNumber = firstRowNumber;
       const { cell } = init(sheet, name, rowNumber, {
         area,
         styles,
@@ -86,7 +89,7 @@ function produce(workbook, employees, { year, month, sheetName }) {
   const ltTotalsMap = {};
   // Body
   filteredEmployees.forEach((e, index) => {
-    const rowNumber = index + 1 + 1;
+    const rowNumber = index + firstRowNumber + 1;
     headers.forEach(({ area, styles, width, height, dataKey, name }) => {
       const { cell } = init(sheet, name, rowNumber, {
         area,

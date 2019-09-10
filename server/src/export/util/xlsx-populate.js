@@ -16,7 +16,8 @@ module.exports = {
   setColumnWidth,
   setRowHeight,
   setStyles,
-  mergeCells
+  mergeCells,
+  initSheetTitle
 };
 
 function initSheet(workbook, name) {
@@ -106,4 +107,14 @@ function setStyles(cell, styles) {
 function mergeCells(fromCell, toCell) {
   const range = fromCell.rangeTo(toCell);
   range.merged(toCell);
+}
+
+function initSheetTitle(sheet, sheetName, headers) {
+  const firstColumnHeader = headers[0];
+  const lastColumnHeader = headers[headers.length - 1];
+  const firstRowFirstCell = initCell(sheet, firstColumnHeader.name, 1);
+  const firstRowLastCell = initCell(sheet, lastColumnHeader.name, 1);
+  mergeCells(firstRowFirstCell, firstRowLastCell);
+  firstRowFirstCell.value(sheetName);
+  firstRowFirstCell.style("fontSize", 14);
 }
