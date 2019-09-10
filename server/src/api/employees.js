@@ -1,6 +1,8 @@
 const Employee = require("../../models/employee");
 const c = require("../shared/collection");
 const util = require("../shared/util");
+const validate = require("../shared/validation");
+const lt = require("../shared/leavetype");
 
 module.exports = {
   get: (req, res) => get({ req, res }),
@@ -10,7 +12,10 @@ module.exports = {
   compensatory: {
     get: compensatory
   },
-  produceCompensatoryInfosOfEmployees
+  produceCompensatoryInfosOfEmployees,
+  annualInfo: {
+    patch: updateAnnualInfo
+  }
 };
 
 function get({ req, res, lightweight = false }) {
@@ -66,10 +71,34 @@ function produce(loginuser, employees, lightweight) {
         c.predicate.isEmployeeUnderLoginuserControl(loginuser, employee)
       )
       .map(employee => {
+        const today = undefined;
         let annualInfo = employee.activatedLeaveTypes.find(
           lt => lt.name === "annual"
         );
-        annualInfo = annualInfo ? annualInfo : { consumes: {}, totals: {} };
+        annualInfo = annualInfo
+          ? annualInfo
+          : { consumes: {}, totals: {}, deadline: "" };
+        const arrivedDate = new Date(employee.arrivedDate);
+        const isAnnualLTRefreshable = lt.isAnnualLTRefreshable(
+          annualInfo.deadline,
+          arrivedDate,
+          today
+        );
+        const {
+          totalsDaysThisYear,
+          totalsDaysNextYear
+        } = lt.getAnnualLTTotalDays(arrivedDate, today);
+        const nextAnnualInfo = {
+          deadline: lt.getAnnualLTDeadline(arrivedDate, today),
+          consumes: {
+            days: 0
+          },
+          totals: {
+            days: isAnnualLTRefreshable
+              ? totalsDaysThisYear
+              : totalsDaysNextYear
+          }
+        };
         const lightweightInfo = {
           _id: employee._id,
           enabled: employee.enabled,
@@ -77,7 +106,9 @@ function produce(loginuser, employees, lightweight) {
           name: employee.name,
           level: employee.level,
           dept: employee.dept,
-          annualInfo
+          annualInfo,
+          nextAnnualInfo,
+          isAnnualLTRefreshable
         };
         return lightweight
           ? lightweightInfo
@@ -234,4 +265,44 @@ function isRecordWaitForSigningByLeaveType(records, leaveType) {
     !c.predicate.isRecordSignedReject(record) &&
     !c.predicate.isRecordAllSignedPass(record)
   );
+}
+
+function updateAnnualInfo(req, res) {
+  validate.admin(req.params.loginuser, req.params.token, (err, pass) => {
+    if (err) {
+      res.send({ success: false, message: err });
+    } else if (pass) {
+      Employee.find(c.conditions.all(), null, (err, employees) => {
+        if (err) {
+          res.send({ success: false, message: err });
+        } else {
+          const filteredEmployees = employees.filter(e =>
+            req.body.usernames.some(username => e.username === username)
+          );
+          refreshAnnualInfo(filteredEmployees, () =>
+            res.send({
+              success: true,
+              message: "annual refresh successfully"
+            })
+          );
+        }
+      });
+    } else {
+      res.send({ success: false, message: "token validation failed" });
+    }
+  });
+}
+
+function refreshAnnualInfo(employees, cb) {
+  const employee = employees.pop();
+  if (employee) {
+    lt.refreshAnnualInfo(employee, err => {
+      if (err) {
+        res.send({ success: false, message: err });
+      }
+      refreshAnnualInfo(employees, cb);
+    });
+  } else {
+    cb();
+  }
 }

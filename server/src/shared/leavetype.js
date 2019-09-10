@@ -14,7 +14,8 @@ module.exports = {
   leaveTypesGroups: getLeaveTypesGroups(),
   refreshAnnualLT,
   refreshAnnualPreRequestLT,
-  refreshAnnualPreRequestRecords
+  refreshAnnualPreRequestRecords,
+  refreshAnnualInfo
 };
 
 function refresh(employee, cb = undefined) {
@@ -50,6 +51,38 @@ function refresh(employee, cb = undefined) {
   if (cb) {
     employee.save(err => {
       cb(err, refreshedLeaveTypes);
+    });
+  } else {
+    return employee;
+  }
+}
+
+function refreshAnnualInfo(employee, cb = undefined) {
+  const enabledLeaveTypes = employee.activatedLeaveTypes.filter(
+    lt => lt.enabled
+  );
+  const annualLT = findLeaveType(enabledLeaveTypes, "annual");
+  const annualPreRequestLT = findLeaveType(
+    enabledLeaveTypes,
+    "annualPreRequest"
+  );
+  const arrivedDate = new Date(employee.arrivedDate);
+  if (
+    annualLT &&
+    annualPreRequestLT &&
+    isAnnualLTRefreshable(annualLT.deadline, arrivedDate)
+  ) {
+    refreshAnnualLT(
+      arrivedDate,
+      annualLT,
+      annualPreRequestLT,
+      employee.records
+    );
+  }
+
+  if (cb) {
+    employee.save(err => {
+      cb(err);
     });
   } else {
     return employee;

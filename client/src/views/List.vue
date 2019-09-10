@@ -42,12 +42,7 @@
             <td>{{ props.item.username }}</td>
             <td class="min-width-120">{{ props.item.dept }}</td>
             <td class="min-width-160">{{ formatDate(props.item.arrivedDate) }}</td>
-            <td class="min-width-160">
-              {{ generateleaveTypeSummary({
-              days: props.item.annualInfo.consumes.days,
-              hours:props.item.annualInfo.consumes.halfHours / 2, totalDays:props.item.annualInfo.totals.days, totalHours:props.item.annualInfo.totals.halfHours / 2
-              }) }}
-            </td>
+            <td class="min-width-160">{{ generateleaveTypeSummary(props.item.annualInfo) }}</td>
             <td class="min-width-380">
               <employee-action
                 :key="props.item._id"
@@ -205,7 +200,13 @@ export default {
       }
     },
     formatDate: utility.formatDate,
-    generateleaveTypeSummary: reportUtility.generateleaveTypeSummary
+    generateleaveTypeSummary: annualInfo =>
+      reportUtility.generateleaveTypeSummary({
+        days: annualInfo.consumes.days,
+        hours: annualInfo.consumes.halfHours / 2,
+        totalDays: annualInfo.totals.days,
+        totalHours: annualInfo.totals.halfHours / 2
+      })
   }
 };
 </script>

@@ -56,6 +56,9 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title v-if="loginuser.level === 'admin'">
+        <annualinfo-management @update="update"></annualinfo-management>
+      </v-toolbar-title>
+      <v-toolbar-title v-if="loginuser.level === 'admin'">
         <database-management @dbbackup="dbbackup" @dbrestore="dbrestore"></database-management>
       </v-toolbar-title>
       <v-toolbar-title>
@@ -73,6 +76,7 @@
 import EmployeeInfo from "@/components/EmployeeInfo";
 import EmployeeAccountSettings from "@/components/EmployeeAccountSettings";
 import DatabaseManagement from "@/components/DatabaseManagement";
+import AnnualInfoManagement from "@/components/AnnualInfoManagement";
 import config from "@/services/config";
 import utility from "@/utility";
 export default {
@@ -80,7 +84,8 @@ export default {
   components: {
     "employee-info": EmployeeInfo,
     "employee-account-settings": EmployeeAccountSettings,
-    "database-management": DatabaseManagement
+    "database-management": DatabaseManagement,
+    "annualinfo-management": AnnualInfoManagement
   },
   props: {
     icon: {
@@ -168,6 +173,18 @@ export default {
         handler: ($router, $cookie) => {
           if (success) {
             this.logout($cookie, $router);
+          }
+        }
+      });
+    },
+    update(success, message) {
+      this.$emit("notified", {
+        text: utility.lookUpCustomMessage(message, this.loalocale.self.message),
+        level: success ? "info" : "warning",
+        visible: true,
+        handler: ($router, $cookie) => {
+          if (success) {
+            location.reload();
           }
         }
       });

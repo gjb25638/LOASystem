@@ -52,6 +52,7 @@ app.get(
   "/employees/compensatory/:year/:loginuser/:token",
   employees.compensatory.get
 );
+app.patch("/annualinfo/:loginuser/:token", employees.annualInfo.patch);
 app.post("/employee/:loginuser/:token", employee.post);
 app.get("/employee/:id/:loginuser/:token", employee.get);
 app.put("/employee/:id/:loginuser/:token", employee.put);

@@ -173,6 +173,13 @@ export default {
     devlog(`${config.API_URL}/${url}`);
     return Api().put(url, params);
   },
+  updateAnnualInfo(params) {
+    const url = `annualinfo/${params.loginuser}/${encodeURIComponent(
+      params.token
+    )}`;
+    devlog(`${config.API_URL}/${url}`);
+    return Api().patch(url, params);
+  },
   downloadURL: {
     exportReport(params) {
       let url;
